@@ -1,0 +1,226 @@
+package com.bean;
+
+import java.awt.event.ActionEvent;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.AbortProcessingException;
+import javax.inject.Named;
+
+import com.Remote.UsuarioBeanRemote;
+import com.entidades.TipoUsuario;
+import com.entidades.Usuario;
+import com.exception.ServiciosException;
+
+@ManagedBean(name="usuario")
+@SessionScoped
+public class UsuarioBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	private UsuarioBeanRemote usuarioBeanRemote;
+
+	public UsuarioBean() {
+	}
+
+	private long id;
+	private String pass;
+	private String username;
+	private String nombre;
+	private String apellido;
+	private String estado;
+	private String tipodoc;
+	private String numerodoc;
+	private String direccion;
+	private String mail;
+	private String tipoUsuario;
+	private List<Usuario> usuariosSeleccionados=new ArrayList<Usuario>();
+	private Usuario usuarioSeleccionado = new Usuario();
+	private boolean modo1 = false;
+	private boolean altaExitoso = false;
+
+	public UsuarioBean( String pass, String usuario, String nombre, String apellido, String estado, String tipodoc,
+			String numerodoc, String direccion, String mail, String tipoUsuario) {
+		super();
+
+		this.pass = pass;
+		this.username = usuario;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.estado = estado;
+		this.tipodoc = tipodoc;
+		this.numerodoc = numerodoc;
+		this.direccion = direccion;
+		this.mail = mail;
+		this.tipoUsuario = tipoUsuario;
+	}
+
+	public String getTipousuario() {
+		return tipoUsuario;
+	}
+	public void setTipousuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	public String getUsuario() {
+		return username;
+	}
+	public void setUsuario(String usuario) {
+		this.username = usuario;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public String getTipodoc() {
+		return tipodoc;
+	}
+	public void setTipodoc(String tipodoc) {
+		this.tipodoc = tipodoc;
+	}
+	public String getNumerodoc() {
+		return numerodoc;
+	}
+	public void setNumerodoc(String numerodoc) {
+		this.numerodoc = numerodoc;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public List<Usuario> getUsuariosSeleccionados() {
+		return usuariosSeleccionados;
+	}
+
+	public void setUsuariosSeleccionados(List<Usuario> usuariosSeleccionados) {
+		this.usuariosSeleccionados = usuariosSeleccionados;
+	}
+
+	public String crearUsuario(){
+		try{
+			this.estado = "ACTIVO";
+			usuarioBeanRemote.CrearUsuario(pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
+			altaExitoso = true;
+			//mensaje de actualizacion correcta
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+					"Se creo el usuario: "+username, "");
+			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+			return "";
+		}catch(Exception e){
+			return null;
+		}
+	}
+
+
+	public String actualizarUsuario(Usuario usuario){
+		try{
+			usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
+					usuario.getApellido(), usuario.getEstado(), usuario.getTipodoc(), usuario.getNumerodoc(), 
+					usuario.getDireccion(), usuario.getMail(), usuario.getTipousuario().getNombre());
+			//mensaje de actualizacion correcta
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+					"Se actualizo el usuario. ", "");
+			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+			return "";
+		}catch(Exception e){
+			return null;
+		}
+	}
+
+	public String darDeBajaUsuario(Usuario usuario) {
+		try {
+			this.estado = "INACTIVO";
+			usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
+					usuario.getApellido(), this.estado, usuario.getTipodoc(), usuario.getNumerodoc(), 
+					usuario.getDireccion(), usuario.getMail(), usuario.getTipousuario().getNombre());
+				//mensaje de actualizacion correcta
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+						"Se elimino el usuario. ", "");
+				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+			return "";
+		} catch(Exception e) {
+			return null;
+		}
+
+	}
+
+	public List<Usuario> obtenerUsuarios() {
+		try {
+			//System.out.println("El username para el select es " + username);
+			return usuarioBeanRemote.obtenerUsuarioActivos();
+		} catch(Exception e){
+			return null;
+		}
+	}
+
+	public String seleccionarUsuarios() {
+		usuariosSeleccionados=usuarioBeanRemote.obtenerUsuarioActivos();
+		return "";
+	}
+
+	public void preRenderViewListener() {
+		modo1=true;
+		if (id != 0) {
+			usuarioSeleccionado = usuarioBeanRemote.obtenerUsuarioPorId(id); 
+		} 
+	}
+
+	public Usuario getUsuarioSeleccionado() {
+		return usuarioSeleccionado;
+	}
+
+	public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
+		this.usuarioSeleccionado = usuarioSeleccionado;
+	}
+
+	public void actionAlta(ActionEvent event) throws AbortProcessingException {
+		System.out.println("Alta exitosa!!");	
+	}
+	public void info() {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Alta exitosa."));
+	}
+}
+
+

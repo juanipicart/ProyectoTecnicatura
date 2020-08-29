@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<h:head>
+<style>
+.employeeTable {   
+   border-collapse:collapse;
+   border:1px solid #000000;
+}
+
+.employeeTableHeader {
+   text-align:center;
+   background:none repeat scroll 0 0 #B5B5B5;
+   border-bottom:1px solid #000000;  
+   padding:5px;
+}
+</style>
+</h:head>
+
+<body> 
+
+	<h1>Gestion de Fenomeno</h1>
+	
+<h2>Listado de Fenomeno</h2>
+
+
+
+<h:form id="formtablaFen">
+<h:dataTable value="#{fenomeno.listaFenomenos}"  
+	var="fenomeno"
+	styleClass = "employeeTable"
+    headerClass = "employeeTableHeader"
+		>
+	<h:column>
+	<f:facet name="header">NombreFenomeno: </f:facet>
+	#{fenomeno.nombreFen}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Descripcion: </f:facet>
+	#{fenomeno.descripcion}
+	</h:column>
+	
+
+</h:dataTable>
+</h:form>
+<h:form>
+	<h:commandButton action="AltaFenomeno" value="AltaFenomeno" />
+	<h:commandButton action="#{fenomeno.ObtenerFenomenos()}" value="Actualizar" />
+	</h:form>
+
+</body> 
+</html>

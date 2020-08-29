@@ -1,0 +1,47 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"> 
+
+<h:head>
+<h:outputStylesheet name="css/bootstrap.min.css"/>
+</h:head> 
+<body> 
+<f:metadata>
+    <f:viewParam name="id" value="#{usuario.id}" />
+    <f:event type="preRenderView" listener="#{usuario.preRenderViewListener()}"/>
+</f:metadata>
+
+
+
+<h2>Datos Empleado</h2>
+
+<h:form id="idDatosEmpleado">
+		
+		
+	<ul class="list-group">
+	  <li class="list-group-item active">Datos empleado</li>
+	  <li class="list-group-item">Id: #{usuario.id}</li>
+	  <li class="list-group-item">Usuario: #{usuario.usuarioSeleccionado.usuario}</li>
+	  <li class="list-group-item">Nombre: #{usuario.usuarioSeleccionado.nombre}</li>
+	  <li class="list-group-item">Apellido: #{usuario.usuarioSeleccionado.apellido}</li>
+	  <li class="list-group-item">Estado: ACTIVO</li>
+	  <li class="list-group-item">Tipo de Documento: #{usuario.usuarioSeleccionado.tipodoc}</li>
+	  <li class="list-group-item">Numero de Documento: #{usuario.usuarioSeleccionado.numerodoc}</li>
+	  <li class="list-group-item">Direccion: #{usuario.usuarioSeleccionado.direccion}</li>
+	  <li class="list-group-item">Mail: #{usuario.usuarioSeleccionado.mail}</li>
+	  <li class="list-group-item">Tipo de Usuario: #{usuario.usuarioSeleccionado.tipousuario.nombre}</li>
+	</ul>
+	
+	<h:link style="display:block; text-align:center" value="Volver" outcome="GestionUsuarios.xhtml" class="btn btn-outline-dark" />	
+		
+		<h:messages   style="color:red;margin:8px;" />
+		
+		
+	</h:form>
+
+</body> 
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"
+      xmlns:p="http://primefaces.org/ui">
+      
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+h2{color:red}
+
+</style>
+</h:head> 
+<body> 
+
+<h2>Datos Usuario</h2>
+
+<h:form id="idDatosEmpleado">
+		
+			
+		<h:panelGrid  cellpadding="3" style="display:block"  columns="3" row="50" cellspacing = "1">
+
+			<h:outputLabel  value="Username" />
+			<h:inputText id="usuario" required="true" placeholder="Ingrese un username" maxlength="80" disabled="false" value="#{usuario.usuario}" />
+			<h:message for="usuario" style="color:red" />
+			
+			<h:outputLabel value="Nombre" />
+			<h:inputText id="nombre" required="true" placeholder="Ingrese un nombre" maxlength="50" disabled="false" value="#{usuario.nombre}" />
+			<h:message for="nombre" style="color:red" />
+
+			<h:outputLabel value="Password" />
+			<h:inputSecret id="password" type="password" required="true" placeholder="Ingrese la password" maxlength="50" disabled="false" value="#{usuario.pass}" />
+			<h:message for="password" style="color:red" />
+
+			<h:outputLabel value="Apellido" />
+			<h:inputText id="apellido" required="true" placeholder="Ingrese un apellido" maxlength="50" disabled="false" value="#{usuario.apellido}" />
+			<h:message for="apellido" style="color:red" />
+			
+			<h:outputLabel value="Estado" />
+			<h:inputText id="estado" required="true" disabled="true" value="ACTIVO" />
+			<h:message for="estado" style="color:red" />
+		
+			<h:outputLabel value="Tipo de Documento" />	
+			<h:selectOneMenu value="#{usuario.tipodoc}" >
+   				<f:selectItem itemValue="CI" itemLabel="CI" />
+   				<f:selectItem itemValue="PASAPORTE" itemLabel="Pasaporte" />
+   				<f:selectItem itemValue="OTROS" itemLabel="Otros" />
+			</h:selectOneMenu><br/>
+								
+			<h:outputLabel value="Numero de Documento" />
+			<h:inputText id="numeroDoc"  required="true" placeholder="Ingrese un numero de documento" maxlength="50" disabled="false" value="#{usuario.numerodoc}" />
+			<h:message for="numeroDoc" style="color:red" />
+
+			<h:outputLabel value="Direccion" />
+			<h:inputText id="direccion" required="true" placeholder="Ingrese la direccion del usuario" maxlength="50" disabled="false" value="#{usuario.direccion}" />
+			<h:message for="direccion" style="color:red" />
+			
+			<h:outputLabel value="Mail" />
+			<h:inputText id="mail" required="true" type="email" placeholder="Ingrese el mail del usuario" maxlength="100" disabled="false" value="#{usuario.mail}" />
+			<h:message for="mail" style="color:red" />
+			
+			<h:outputLabel value="Tipo de Usuario" />	
+			<h:selectOneMenu value="#{usuario.tipousuario}">
+   				<f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador" />
+   				<f:selectItem itemValue="EXPERTO" itemLabel="Experto" />
+   				<f:selectItem itemValue="VOLUNTARIO" itemLabel="Voluntario" />
+			</h:selectOneMenu><br/><br/><br/>
+
+
+		</h:panelGrid>
+		
+		<h:messages   style="color:green;margin:8px;" />
+		
+		<h:commandButton id="idVolver" value="Volver"	action="GestionUsuarios.xhtml" style="width:150px;height:20px" /> 
+		<h:commandButton id="idAlta"  value="Dar de alta" action="#{usuario.crearUsuario()}" style="width:150px;height:20px">
+		
+		</h:commandButton> 
+	</h:form>
+
+</body> 
+</html>
+
+
+
