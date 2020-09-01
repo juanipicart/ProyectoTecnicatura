@@ -2,7 +2,7 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="PDT">
 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:/PDT-UTEC</jta-data-source>
+		<jta-data-source>java:/PDT</jta-data-source>
 		<properties>
 	<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
 	<property name="hibernate.hbm2ddl.auto" value="validate"/>
