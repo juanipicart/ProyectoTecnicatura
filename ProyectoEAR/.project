@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>TareaPDT_EAR</name>
+	<name>ProyectoEAR</name>
 	<comment></comment>
 	<projects>
-		<project>TareaPDT_JSF</project>
 		<project>PDT</project>
+		<project>TareaPDT_JSF</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
