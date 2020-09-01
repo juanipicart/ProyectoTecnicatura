@@ -3,8 +3,8 @@
 	<name>TareaPDT_EAR</name>
 	<comment></comment>
 	<projects>
-		<project>PDT</project>
 		<project>TareaPDT_JSF</project>
+		<project>PDT</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
