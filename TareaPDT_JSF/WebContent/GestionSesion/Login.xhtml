@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"
+      xmlns:p="http://primefaces.org/ui">
+      
+
+<h:head>
+<h:outputStylesheet name="css/bootstrap.min.css"/>
+</h:head> 
+<body> 
+
+<h:form id="idDatosEmpleado">
+		
+		
+	<ul class="list-group" style="text-align:center">
+	  <li class="list-group-item active">Ingresar a la Aplicacion</li>
+	  <li class="list-group-item">Usuario:
+	  <h:inputText id="usuario" required="true" placeholder="Ingrese un username" maxlength="80" disabled="false" value="#{usuario.usuario}" />
+	  </li>
+	  <li class="list-group-item">Password: 
+	  	  <h:inputSecret  id="password" required="true" placeholder="Ingrese una password" maxlength="80" disabled="false" value="#{usuario.pass}" />
+	  </li>
+	 
+	</ul>
+	
+	<div style="display:block; text-align:center; margin-top: 20px" >
+	<h:commandButton id="idIngresar"  value="Ingresar" style="margin-left: 40px" action="#{usuario.Login()}" class="btn btn-outline-dark"/>
+	</div>
+	
+		<h:messages   style="color:red;margin:8px;" />
+				
+	</h:form>
+
+</body> 
+</html>
+
+
+
+
+
+
+

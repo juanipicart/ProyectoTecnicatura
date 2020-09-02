@@ -153,7 +153,6 @@ public class UsuarioBean implements Serializable{
 		}
 	}
 
-
 	public String actualizarUsuario(Usuario usuario){
 		try{
 			usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
@@ -220,6 +219,17 @@ public class UsuarioBean implements Serializable{
 	}
 	public void info() {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Alta exitosa."));
+	}
+
+	public List<Usuario> Login (String usuario, String pass){
+		try {
+			List<Usuario> usuarios = usuarioBeanRemote.Login(usuario, pass);
+			return usuarios;
+		}
+		catch(Exception e){
+			return null;
+		}
+		
 	}
 }
 

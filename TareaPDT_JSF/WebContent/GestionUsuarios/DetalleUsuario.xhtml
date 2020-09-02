@@ -15,15 +15,11 @@
     <f:event type="preRenderView" listener="#{usuario.preRenderViewListener()}"/>
 </f:metadata>
 
-
-
-<h2>Datos Empleado</h2>
-
 <h:form id="idDatosEmpleado">
 		
 		
 	<ul class="list-group" style="text-align:center">
-	  <li class="list-group-item active">Datos empleado</li>
+	  <li class="list-group-item active">Detalles del Usuario</li>
 	  <li class="list-group-item">Id: #{usuario.id}</li>
 	  <li class="list-group-item">Usuario: #{usuario.usuarioSeleccionado.usuario}</li>
 	  <li class="list-group-item">Nombre: #{usuario.usuarioSeleccionado.nombre}</li>
@@ -34,10 +30,12 @@
 	  <li class="list-group-item">Direccion: #{usuario.usuarioSeleccionado.direccion}</li>
 	  <li class="list-group-item">Mail: #{usuario.usuarioSeleccionado.mail}</li>
 	  <li class="list-group-item">Tipo de Usuario: #{usuario.usuarioSeleccionado.tipousuario.nombre}</li>
+	  
 	</ul>
 	
-	<h:link style="display:block; text-align:center" value="Volver" outcome="GestionUsuarios.xhtml" class="btn btn-outline-dark" />	
-		
+	<div style="display:block; text-align:center; margin-top: 20px" >	
+	<h:link value="Volver" outcome="GestionUsuarios.xhtml" class="btn btn-outline-dark" />	
+	</div>
 		<h:messages   style="color:red;margin:8px;" />
 		
 		

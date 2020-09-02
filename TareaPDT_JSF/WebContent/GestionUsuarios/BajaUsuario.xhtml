@@ -4,83 +4,43 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
 
-<h:head></h:head> 
+<h:head>
+<h:outputStylesheet name="css/bootstrap.min.css"/>
+</h:head> 
 <body> 
 
 	<f:metadata>
     <f:viewParam name="id" value="#{usuario.id}" />
     <f:event type="preRenderView" listener="#{usuario.preRenderViewListener()}"/>
 </f:metadata>
-
-
-
-<h2>Datos Empleado</h2>
-
-<h:form id="idDatosEmpleado">
+			
+		<h:form id="idDatosEmpleado">
 		
-			
-		<h:panelGrid columns="3">
-
-			<h:outputLabel  value="Id" />
-			<h:inputText id="id"  disabled="true" value="#{usuario.id}" />
-			<h:message for="id" style="color:red" />
-			
-			<h:outputLabel  value="Username" />
-			<h:inputText id="usuario" disabled="true" required="true" placeholder="Ingrese un username" maxlength="80" value="#{usuario.usuarioSeleccionado.usuario}" />
-			<h:message for="usuario" style="color:red" />
-			
-			<h:outputLabel value="Nombre" />
-			<h:inputText id="nombre" disabled="true" required="true" placeholder="Ingrese un nombre" maxlength="50"  value="#{usuario.usuarioSeleccionado.nombre}" />
-			<h:message for="nombre" style="color:red" />
-
-			
-			<h:outputLabel value="Apellido" />
-			<h:inputText id="apellido" disabled="true" required="true" placeholder="Ingrese un apellido" maxlength="50" value="#{usuario.usuarioSeleccionado.apellido}" />
-			<h:message for="apellido" style="color:red" />
-			
-			<h:outputLabel value="Estado" />
-			<h:inputText id="estado" disabled="true" required="true" value="ACTIVO" />
-			<h:message for="estado" style="color:red" />
 		
-			<h:outputLabel value="Tipo de Documento" />
-			<h:selectOneMenu disabled="true" value="#{usuario.usuarioSeleccionado.tipodoc}">
-   				<f:selectItem itemValue="CI" itemLabel="CI" />
-   				<f:selectItem itemValue="PASAPORTE" itemLabel="Pasaporte" />
-   				<f:selectItem itemValue="OTROS" itemLabel="Otros" />
-			</h:selectOneMenu><br/>
-								
-			<h:outputLabel value="Numero de Documento" />
-			<h:inputText id="numeroDoc" disabled="true"  required="true" placeholder="Ingrese un numero de documento" maxlength="50" value="#{usuario.usuarioSeleccionado.numerodoc}" />
-			<h:message for="numeroDoc" style="color:red" />
-
-			<h:outputLabel value="Direccion" />
-			<h:inputText id="direccion" disabled="true" required="true" placeholder="Ingrese la direccion del usuario" maxlength="50" value="#{usuario.usuarioSeleccionado.direccion}" />
-			<h:message for="direccion" style="color:red" />
+	<ul class="list-group" style="text-align:center">
+	  <li class="list-group-item active">Eliminar Usuario</li>
+	  <li class="list-group-item">Id: #{usuario.id}</li>
+	  <li class="list-group-item">Usuario: #{usuario.usuarioSeleccionado.usuario}</li>
+	  <li class="list-group-item">Nombre: #{usuario.usuarioSeleccionado.nombre}</li>
+	  <li class="list-group-item">Apellido: #{usuario.usuarioSeleccionado.apellido}</li>
+	  <li class="list-group-item">Estado: ACTIVO</li>
+	  <li class="list-group-item">Tipo de Documento: #{usuario.usuarioSeleccionado.tipodoc}</li>
+	  <li class="list-group-item">Numero de Documento: #{usuario.usuarioSeleccionado.numerodoc}</li>
+	  <li class="list-group-item">Direccion: #{usuario.usuarioSeleccionado.direccion}</li>
+	  <li class="list-group-item">Mail: #{usuario.usuarioSeleccionado.mail}</li>
+	  <li class="list-group-item">Tipo de Usuario: #{usuario.usuarioSeleccionado.tipousuario.nombre}</li>
+	</ul>
 			
-			<h:outputLabel value="Mail" />
-			<h:inputText id="mail" disabled="true" required="true" type="email" placeholder="Ingrese el mail del usuario" maxlength="100" value="#{usuario.usuarioSeleccionado.mail}" />
-			<h:message for="mail" style="color:red" />
-			
-			<h:outputLabel value="Tipo de Usuario" />
-			<h:selectOneMenu disabled="true" selected="selected" value="#{usuario.usuarioSeleccionado.tipousuario.nombre}">
-   				<f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador"  />
-   				<f:selectItem itemValue="EXPERTO" itemLabel="Experto" />
-   				<f:selectItem itemValue="VOLUNTARIO" itemLabel="Voluntario" />
-			</h:selectOneMenu><br/><br/>
-
-
-		</h:panelGrid>
-		
-		<h:messages   style="color:Green;margin:8px;" />
-		
-		<h:commandButton id="idVolver" value="Volver"	action="GestionUsuarios" /> 
-		<h:commandButton id="idBaja"  value="Dar de baja" action="#{usuario.darDeBajaUsuario(usuario.usuarioSeleccionado)}">
+		<div style="display:block; text-align:center; margin-top: 20px">		
+		<h:commandButton  id="idVolver" value="Volver"	action="GestionUsuarios.xhtml" class="btn btn-outline-dark" /> 
+		<h:commandButton id="idBaja"  value="Dar de baja" style="margin-left: 40px" action="#{usuario.darDeBajaUsuario(usuario.usuarioSeleccionado)}" class="btn btn-outline-dark">
     			<f:param name="id" value="${usuario.id}" />
     	</h:commandButton>
+		</div>
+		<h:messages   style="color:red;margin:8px;" />
 		
 	</h:form>
 	
-
 
 </body> 
 </html>
