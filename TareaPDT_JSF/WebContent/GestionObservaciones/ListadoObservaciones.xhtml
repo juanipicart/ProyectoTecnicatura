@@ -10,72 +10,67 @@
 </h:head>
 <body>
 	
-	<h1>Listado de Usuarios</h1>
+	<h1>Listado de Observaciones</h1>
 	
 	
 	<h:form class="form-group">
 		<h:messages style="color:red;margin:8px;" />
 		
-		
 		<h:panelGrid columns="1">
-		
-			<!--<h:outputLabel value="Nombre" />
-			<h:inputText id="nombre" value="#{usuario.usuario}" />-->
 			
 		<p>Welcome #{usuario.usuario}</p>
 		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark"></h:commandLink>
 
 		</h:panelGrid>
-		<h:commandButton value="Buscar"	action="#{usuario.seleccionarUsuarios()}" class="btn btn-outline-dark"/>
-		<h:commandButton value="Alta de usuario" 	action="AltaUsuario" class="btn btn-outline-dark" />
-		
+		<h:commandButton value="Buscar"	action="#{observacion.seleccionarObservaciones()}" class="btn btn-outline-dark"/>
+		<h:commandButton value="Alta de Observacion" 	action="AltaObservacion" class="btn btn-outline-dark" />
 		
 	</h:form>
 
-	<h3 style="text-align:center">Usuarios seleccionados</h3>
+	<h3 style="text-align:center">Observaciones seleccionadas</h3>
 	<h:form id="formTabla">
-	<h:dataTable value="#{usuario.usuariosSeleccionados}"
+	<h:dataTable value="#{observacion.observacionesSeleccionadas}"
 		var="usuario"
 		  class="table table-striped table-dark">
    
 		<h:column>
-			<f:facet name="header">Username</f:facet>    				
-      		#{usuario.usuario}
+			<f:facet name="header">codigo</f:facet>    				
+      		#{observacion.codigo_OBS}
    		</h:column>
 
 		<h:column>
 			<f:facet name="header">Nombre</f:facet>
-		      #{usuario.nombre}
+		      #{observacion.usuario.usuario}
 		</h:column>
 
 		<h:column>
-			<f:facet name="header">Apellido</f:facet>
-      		#{usuario.apellido}
+			<f:facet name="header">Fenomeno</f:facet>
+      		#{observacion.fenomeno.nombreFen}
    		</h:column>
 
 		<h:column>
-			<f:facet name="header">Mail</f:facet>
-      		#{usuario.mail}
+			<f:facet name="header">Localidad</f:facet>
+      		#{observacion.localidad.nombreLoc}
 		</h:column>
 		
 		<h:column>
 			<f:facet name="header">Ver Detalle</f:facet>
-			<h:link value="Ver detalle" outcome="DetalleUsuario.xhtml" class="badge badge-success">
-    			<f:param name="id" value="${usuario.id}" />
+			<h:link value="Ver detalle" outcome="DetalleObservacion.xhtml" class="badge badge-success">
+    			<f:param name="id" value="${observacion.id}" />
 			</h:link>
 		</h:column>
 		
 		<h:column>
 			<f:facet name="header">Modificar</f:facet>
-			<h:link value="Modificar usuario" outcome="ModificarUsuario.xhtml" class="badge badge-info">
-    			<f:param name="id" value="${usuario.id}" />
+			<h:link value="Modificar Observacion" outcome="ModificarObservacion.xhtml" class="badge badge-info">
+    			<f:param name="id" value="${observacion.id}" />
 			</h:link>
 		</h:column>
 		
 		<h:column>
 			<f:facet name="header">Dar de baja</f:facet>
-			<h:link value="Dar de baja" outcome="BajaUsuario.xhtml" class="badge badge-danger">
-    			<f:param name="id" value="${usuario.id}" />
+			<h:link value="Dar de baja" outcome="BajaObservacion.xhtml" class="badge badge-danger">
+    			<f:param name="id" value="${observacion.id}" />
 			</h:link>
 		</h:column> 
 		

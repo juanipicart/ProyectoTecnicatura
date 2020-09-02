@@ -114,8 +114,6 @@ public class ObservacionBean implements ObservacionBeanRemote {
 		return pudeEliminar;
 	}
 	
-	
-	
 	@Override
 	public List<Observacion> obtenerTodasObservaciones(){
 
@@ -136,7 +134,6 @@ public class ObservacionBean implements ObservacionBeanRemote {
 		return estaLimpia;		
 	}
 
-	
 	@Override
 	public List<Observacion> existeObservacion(String identificacion){
 		List <Observacion> observaciones = this.obsDao.existeObservacion(identificacion);		
