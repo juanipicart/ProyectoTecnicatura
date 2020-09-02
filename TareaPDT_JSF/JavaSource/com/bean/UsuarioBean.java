@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import com.Remote.UsuarioBeanRemote;
 import com.entidades.TipoUsuario;
@@ -221,15 +222,38 @@ public class UsuarioBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Alta exitosa."));
 	}
 
-	public List<Usuario> Login (String usuario, String pass){
-		try {
-			List<Usuario> usuarios = usuarioBeanRemote.Login(usuario, pass);
-			return usuarios;
-		}
-		catch(Exception e){
-			return null;
+	public String Login (){
+		
+		boolean valid = false;
+		List <Usuario> usuarios = usuarioBeanRemote.Login(username, pass);
+		
+		for (Usuario u : usuarios)
+		{
+			if (u !=null) 
+			{
+				valid = true;
+			}
 		}
 		
+		if (valid) {
+			HttpSession session = SessionUtils.getSession();
+			session.setAttribute("username", username);
+			return "GestionUsuarios";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Incorrect Username and Passowrd",
+							"Please enter correct username and Password"));
+			return "Login";
+		}
+	}
+
+	//logout
+	public String logout() {
+		HttpSession session = SessionUtils.getSession();
+		session.invalidate();
+		return "Login";
 	}
 }
 
