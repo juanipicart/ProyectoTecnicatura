@@ -29,11 +29,12 @@ public class UsuariosRest {
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces("application/json")
 	public Response loginUsuario(Usuario usuario){
 		if (usuarioBeanRemote.Login(usuario.getUsuario(), usuario.getPass()).size() == 0) {
-			return Response.status(Response.Status.NOT_ACCEPTABLE).entity("Datos invalidos").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\"Datos invalidos\"}").build();
 		} else {
-			return Response.ok().entity("Login exitoso").build();
+			return Response.ok().entity("{\"message\":\"Login exitoso\"}").build();
 		}
 	}
 }
