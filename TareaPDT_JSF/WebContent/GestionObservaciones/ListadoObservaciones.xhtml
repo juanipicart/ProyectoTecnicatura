@@ -18,9 +18,11 @@
 		
 		<h:panelGrid columns="1">
 			
-		<p>Welcome #{usuario.usuario}</p>
+		<div class="alert alert-primary" role="alert" > 
+		<p >Bienvenido: #{usuario.usuario}</p>
 		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark"></h:commandLink>
-
+		</div>
+		
 		</h:panelGrid>
 		<h:commandButton value="Buscar"	action="#{observacion.seleccionarObservaciones()}" class="btn btn-outline-dark"/>
 		<h:commandButton value="Alta de Observacion" 	action="AltaObservacion" class="btn btn-outline-dark" />
@@ -30,12 +32,12 @@
 	<h3 style="text-align:center">Observaciones seleccionadas</h3>
 	<h:form id="formTabla">
 	<h:dataTable value="#{observacion.observacionesSeleccionadas}"
-		var="usuario"
+		var="observacion"
 		  class="table table-striped table-dark">
    
 		<h:column>
-			<f:facet name="header">codigo</f:facet>    				
-      		#{observacion.codigo_OBS}
+			<f:facet name="header">Codigo</f:facet>    				
+      		 #{observacion.codigo_OBS}
    		</h:column>
 
 		<h:column>
@@ -51,6 +53,11 @@
 		<h:column>
 			<f:facet name="header">Localidad</f:facet>
       		#{observacion.localidad.nombreLoc}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Descripcion</f:facet>
+      		#{observacion.descripcion}
 		</h:column>
 		
 		<h:column>

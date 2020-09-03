@@ -140,6 +140,12 @@ public class ObservacionBean implements ObservacionBeanRemote {
 		 return observaciones;
 	}
 	
+	@Override
+	public Observacion obtenerObservacionPorId(long id) {
+		Observacion observacion = obsDao.obtenerObservacionPorId(id);
+		 
+		return observacion;
+	}
 	
 	
 	

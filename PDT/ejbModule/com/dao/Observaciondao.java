@@ -78,4 +78,13 @@ public class Observaciondao {
   		return observaciones;
   	}
   
+  //Obtener observacion por id
+  	public Observacion obtenerObservacionPorId(long id) {
+
+	    	TypedQuery<Observacion> query = em.createQuery("SELECT o FROM Observacion o where o.id LIKE : id",Observacion.class).setParameter("id",id);
+			return query.getSingleResult();
+
+		} 
+    
+    
 }

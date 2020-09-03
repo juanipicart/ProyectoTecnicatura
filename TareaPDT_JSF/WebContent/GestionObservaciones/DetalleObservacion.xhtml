@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"> 
+
+<h:head>
+<h:outputStylesheet name="css/bootstrap.min.css"/>
+</h:head> 
+<body> 
+<f:metadata>
+    <f:viewParam name="id" value="#{observacion.id}" />
+    <f:event type="preRenderView" listener="#{observacion.preRenderViewListener()}"/>
+</f:metadata>
+
+<h:form id="idDatosObservacion">
+		
+		
+	<ul class="list-group" style="text-align:center">
+	  <li class="list-group-item active">Detalles de Observacion</li>
+	  <li class="list-group-item">Id: #{observacion.id}</li>
+	  <li class="list-group-item">Codigo: #{observacion.observacionSeleccionada.codigo_OBS}</li>
+	  <li class="list-group-item">Usuario: #{observacion.observacionSeleccionada.usuario.usuario}</li>
+	  <li class="list-group-item">Fenomeno: #{observacion.observacionSeleccionada.fenomeno.nombreFen}</li>
+	  <li class="list-group-item">Estado: #{observacion.observacionSeleccionada.estado.nombre}</li>
+	  <li class="list-group-item">Localidad: #{observacion.observacionSeleccionada.localidad.nombreLoc}</li>
+	  <li class="list-group-item">Descripcion: #{observacion.observacionSeleccionada.descripcion}</li>
+	  <li class="list-group-item">Latitud: -#{observacion.observacionSeleccionada.latitud}°</li>
+	  <li class="list-group-item">Longitud: -#{observacion.observacionSeleccionada.longitud}°</li>
+	  <li class="list-group-item">Altitud: #{observacion.observacionSeleccionada.altitud} mts</li>
+	  <li class="list-group-item">Imagen: #{observacion.observacionSeleccionada.imagen}</li>
+	</ul>
+	
+	<div style="display:block; text-align:center; margin-top: 20px" >	
+	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-outline-dark" />	
+	</div>
+		<h:messages style="color:red;margin:8px;" />
+		
+	</h:form>
+
+</body> 
+</html>

@@ -68,20 +68,25 @@ public class ObservacionBean implements Serializable{
 		private Estado estado;
 	    private Date fecha;
 	    private List<Observacion> observacionesSeleccionadas=new ArrayList<Observacion>();    
-		    
+		private Observacion observacionSeleccionada = new Observacion();
+		boolean modo1 = true;
+	    
 		//Propiedades
-		public ObservacionBeanRemote getObservacionBeanRemote() {
-			return observacionBeanRemote;
+		
+		public Observacion getObservacionSeleccionada() {
+			return observacionSeleccionada;
 		}
 
-		public void setObservacionBeanRemote(ObservacionBeanRemote observacionBeanRemote) {
-			this.observacionBeanRemote = observacionBeanRemote;
+		public void setObservacionSeleccionada(Observacion observacionSeleccionada) {
+			this.observacionSeleccionada = observacionSeleccionada;
 		}
+
 
 		public long getId() {
 			return id;
 		}
 
+	
 		public void setId(long id) {
 			this.id = id;
 		}
@@ -209,6 +214,13 @@ public class ObservacionBean implements Serializable{
 		public String seleccionarObservaciones() {
 			observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservaciones();
 			return "";
+		}
+		
+		public void preRenderViewListener() {
+			modo1 = true;
+			if (id != 0) {
+				observacionSeleccionada = observacionBeanRemote.obtenerObservacionPorId(id);
+			} 
 		}
 		
 		

@@ -21,9 +21,11 @@
 		
 			<!--<h:outputLabel value="Nombre" />
 			<h:inputText id="nombre" value="#{usuario.usuario}" />-->
-			
-		<p>Welcome #{usuario.usuario}</p>
+		
+		<div class="alert alert-primary" role="alert"> 
+		<p>Bienvenido: #{usuario.usuario}</p>
 		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark"></h:commandLink>
+		</div>
 
 		</h:panelGrid>
 		<h:commandButton value="Buscar"	action="#{usuario.seleccionarUsuarios()}" class="btn btn-outline-dark"/>
