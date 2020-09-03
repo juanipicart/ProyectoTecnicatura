@@ -65,7 +65,11 @@ public class Usuario implements Serializable{
 		this.mail = mail;
 		this.tiposusuario = tipousuario;
 	}
-    
+
+	public Usuario(String usuario, String pass) {
+		this.usuario=usuario;
+		this.pass=pass;
+	}
 	public TipoUsuario getTipousuario() {
 		return tiposusuario;
 	}
