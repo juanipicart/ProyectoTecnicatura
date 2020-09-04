@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
@@ -255,6 +256,22 @@ public class UsuarioBean implements Serializable{
 		session.invalidate();
 		return "Login";
 	}
+
+	public void limpiar(ComponentSystemEvent event){
+
+	    //Antes de  hacer  render se llama a este metodo
+	    //Limpiara los objetos o propiedades
+		pass = "";
+		username = "";
+		nombre = "";
+		apellido = "";
+		estado = "";
+		tipodoc = "";
+		numerodoc = "";
+		direccion = "";
+		mail = "";
+		tipoUsuario = "";
+	  }
 }
 
 
