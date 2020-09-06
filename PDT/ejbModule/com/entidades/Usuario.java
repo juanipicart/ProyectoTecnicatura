@@ -70,6 +70,10 @@ public class Usuario implements Serializable{
 		this.usuario=usuario;
 		this.pass=pass;
 	}
+	
+	
+	
+	
 	public TipoUsuario getTipousuario() {
 		return tiposusuario;
 	}

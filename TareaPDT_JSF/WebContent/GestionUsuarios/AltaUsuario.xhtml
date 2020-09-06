@@ -9,7 +9,6 @@
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
-  <f:event listener="#{usuario.limpiar}" type="preRenderView" />
 </h:head> 
 <body> 
 
@@ -63,7 +62,7 @@
 	<h:commandButton id="idAlta"  value="Dar de alta" style="margin-left: 40px" action="#{usuario.crearUsuario()}" class="btn btn-outline-dark"/>
 	</div>
 	
-	<h:messages   style="color:red;margin:8px;" />
+		<h:messages   style="color:red;margin:8px;" />
 				
 	</h:form>
 
