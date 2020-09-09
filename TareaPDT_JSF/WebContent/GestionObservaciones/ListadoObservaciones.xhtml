@@ -10,23 +10,44 @@
 </h:head>
 <body>
 	
-	<h1>Listado de Observaciones</h1>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../GestionUsuarios/Index.xhtml">Green Place</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../GestionUsuarios/GestionUsuarios.xhtml">Gestion de Usuarios
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="../GestionReportes/GestionReportes.xhtml">Gestion de reportes</a>
+          </li>
+          <li>
+            <div class="badge badge-info">
+             #{usuario.usuario} 
+             </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 	
 	
 	<h:form class="form-group">
 		<h:messages style="color:red;margin:8px;" />
 		
 		<h:panelGrid columns="1">
-			
-		<div class="alert alert-primary" role="alert" > 
-		<p >Bienvenido: #{usuario.usuario}</p>
-		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark"></h:commandLink>
-		</div>
 		
 		</h:panelGrid>
-		<h:commandButton value="Buscar"	action="#{observacion.seleccionarObservaciones()}" class="btn btn-outline-dark"/>
-		<h:commandButton value="Alta de Observacion" 	action="AltaObservacion" class="btn btn-outline-dark" />
-		
+		<h:commandButton value="Buscar"	action="#{observacion.seleccionarObservaciones()}" class="btn btn-outline-dark" style="margin-top: 100px"/>
+		<h:commandButton value="Alta de Observacion" 	action="AltaObservacion" class="btn btn-outline-dark" style="margin-top: 100px"/>
+		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
 	</h:form>
 
 	<h3 style="text-align:center">Observaciones seleccionadas</h3>

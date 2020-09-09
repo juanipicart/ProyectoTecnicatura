@@ -239,13 +239,13 @@ public class UsuarioBean implements Serializable{
 		if (valid) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", username);
-			return "GestionUsuarios";
+			return "Index";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Incorrect Username and Passowrd",
-							"Please enter correct username and Password"));
+							"Usuario o Password incorrecta",
+							"Por favor verifique los datos ingresados"));
 			return "Login";
 		}
 	}
