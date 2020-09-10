@@ -38,7 +38,7 @@
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >	
 	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-outline-dark" />
-	<h:commandButton id="idModificar"  value="Editar Informacion" style="margin-left: 40px" action="#{observacion.actualizarObservacion(observacion.observacionSeleccionada)}" class="btn btn-outline-dark">
+	<h:commandButton id="idModificar"  value="Editar Informacion" style="margin-left: 40px" action="ModificarObservacion.xhtml" class="btn btn-outline-dark">
 	<f:param name="id" value="${observacion.id}" />
     	</h:commandButton>	
 	</div>

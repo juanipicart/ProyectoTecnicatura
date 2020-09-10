@@ -1,8 +1,11 @@
 package com.bean;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -265,4 +268,5 @@ public class ObservacionBean implements Serializable{
 		     return today;
 		}
 		
+	
 }	
