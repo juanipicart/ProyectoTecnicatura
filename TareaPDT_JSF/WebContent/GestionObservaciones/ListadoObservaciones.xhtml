@@ -46,7 +46,6 @@
 		
 		</h:panelGrid>
 		<h:commandButton value="Buscar"	action="#{observacion.seleccionarObservaciones()}" class="btn btn-outline-dark" style="margin-top: 100px"/>
-		<h:commandButton value="Alta de Observacion" 	action="AltaObservacion" class="btn btn-outline-dark" style="margin-top: 100px"/>
 		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
 	</h:form>
 
@@ -87,21 +86,6 @@
     			<f:param name="id" value="${observacion.id}" />
 			</h:link>
 		</h:column>
-		
-		<h:column>
-			<f:facet name="header">Modificar</f:facet>
-			<h:link value="Modificar Observacion" outcome="ModificarObservacion.xhtml" class="badge badge-info">
-    			<f:param name="id" value="${observacion.id}" />
-			</h:link>
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">Dar de baja</f:facet>
-			<h:link value="Dar de baja" outcome="BajaObservacion.xhtml" class="badge badge-danger">
-    			<f:param name="id" value="${observacion.id}" />
-			</h:link>
-		</h:column> 
-		
 	</h:dataTable>
 	</h:form>
 

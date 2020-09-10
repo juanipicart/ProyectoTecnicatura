@@ -3,7 +3,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"> 
+      xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"
+      xmlns:o="http://java.sun.com/jsf/html"
+      xmlns:p="http://java.sun.com/jsf/html"> 
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
@@ -22,6 +24,7 @@
 	  <li class="list-group-item">Id: #{observacion.id}</li>
 	  <li class="list-group-item">Codigo: #{observacion.observacionSeleccionada.codigo_OBS}</li>
 	  <li class="list-group-item">Usuario: #{observacion.observacionSeleccionada.usuario.usuario}</li>
+	  <li class="list-group-item">Fecha: #{observacion.NuevaFecha(observacion.observacionSeleccionada.fecha)}</li>
 	  <li class="list-group-item">Fenomeno: #{observacion.observacionSeleccionada.fenomeno.nombreFen}</li>
 	  <li class="list-group-item">Estado: #{observacion.observacionSeleccionada.estado.nombre}</li>
 	  <li class="list-group-item">Localidad: #{observacion.observacionSeleccionada.localidad.nombreLoc}</li>
@@ -29,11 +32,15 @@
 	  <li class="list-group-item">Latitud: -#{observacion.observacionSeleccionada.latitud}°</li>
 	  <li class="list-group-item">Longitud: -#{observacion.observacionSeleccionada.longitud}°</li>
 	  <li class="list-group-item">Altitud: #{observacion.observacionSeleccionada.altitud} mts</li>
-	  <li class="list-group-item">Imagen: #{observacion.observacionSeleccionada.imagen}</li>
+	  <li class="list-group-item">
+			<h:graphicImage value="#{observacion.imagen}"> </h:graphicImage>	  </li>
 	</ul>
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >	
-	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-outline-dark" />	
+	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-outline-dark" />
+	<h:commandButton id="idModificar"  value="Editar Informacion" style="margin-left: 40px" action="#{observacion.actualizarObservacion(observacion.observacionSeleccionada)}" class="btn btn-outline-dark">
+	<f:param name="id" value="${observacion.id}" />
+    	</h:commandButton>	
 	</div>
 		<h:messages style="color:red;margin:8px;" />
 		

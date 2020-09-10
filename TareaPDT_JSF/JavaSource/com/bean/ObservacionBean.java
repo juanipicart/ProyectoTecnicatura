@@ -1,13 +1,25 @@
 package com.bean;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
+import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +28,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.swing.ImageIcon;
 
 import com.Remote.EstadoBeanRemote;
 import com.Remote.FenomenoBeanRemote;
@@ -32,6 +45,7 @@ import com.entidades.Fenomeno;
 import com.entidades.Localidad;
 import com.entidades.Observacion;
 import com.entidades.Usuario;
+import com.sun.prism.Image;
 
 @ManagedBean(name="observacion")
 @SessionScoped
@@ -209,13 +223,15 @@ public class ObservacionBean implements Serializable{
 			this.fecha = fecha;
 		}
 		
-		//Metodos
+		/***************METODOS******************/
 		
+		//Obtener todas las observaciones
 		public String seleccionarObservaciones() {
 			observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservaciones();
 			return "";
 		}
 		
+		//Renderizar
 		public void preRenderViewListener() {
 			modo1 = true;
 			if (id != 0) {
@@ -223,5 +239,30 @@ public class ObservacionBean implements Serializable{
 			} 
 		}
 		
+		//Actualizar
+		public String actualizarObservacion(Observacion observacion){
+			try{
+				observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
+						observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
+						observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), 
+						observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), 
+						observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
+				//mensaje de actualizacion correcta
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+						"Se actualizo la observacion. ", "");
+				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				return "";
+			}catch(Exception e){
+				return null;
+			}
+		}
 		
-}
+		//Transformar Fecha
+		public String NuevaFecha(Date fecha)
+		{
+			 DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		     String today = formatter.format(fecha);
+		     return today;
+		}
+		
+}	
