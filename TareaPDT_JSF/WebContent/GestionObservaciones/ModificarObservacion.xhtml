@@ -26,22 +26,30 @@
 	  <h:inputText id="codigo" required="true" maxlength="80" disabled="false" value="#{observacion.observacionSeleccionada.codigo_OBS}" />
 	  </li>
 	  <li class="list-group-item">Usuario: 
-	  	  <h:inputSecret id="usuario" required="true" maxlength="80" disabled="false" value="#{observacion.observacionSeleccionada.usuario.usuario}" />
+	  	  <h:inputText id="usuario" required="true" maxlength="80" disabled="true" value="#{observacion.observacionSeleccionada.usuario.usuario}" />
 	  </li>
 	  <li class="list-group-item">Fecha: 
 	  	  <h:inputText id="fecha" required="true" maxlength="80" disabled="false" value="#{observacion.NuevaFecha(observacion.observacionSeleccionada.fecha)}" />
 	  </li>
 	  <li class="list-group-item">Fenomeno: 
-			<h:selectOneMenu value="#{observacion.observacionSeleccionada.fenomeno}" >
-   				<f:selectItem itemValue="#{observacion.observacionSeleccionada.fenomeno.nombreFen}" itemLabel="#{observacion.observacionSeleccionada.fenomeno.nombreFen}" />
+			<h:selectOneMenu value="#{observacion.observacionSeleccionada.fenomeno.nombreFen}" >
+   				<f:selectItems value="#{observacion.fenomenos}" var="obser" itemValue="#{obser.nombreFen}" 
+   				itemLabel="#{obser.nombreFen}"
+   				/>
 	  </h:selectOneMenu><br/> 
 	  </li>
 	  <li class="list-group-item">Estado: 
-	   <h:inputText id="estado" required="true" maxlength="80" disabled="false" value="#{observacion.observacionSeleccionada.estado.nombre}"/>
+	  	<h:selectOneMenu value="#{observacion.observacionSeleccionada.estado.nombre}">
+   				<f:selectItem itemValue="ALTA" itemLabel="ALTA" />
+   				<f:selectItem itemValue="MEDIA" itemLabel="MEDIA" />
+   				<f:selectItem itemValue="BAJA" itemLabel="BAJA" />
+			</h:selectOneMenu>
 	  </li>
 	  <li class="list-group-item">Localidad: 
-			<h:selectOneMenu value="#{observacion.observacionSeleccionada.localidad}" >
-   				<f:selectItem itemValue="#{observacion.observacionSeleccionada.localidad.nombreLoc}" itemLabel="#{observacion.observacionSeleccionada.localidad.nombreLoc}" />
+			<h:selectOneMenu value="#{observacion.observacionSeleccionada.localidad.nombreLoc}" >
+   				<f:selectItems value="#{observacion.localidades}" var="local" itemValue="#{local.nombreLoc}" 
+   				itemLabel="#{local.nombreLoc}"
+   				/>
 	  </h:selectOneMenu><br/> 
 	  </li>
 	  <li class="list-group-item">Descripcion:

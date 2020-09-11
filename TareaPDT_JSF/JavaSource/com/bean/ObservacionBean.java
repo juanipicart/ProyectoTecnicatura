@@ -15,6 +15,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
@@ -87,9 +88,27 @@ public class ObservacionBean implements Serializable{
 	    private List<Observacion> observacionesSeleccionadas=new ArrayList<Observacion>();    
 		private Observacion observacionSeleccionada = new Observacion();
 		boolean modo1 = true;
-	    
+		private List<Fenomeno> fenomenos;
+		private List<Localidad> localidades;
+		
 		//Propiedades
 		
+		public List<Fenomeno> getFenomenos() {
+			return fenomenos;
+		}
+
+		public void setFenomenos(List<Fenomeno> fenomenos) {
+			this.fenomenos = fenomenos;
+		}
+		
+		public List<Localidad> getLocalidades() {
+			return localidades;
+		}
+
+		public void setLocalidades(List<Localidad> localidades) {
+			this.localidades = localidades;
+		}
+
 		public Observacion getObservacionSeleccionada() {
 			return observacionSeleccionada;
 		}
@@ -268,5 +287,11 @@ public class ObservacionBean implements Serializable{
 		     return today;
 		}
 		
-	
+		//Luego del Constructor
+		@PostConstruct
+		public void CargaCombos() {
+		    fenomenos = fenomenoBeanRemote.Obtenertodoslosfenomenos();
+		    localidades = localidadBeanRemote.obtenerTodasLocalidades();
+		}
+		
 }	
