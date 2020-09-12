@@ -34,11 +34,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.swing.ImageIcon;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+
 import com.Remote.EstadoBeanRemote;
 import com.Remote.FenomenoBeanRemote;
 import com.Remote.LocalidadBeanRemote;
 import com.Remote.ObservacionBeanRemote;
 import com.Remote.UsuarioBeanRemote;
+import com.Remote.ZonaBeanRemote;
 import com.dao.Estadodao;
 import com.dao.Fenomenodao;
 import com.dao.Localidaddao;
@@ -49,7 +53,18 @@ import com.entidades.Fenomeno;
 import com.entidades.Localidad;
 import com.entidades.Observacion;
 import com.entidades.Usuario;
+import com.entidades.Zona;
 import com.sun.prism.Image;
+import com.sun.xml.internal.ws.client.RequestContext;
+
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
+import javax.faces.application.FacesMessage;  
+import javax.faces.bean.ManagedBean;  
+import javax.faces.context.FacesContext;  
+import org.primefaces.event.SelectEvent;
+import org.primefaces.expression.impl.ThisExpressionResolver;  
+
 
 @ManagedBean(name="observacion")
 @SessionScoped
@@ -71,6 +86,9 @@ public class ObservacionBean implements Serializable{
 		@EJB
 		private FenomenoBeanRemote fenomenoBeanRemote;
 		Fenomeno fen = new Fenomeno();
+		@EJB
+		private ZonaBeanRemote zonaBeanRemote;
+		Zona zon = new Zona();
 		
 		//Atributos
 	    private long id;
@@ -90,11 +108,22 @@ public class ObservacionBean implements Serializable{
 		boolean modo1 = true;
 		private List<Fenomeno> fenomenos;
 		private List<Localidad> localidades;
+		private List<Zona> zonas;
 		
 		//Propiedades
 		
+		
+		
 		public List<Fenomeno> getFenomenos() {
 			return fenomenos;
+		}
+
+		public List<Zona> getZonas() {
+			return zonas;
+		}
+
+		public void setZonas(List<Zona> zonas) {
+			this.zonas = zonas;
 		}
 
 		public void setFenomenos(List<Fenomeno> fenomenos) {
@@ -292,6 +321,14 @@ public class ObservacionBean implements Serializable{
 		public void CargaCombos() {
 		    fenomenos = fenomenoBeanRemote.Obtenertodoslosfenomenos();
 		    localidades = localidadBeanRemote.obtenerTodasLocalidades();
+		    zonas = zonaBeanRemote.obtenerTodasZonas();
 		}
+		
+		public void onDateSelect(SelectEvent event) {  
+			FacesContext facesContext = FacesContext.getCurrentInstance();  
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");  
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));  
+			}  
+		
 		
 }	

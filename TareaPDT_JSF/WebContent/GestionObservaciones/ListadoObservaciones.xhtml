@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
@@ -25,9 +26,6 @@
           <li class="nav-item active">
             <a class="nav-link" href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="../GestionReportes/GestionReportes.xhtml">Gestion de reportes</a>
-          </li>
           <li>
             <div class="badge badge-info">
              #{usuario.usuario} 
@@ -47,7 +45,16 @@
 		</h:panelGrid>
 		<h:commandButton value="Buscar"	action="#{observacion.seleccionarObservaciones()}" class="btn btn-outline-dark" style="margin-top: 100px"/>
 		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
-	</h:form>
+		<p:outputLabel value= "Fecha Desde" style="margin-top: 100px"/>
+			<p:calendar id="inline" value="#{observacion.fecha}" mode="popup" pattern="dd/MM/yyyy" style="margin-top: 100px"/>
+		<p:outputLabel value= "Fecha Hasta" style="margin-top: 100px"/>
+			<p:calendar id="inline2" value="#{observacion.fecha}" mode="popup" pattern="dd/MM/yyyy" style="margin-top: 100px"/>	
+		<h:selectOneMenu value="#{observacion.observacionSeleccionada.localidad.departamento.zona.nombre_zona}" >
+   				<f:selectItems value="#{observacion.zonas}" var="obser" itemValue="#{obser.nombre_zona}" 
+   				itemLabel="#{obser.nombre_zona}"
+   				/>
+	  </h:selectOneMenu><br/> 
+		</h:form>
 
 	<h3 style="text-align:center">Observaciones seleccionadas</h3>
 	<h:form id="formTabla">
