@@ -9,6 +9,10 @@
 <h:outputStylesheet name="css/bootstrap.min.css"/>
 </h:head>
 <body>
+<f:metadata>
+    <f:viewParam name="id" value="#{usuario.id}" />
+    <f:event type="preRenderView" listener="#{usuario.preRenderViewListener()}"/>
+</f:metadata>
 
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -25,11 +29,15 @@
           <li class="nav-item active">
             <a class="nav-link" href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a>
+          </li>
           <li>
             <div class="badge badge-info">
-             #{usuario.usuario} 
+             #{usuario.usuario}
              </div>
-          </li>
+             </li>
+           	  <li class="list-group-item">Tipo de Usuario: #{usuario.usuarioSeleccionado.tipousuario.nombre}</li>
         </ul>
       </div>
     </div>
