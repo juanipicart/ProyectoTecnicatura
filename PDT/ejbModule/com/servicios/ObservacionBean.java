@@ -121,6 +121,15 @@ public class ObservacionBean implements ObservacionBeanRemote {
 		 return observaciones;
 	}
 	
+	
+	@Override
+	public List<Observacion> obtenerObservacionFechaZona(Date desde, Date hasta, String zona){
+		
+		List<Observacion> observaciones = this.obsDao.obtenerObservacionFechaZona(desde, hasta, zona);
+		return observaciones;
+	}
+	
+	
 	@Override
 	public boolean validarDescripcion(Observacion obs, List<String> palabras) {
 		boolean estaLimpia = true; 

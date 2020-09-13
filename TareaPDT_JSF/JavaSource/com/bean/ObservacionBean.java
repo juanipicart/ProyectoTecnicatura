@@ -359,4 +359,28 @@ public class ObservacionBean implements Serializable{
 				return ("Error al cargar imagen");
 			}
 		}
+		
+		public List<Observacion>seleccionarObservaciones(Date desde, Date hasta, String zona){
+			
+			try {
+			observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservaciones();
+			List<Observacion> filtradas = new ArrayList<Observacion>();
+			
+			for (Observacion o : observacionesSeleccionadas)
+			{
+				//si la zona es la misma que el objeto y la fecha se encuentra en el rango lo agrego a la lista
+				if (zona == o.getLocalidad().getDepartamento().getZona().getNombre_zona() &&
+					(o.getFecha().after(desde) && o.getFecha().before(hasta)))
+				
+				filtradas.add(o);
+			}
+			
+			return filtradas;	
+		}
+			catch (Exception ex)
+			{
+				ex.getMessage();
+				return null;
+			}
+		}
 }	

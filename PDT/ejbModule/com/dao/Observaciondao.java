@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -78,13 +79,24 @@ public class Observaciondao {
   		return observaciones;
   	}
   
-  //Obtener observacion por id
+    //Obtener observacion por id
   	public Observacion obtenerObservacionPorId(long id) {
 
 	    	TypedQuery<Observacion> query = em.createQuery("SELECT o FROM Observacion o where o.id LIKE : id",Observacion.class).setParameter("id",id);
 			return query.getSingleResult();
 
 		} 
-    
+
+  	//Obtener Obs por fecha y zona
+  	public List<Observacion> obtenerObservacionFechaZona(Date desde, Date hasta, String zona)
+  	{
+  		TypedQuery<Observacion> query = em.createQuery("SELECT o FROM Observacion o where o.nombre_zona LIKE : zona "
+  				+ "and o.fecha BETWEEN desde AND hasta",Observacion.class)
+  				.setParameter("nombre_zona",zona)
+  				.setParameter("fecha", desde)
+  				.setParameter("fecha", hasta);
+  		List<Observacion> observaciones = query.getResultList();
+		return observaciones;
+  	}
     
 }
