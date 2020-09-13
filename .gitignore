@@ -2,5 +2,6 @@
 /TareaPDT_EAR/
 /PDT/.settings/
 /PDT/build/
-/PDT/.classpath
-/PDT/.project
+*.classpath
+*.project
+*.class
