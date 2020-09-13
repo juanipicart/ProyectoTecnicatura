@@ -229,14 +229,13 @@ public class UsuarioBean implements Serializable{
 		boolean valid = false;
 		List <Usuario> usuarios = usuarioBeanRemote.Login(username, pass);
 		Usuario usu = new Usuario();
-		usu = usuarios.get(0);
-		for (Usuario u : usuarios)
-		{
-			if (u !=null) 
+
+		if (!(usuarios.isEmpty())) 
 			{
 				valid = true;
+				usu = usuarios.get(0);
 			}
-		}
+		
 		
 		if (valid) {
 			HttpSession session = SessionUtils.getSession();
