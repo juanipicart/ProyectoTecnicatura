@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -109,13 +111,20 @@ public class ObservacionBean implements Serializable{
 		private List<Fenomeno> fenomenos;
 		private List<Localidad> localidades;
 		private List<Zona> zonas;
+		private  String encoded2;
 		
 		//Propiedades
 		
-		
-		
 		public List<Fenomeno> getFenomenos() {
 			return fenomenos;
+		}
+
+		public String getEncoded2() {
+			return encoded2;
+		}
+
+		public void setEncoded2(String encoded2) {
+			this.encoded2 = encoded2;
 		}
 
 		public List<Zona> getZonas() {
@@ -159,7 +168,7 @@ public class ObservacionBean implements Serializable{
 		public String getCodigo_OBS() {
 			return codigo_OBS;
 		}
-
+			
 		public void setCodigo_OBS(String codigo_OBS) {
 			this.codigo_OBS = codigo_OBS;
 		}
@@ -339,4 +348,19 @@ public class ObservacionBean implements Serializable{
 			return tipo;
 		}
 		
+		public String codificar()
+		{
+			try {
+			if ( observacionSeleccionada.getImagen() != null) {	
+			return (encoded2 = Base64.getEncoder().encodeToString(observacionSeleccionada.getImagen()));
+			}
+			else
+				return ("No hay imagen disponible");
+			}
+			catch (Exception ex)
+			{
+				ex.getMessage();
+				return ("Error al cargar imagen");
+			}
+		}
 }	
