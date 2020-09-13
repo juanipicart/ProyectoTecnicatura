@@ -112,11 +112,22 @@ public class ObservacionBean implements Serializable{
 		private List<Localidad> localidades;
 		private List<Zona> zonas;
 		private  String encoded2;
+		private Zona zona;
 		
 		//Propiedades
 		
+		
+		
 		public List<Fenomeno> getFenomenos() {
 			return fenomenos;
+		}
+
+		public Zona getZona() {
+			return zona;
+		}
+
+		public void setZona(Zona zona) {
+			this.zona = zona;
 		}
 
 		public String getEncoded2() {
@@ -336,10 +347,10 @@ public class ObservacionBean implements Serializable{
 			}  
 		
 		public boolean VerificarTipo() {
-			boolean tipo = false; 
-			if (observacionSeleccionada.getUsuario().getTipousuario().getNombre() != "EXPERTO")		
+			boolean tipo = true; 
+			if (observacionSeleccionada.getUsuario().getTipousuario().getNombre().equals("EXPERTO"))		
 			{
-				tipo = true;
+				tipo = false;
 			}
 			return tipo;
 		}
@@ -360,7 +371,7 @@ public class ObservacionBean implements Serializable{
 			}
 		}
 		
-		public List<Observacion>seleccionarObservaciones(Date desde, Date hasta, String zona){
+		public List<Observacion>seleccionarObservaciones(Date desde, Date hasta, Zona zona){
 			
 			try {
 			observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservaciones();
@@ -369,7 +380,7 @@ public class ObservacionBean implements Serializable{
 			for (Observacion o : observacionesSeleccionadas)
 			{
 				//si la zona es la misma que el objeto y la fecha se encuentra en el rango lo agrego a la lista
-				if (zona == o.getLocalidad().getDepartamento().getZona().getNombre_zona() &&
+				if (o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona) &&
 					(o.getFecha().after(desde) && o.getFecha().before(hasta)))
 				
 				filtradas.add(o);

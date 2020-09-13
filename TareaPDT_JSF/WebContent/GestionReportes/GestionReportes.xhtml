@@ -50,7 +50,7 @@
 			<p:calendar id="inline" value="#{observacion.fecha}" var="desde" mode="popup" pattern="dd/MM/yyyy" style="margin-top: 100px"/>
 		<p:outputLabel value= "Fecha Hasta" style="margin-top: 100px"/>
 			<p:calendar id="inline2" value="#{observacion.fecha}" var="hasta" mode="popup" pattern="dd/MM/yyyy" style="margin-top: 100px"/>	
-		<h:selectOneMenu value="#{observacion.observacionSeleccionada.localidad.departamento.zona.nombre_zona}" >
+		<h:selectOneMenu value="#{observacion.zona}" >
    				<f:selectItems value="#{observacion.zonas}" var="zona" itemValue="#{zona.nombre_zona}" 
    				itemLabel="#{zona.nombre_zona}"
    				/>
