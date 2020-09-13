@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -196,10 +197,10 @@ public class UsuarioBean implements Serializable{
 		}
 	}
 
-	public String seleccionarUsuarios() {
-		usuariosSeleccionados=usuarioBeanRemote.obtenerUsuarioActivos();
-		return "";
-	}
+	//public String seleccionarUsuarios() {
+	//	usuariosSeleccionados=usuarioBeanRemote.obtenerUsuarioActivos();
+	//	return "";
+	//}
 
 	public void preRenderViewListener() {
 		modo1=true;
@@ -227,7 +228,8 @@ public class UsuarioBean implements Serializable{
 		
 		boolean valid = false;
 		List <Usuario> usuarios = usuarioBeanRemote.Login(username, pass);
-		
+		Usuario usu = new Usuario();
+		usu = usuarios.get(0);
 		for (Usuario u : usuarios)
 		{
 			if (u !=null) 
@@ -238,7 +240,8 @@ public class UsuarioBean implements Serializable{
 		
 		if (valid) {
 			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("username", username);
+			//session.setAttribute("username", username);
+			session.setAttribute("username", usu);
 			return "Index";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
@@ -256,6 +259,12 @@ public class UsuarioBean implements Serializable{
 		session.invalidate();
 		return "Login";
 	}
+	
+	  @PostConstruct 
+	    public void init(){ 
+		  usuariosSeleccionados=usuarioBeanRemote.obtenerUsuarioActivos();
+	  }
+	
 
 	public void limpiar(ComponentSystemEvent event){
 

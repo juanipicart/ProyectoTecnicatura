@@ -285,11 +285,6 @@ public class ObservacionBean implements Serializable{
 		
 		/***************METODOS******************/
 		
-		//Obtener todas las observaciones
-		public String seleccionarObservaciones() {
-			observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservaciones();
-			return "";
-		}
 		
 		//Renderizar
 		public void preRenderViewListener() {
@@ -327,10 +322,11 @@ public class ObservacionBean implements Serializable{
 		
 		//Luego del Constructor
 		@PostConstruct
-		public void CargaCombos() {
+		public void init() {
 		    fenomenos = fenomenoBeanRemote.Obtenertodoslosfenomenos();
 		    localidades = localidadBeanRemote.obtenerTodasLocalidades();
 		    zonas = zonaBeanRemote.obtenerTodasZonas();
+		    observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservaciones();
 		}
 		
 		public void onDateSelect(SelectEvent event) {  

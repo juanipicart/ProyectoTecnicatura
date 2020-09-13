@@ -41,14 +41,6 @@
 	<h:form class="form-group">
 		<h:messages style="color:red;margin:8px;" />
 		
-		
-		<h:panelGrid columns="1">
-		
-			
-
-		</h:panelGrid>
-		<h:commandButton value="Buscar"	action="#{usuario.seleccionarUsuarios()}" class="btn btn-outline-dark" style="margin-top: 100px"/>
-		<h:commandButton value="Alta de usuario" 	action="AltaUsuario" class="btn btn-outline-dark" style="margin-top: 100px"/>
 		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
 		
 		
@@ -103,6 +95,6 @@
 		
 	</h:dataTable>
 	</h:form>
-
+			<h:commandButton value="Alta de usuario" 	action="AltaUsuario" class="btn btn-outline-dark" style="margin-top: 50px"/>
 </body>
 </html>
