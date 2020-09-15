@@ -401,14 +401,15 @@ public class ObservacionBean implements Serializable{
 		
 		
 		
-		public List<Observacion>seleccionarObservacionesLista(String zona, Date hasta)
+		public List<Observacion>seleccionarObservacionesLista(String zona, Date hasta, Date desde)
 		{
 			try {
 				observacionesFiltradas = observacionBeanRemote.obtenerTodasObservaciones();
 				List <Observacion> filtradas = new ArrayList<Observacion>();
 				for (Observacion o : observacionesFiltradas)
 				{
-					if (o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona) && o.getFecha().before(hasta))
+					if (o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona) 
+							&& (o.getFecha().before(hasta) && o.getFecha().after(desde)))
 							{
 								filtradas.add(o);
 							}
@@ -423,7 +424,7 @@ public class ObservacionBean implements Serializable{
 		}
 		
 		public String seleccionarObservaciones() {
-			observacionesFiltradas = seleccionarObservacionesLista(zona, hasta); 
+			observacionesFiltradas = seleccionarObservacionesLista(zona, hasta, desde); 
 			return "";
 		}
 		
