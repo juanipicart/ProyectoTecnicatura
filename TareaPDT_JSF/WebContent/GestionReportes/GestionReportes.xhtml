@@ -73,7 +73,7 @@
    		</h:column>
 
 		<h:column>
-			<f:facet name="header">Nombre</f:facet>
+			<f:facet name="header">Usuario</f:facet>
 		      #{observacion.usuario.usuario}
 		</h:column>
 
@@ -83,19 +83,21 @@
    		</h:column>
 
 		<h:column>
-			<f:facet name="header">Localidad</f:facet>
-      		#{observacion.localidad.nombreLoc}
+			<f:facet name="header">Zona</f:facet>
+      		#{observacion.localidad.departamento.zona.nombre_zona}
 		</h:column>
 		
 		<h:column>
-			<f:facet name="header">Descripcion</f:facet>
-      		#{observacion.descripcion}
+		<f:facet name="header">Fecha de Observacion</f:facet>
+			<h:outputText value="#{observacion.fecha}" >
+    		<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
 		</h:column>
 		
 		<h:column>
 			<f:facet name="header">Ver Detalle</f:facet>
 			<h:link value="Ver detalle" outcome="DetalleObservacion.xhtml" class="badge badge-success">
-    			<f:param name="id" value="${observacion.id}" />
+    			<f:param name="id" value="${observacion.id}"/>
 			</h:link>
 		</h:column>
 	</h:dataTable>
