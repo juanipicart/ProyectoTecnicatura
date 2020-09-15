@@ -105,14 +105,17 @@ public class ObservacionBean implements Serializable{
 		private float altitud;
 		private Estado estado;
 	    private Date fecha;
-	    private List<Observacion> observacionesSeleccionadas=new ArrayList<Observacion>();    
+	    private List<Observacion> observacionesSeleccionadas=new ArrayList<Observacion>();
+	    private List<Observacion> observacionesFiltradas=new ArrayList<Observacion>();    
 		private Observacion observacionSeleccionada = new Observacion();
 		boolean modo1 = true;
 		private List<Fenomeno> fenomenos;
 		private List<Localidad> localidades;
 		private List<Zona> zonas;
 		private  String encoded2;
-		private Zona zona;
+		private String zona;
+		private Date hasta;
+		private Date desde;
 		
 		//Propiedades
 		
@@ -122,11 +125,35 @@ public class ObservacionBean implements Serializable{
 			return fenomenos;
 		}
 
-		public Zona getZona() {
+		public List<Observacion> getObservacionesFiltradas() {
+			return observacionesFiltradas;
+		}
+
+		public void setObservacionesFiltradas(List<Observacion> observacionesFiltradas) {
+			this.observacionesFiltradas = observacionesFiltradas;
+		}
+
+		public Date getHasta() {
+			return hasta;
+		}
+
+		public void setHasta(Date hasta) {
+			this.hasta = hasta;
+		}
+
+		public Date getDesde() {
+			return desde;
+		}
+
+		public void setDesde(Date desde) {
+			this.desde = desde;
+		}
+
+		public String getZona() {
 			return zona;
 		}
 
-		public void setZona(Zona zona) {
+		public void setZona(String zona) {
 			this.zona = zona;
 		}
 
@@ -276,7 +303,7 @@ public class ObservacionBean implements Serializable{
 		public ObservacionBean() {
 		}
 		
-		//contructor comppleto
+		//contructor completo
 		public ObservacionBean(String codigo_OBS, Usuario usuario, Fenomeno fenomeno, Localidad localidad,
 				String descripcion, byte[] imagen, float latitud, float longitud, float altitud, Estado estado, Date fecha) {
 			super();
@@ -338,6 +365,7 @@ public class ObservacionBean implements Serializable{
 		    localidades = localidadBeanRemote.obtenerTodasLocalidades();
 		    zonas = zonaBeanRemote.obtenerTodasZonas();
 		    observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservaciones();
+		    observacionesFiltradas = observacionBeanRemote.obtenerTodasObservaciones();
 		}
 		
 		public void onDateSelect(SelectEvent event) {  
@@ -371,27 +399,34 @@ public class ObservacionBean implements Serializable{
 			}
 		}
 		
-		public List<Observacion>seleccionarObservaciones(Date desde, Date hasta, Zona zona){
-			
+		
+		
+		public List<Observacion>seleccionarObservacionesLista(String zona, Date hasta)
+		{
 			try {
-			observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservaciones();
-			List<Observacion> filtradas = new ArrayList<Observacion>();
-			
-			for (Observacion o : observacionesSeleccionadas)
-			{
-				//si la zona es la misma que el objeto y la fecha se encuentra en el rango lo agrego a la lista
-				if (o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona) &&
-					(o.getFecha().after(desde) && o.getFecha().before(hasta)))
-				
-				filtradas.add(o);
+				observacionesFiltradas = observacionBeanRemote.obtenerTodasObservaciones();
+				List <Observacion> filtradas = new ArrayList<Observacion>();
+				for (Observacion o : observacionesFiltradas)
+				{
+					if (o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona) && o.getFecha().before(hasta))
+							{
+								filtradas.add(o);
+							}
+				}
+				return filtradas;
 			}
-			
-			return filtradas;	
-		}
 			catch (Exception ex)
 			{
 				ex.getMessage();
 				return null;
 			}
 		}
+		
+		public String seleccionarObservaciones() {
+			observacionesFiltradas = seleccionarObservacionesLista(zona, hasta); 
+			return "";
+		}
+		
+
+
 }	

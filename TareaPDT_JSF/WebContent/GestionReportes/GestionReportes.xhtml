@@ -45,24 +45,22 @@
 		
 		<h:panelGrid columns="1">
 		
-		</h:panelGrid>
-		<p:outputLabel value= "Fecha Desde" style="margin-top: 100px"/>
-			<p:calendar id="inline" value="#{observacion.fecha}" var="desde" mode="popup" pattern="dd/MM/yyyy" style="margin-top: 100px"/>
+		<h:outputLabel value="Observacion" />
+			<h:selectOneMenu value="#{observacion.zona}" style="margin-top: 100px">
+   				<f:selectItems   value="#{observacion.zonas}" var="zona" itemValue="#{zona.nombre_zona}" 
+   				itemLabel="#{zona.nombre_zona}" />
+			</h:selectOneMenu>
 		<p:outputLabel value= "Fecha Hasta" style="margin-top: 100px"/>
-			<p:calendar id="inline2" value="#{observacion.fecha}" var="hasta" mode="popup" pattern="dd/MM/yyyy" style="margin-top: 100px"/>	
-		<h:selectOneMenu value="#{observacion.zona}" >
-   				<f:selectItems value="#{observacion.zonas}" var="zona" itemValue="#{zona.nombre_zona}" 
-   				itemLabel="#{zona.nombre_zona}"
-   				/>
-	  </h:selectOneMenu><br/> 
-		
-		<h:commandButton value="Buscar"	action="#{observacion.seleccionarObservaciones(desde,hasta,zona)}" class="btn btn-outline-dark" style="margin-top: 100px"/>
+			<p:calendar id="hasta" value="#{observacion.hasta}" outcome="#{observacion.hasta}" var="hasta" mode="popup" pattern="dd/MM/yy" style="margin-top: 100px"/>
+			
+		</h:panelGrid>
+		<h:commandButton value="Buscar"	action="#{observacion.seleccionarObservaciones()}"/>
 		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
 		</h:form>
 
 	<h3 style="text-align:center">Observaciones seleccionadas</h3>
 	<h:form id="formTabla">
-	<h:dataTable value="#{observacion.observacionesSeleccionadas}"
+	<h:dataTable value="#{observacion.observacionesFiltradas}"
 		var="observacion"
 		  class="table table-striped table-dark">
    
