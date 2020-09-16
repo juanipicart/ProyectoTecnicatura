@@ -10,13 +10,17 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
+import com.Remote.TIpoUsuarioBeanRemote;
 import com.Remote.UsuarioBeanRemote;
+import com.entidades.Localidad;
 import com.entidades.TipoUsuario;
 import com.entidades.Usuario;
 import com.exception.ServiciosException;
@@ -30,6 +34,9 @@ public class UsuarioBean implements Serializable{
 	@EJB
 	private UsuarioBeanRemote usuarioBeanRemote;
 
+	@EJB
+	private TIpoUsuarioBeanRemote tipousuarioBeanRemote;
+	
 	public UsuarioBean() {
 	}
 
@@ -48,6 +55,7 @@ public class UsuarioBean implements Serializable{
 	private Usuario usuarioSeleccionado = new Usuario();
 	private boolean modo1 = false;
 	private boolean altaExitoso = false;
+	private List<TipoUsuario> tiposUsuarios = new ArrayList<TipoUsuario>();
 
 	public UsuarioBean( String pass, String usuario, String nombre, String apellido, String estado, String tipodoc,
 			String numerodoc, String direccion, String mail, String tipoUsuario) {
@@ -63,6 +71,16 @@ public class UsuarioBean implements Serializable{
 		this.direccion = direccion;
 		this.mail = mail;
 		this.tipoUsuario = tipoUsuario;
+	}
+
+	
+	
+	public List<TipoUsuario> getTiposUsuarios() {
+		return tiposUsuarios;
+	}
+
+	public void setTiposUsuarios(List<TipoUsuario> tiposUsuarios) {
+		this.tiposUsuarios = tiposUsuarios;
 	}
 
 	public String getTipousuario() {
@@ -141,18 +159,36 @@ public class UsuarioBean implements Serializable{
 		this.usuariosSeleccionados = usuariosSeleccionados;
 	}
 
-	public String crearUsuario(){
+	public Usuario getUsuarioSeleccionado() {
+		return usuarioSeleccionado;
+	}
+
+	public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
+		this.usuarioSeleccionado = usuarioSeleccionado;
+	}
+	
+	public void crearUsuario() {
 		try{
+			
+			List<Usuario> usuarioValido = usuarioBeanRemote.existeUsuario(username);
+			
+			if (usuarioValido.size() != 0) {
+				
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+						"El usuario ya existe en el sistema ", "");
+				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+	 		}
+			else {
 			this.estado = "ACTIVO";
 			usuarioBeanRemote.CrearUsuario(pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
 			altaExitoso = true;
 			//mensaje de actualizacion correcta
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-					"Se creo el usuario: "+username, "");
+					"Se creo el usuario correctamente ", "");
 			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-			return "";
-		}catch(Exception e){
-			return null;
+		}
+			}catch(Exception e){
+			e.getMessage();
 		}
 	}
 
@@ -209,13 +245,6 @@ public class UsuarioBean implements Serializable{
 		} 
 	}
 
-	public Usuario getUsuarioSeleccionado() {
-		return usuarioSeleccionado;
-	}
-
-	public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
-		this.usuarioSeleccionado = usuarioSeleccionado;
-	}
 
 	public void actionAlta(ActionEvent event) throws AbortProcessingException {
 		System.out.println("Alta exitosa!!");	
@@ -262,6 +291,7 @@ public class UsuarioBean implements Serializable{
 	  @PostConstruct 
 	    public void init(){ 
 		  usuariosSeleccionados=usuarioBeanRemote.obtenerUsuarioActivos();
+		  tiposUsuarios = tipousuarioBeanRemote.obtenerTodoslosTipos();
 	  }
 	
 
@@ -280,7 +310,7 @@ public class UsuarioBean implements Serializable{
 		mail = "";
 		tipoUsuario = "";
 	  }
-	
+		
 }
 
 

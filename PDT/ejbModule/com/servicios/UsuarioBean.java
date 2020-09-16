@@ -134,6 +134,12 @@ public  class UsuarioBean implements UsuarioBeanRemote {
 		return usuarios;
 	}
 	
+	@Override
+	public Usuario obtenerUsuario(String usu) {
+		Usuario usuario = usuariodao.obtenerUsuario(usu);
+		return usuario;
+	}
+	
 
 }
 
