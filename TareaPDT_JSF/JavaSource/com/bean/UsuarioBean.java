@@ -170,15 +170,24 @@ public class UsuarioBean implements Serializable{
 	public void crearUsuario() {
 		try{
 			
-			List<Usuario> usuarioValido = usuarioBeanRemote.existeUsuario(username);
+			boolean validarUsuario = ValidarUsuario();
 			
-			if (usuarioValido.size() != 0) {
+			if (validarUsuario == true) {
 				
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"El usuario ya existe en el sistema ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 	 		}
 			else {
+				
+				if (tipodoc == "CI" && numerodoc.length()<7 || numerodoc.length()>8)
+				{
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+							"La CI debe contener entre 7 y 8 digitos", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				}
+				else
+				{
 			this.estado = "ACTIVO";
 			usuarioBeanRemote.CrearUsuario(pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
 			altaExitoso = true;
@@ -186,10 +195,28 @@ public class UsuarioBean implements Serializable{
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 					"Se creo el usuario correctamente ", "");
 			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+			limpiar();
 		}
+				}
 			}catch(Exception e){
 			e.getMessage();
 		}
+	}
+	
+	public boolean ValidarUsuario () {
+		boolean bandera = false;	
+		try {
+		List<Usuario> usuarioValido = usuarioBeanRemote.existeUsuario(username);
+		
+		if (usuarioValido.size() != 0) {
+				bandera = true;
+ 		}
+		}
+		catch (Exception ex)
+		{
+			ex.getMessage();;
+		}
+		return bandera;
 	}
 
 	public String actualizarUsuario(Usuario usuario){
@@ -295,9 +322,8 @@ public class UsuarioBean implements Serializable{
 	  }
 	
 
-	public void limpiar(ComponentSystemEvent event){
+	public void limpiar(){
 
-	    //Antes de  hacer  render se llama a este metodo
 	    //Limpiara los objetos o propiedades
 		pass = "";
 		username = "";
