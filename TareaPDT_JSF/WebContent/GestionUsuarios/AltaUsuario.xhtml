@@ -84,7 +84,9 @@
 	  	     </div>
 	  	     <div class="col-md-4 mb-4">
 	   		  <label for="inputMail">Mail:</label>
-			  	<h:inputText label="*Mail Requerido*" id="inputMail" required="true" class="form-control" type="email" a:placeholder="Ingrese el mail del usuario..." maxlength="100" disabled="false" value="#{usuario.mail}" />
+			  	<h:inputText label="*Mail Requerido*" id="inputMail" required="true" class="form-control" type="email" a:placeholder="Ingrese el mail del usuario..." maxlength="100" disabled="false" value="#{usuario.mail}" validatorMessage="El formato del email no es correcto">
+			  	<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" /> 
+			  	</h:inputText>
 			  	<h:message for="inputMail"  style="color:red" ></h:message>
 		     </div>
 	    </div>
