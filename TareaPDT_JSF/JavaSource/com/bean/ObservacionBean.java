@@ -38,6 +38,7 @@ import javax.swing.ImageIcon;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+import org.primefaces.model.file.UploadedFile;
 
 import com.Remote.EstadoBeanRemote;
 import com.Remote.FenomenoBeanRemote;
@@ -63,7 +64,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;  
 import javax.faces.application.FacesMessage;  
 import javax.faces.bean.ManagedBean;  
-import javax.faces.context.FacesContext;  
+import javax.faces.context.FacesContext;
+
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.expression.impl.ThisExpressionResolver;  
 
@@ -116,13 +119,31 @@ public class ObservacionBean implements Serializable{
 		private String zona;
 		private Date hasta;
 		private Date desde;
-		
+		private UploadedFile file;
+		private byte[] nuevaImagen;
+		 
 		//Propiedades
 		
 		
 		
 		public List<Fenomeno> getFenomenos() {
 			return fenomenos;
+		}
+
+		public byte[] getNuevaImagen() {
+			return nuevaImagen;
+		}
+
+		public void setNuevaImagen(byte[] nuevaImagen) {
+			this.nuevaImagen = nuevaImagen;
+		}
+
+		public UploadedFile getFile() {
+			return file;
+		}
+
+		public void setFile(UploadedFile file) {
+			this.file = file;
 		}
 
 		public List<Observacion> getObservacionesFiltradas() {
@@ -335,10 +356,20 @@ public class ObservacionBean implements Serializable{
 		//Actualizar
 		public String actualizarObservacion(Observacion observacion){
 			try{
+				byte[] imagen;
+				imagen = observacion.getImagen();
+				
+				upload();
+				
+				if (!nuevaImagen.equals(null))
+				{
+					imagen = nuevaImagen;					
+				}
+				
 				observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
 						observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
 						observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), 
-						observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), 
+						imagen, observacion.getLatitud(), observacion.getLongitud(), 
 						observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
 				//mensaje de actualizacion correcta
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
@@ -429,6 +460,17 @@ public class ObservacionBean implements Serializable{
 			return "";
 		}
 		
+		//Modificar imagen 
+		public void upload() {
+		    String fileName = file.getFileName();
+		    String contentType = file.getContentType();
+		    nuevaImagen = file.getContent();
+		}
+		
+		public void handleFileUpload(FileUploadEvent event) {
+	        FacesMessage msg = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	    }
 
 
 }	

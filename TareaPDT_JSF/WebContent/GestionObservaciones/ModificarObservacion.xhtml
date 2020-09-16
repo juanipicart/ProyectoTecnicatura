@@ -66,7 +66,11 @@
 	  <li class="list-group-item">Altitud: 
 	  	<h:inputText id="Altitud" required="true"  maxlength="100" disabled="false" value="#{observacion.observacionSeleccionada.altitud}" />
 	  </li>
-	  
+	  <li class="list-group-item">Imagen:
+  		<h:form enctype="multipart/form-data">
+    	<p:fileUpload mode="simple" value="#{observacion.file}" />
+		</h:form>
+	  </li>
 	</ul>	
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >

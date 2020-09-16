@@ -260,10 +260,6 @@ public class UsuarioBean implements Serializable{
 		}
 	}
 
-	//public String seleccionarUsuarios() {
-	//	usuariosSeleccionados=usuarioBeanRemote.obtenerUsuarioActivos();
-	//	return "";
-	//}
 
 	public void preRenderViewListener() {
 		modo1=true;
@@ -295,7 +291,6 @@ public class UsuarioBean implements Serializable{
 		
 		if (valid) {
 			HttpSession session = SessionUtils.getSession();
-			//session.setAttribute("username", username);
 			session.setAttribute("username", usu);
 			return "Index";
 		} else {
