@@ -51,7 +51,9 @@
 	  	<h:inputText id="direccion" required="true" placeholder="Ingrese la direccion del usuario" maxlength="50" disabled="false" value="#{usuario.usuarioSeleccionado.direccion}" />
 	  </li>
 	  <li class="list-group-item">Mail: 
-	  	<h:inputText id="mail" required="true" type="email" placeholder="Ingrese el mail del usuario" maxlength="100" disabled="false" value="#{usuario.usuarioSeleccionado.mail}" />
+	  	<h:inputText id="mail" required="true" type="email" placeholder="Ingrese el mail del usuario" maxlength="100" disabled="false" value="#{usuario.usuarioSeleccionado.mail}" validatorMessage="El formato del email no es correcto">
+	  	<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" /> 
+	  	</h:inputText>
 	  </li>
 	  <li class="list-group-item">Tipo de Usuario: 
 	  	<h:selectOneMenu class="form-control" value="#{usuario.tipousuario}" >
