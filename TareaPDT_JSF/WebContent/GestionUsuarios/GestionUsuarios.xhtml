@@ -40,9 +40,14 @@
 	
 	<h:form class="form-group">
 		<h:messages style="color:red;margin:8px;" />
-		
+			<h:outputLabel value="Usuario" id="usuario" style="text-align:left;margin-left:15px"/>
+			<h:inputText for="usuario" value="#{usuario.usuario}"  style="text-align:left;margin-left:15px"/>
+			<h:outputLabel value="Nombre" style="text-align:left;margin-left:15px" />
+			<h:inputText id="nombre" value="#{usuario.nombre}" style="text-align:left;margin-left:15px" />
+			<h:commandLink action="#{usuario.seleccionarUsuarios()}" value="Filtrar" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
+   			
 		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
-		<h:commandButton value="Alta de usuario" 	action="AltaUsuario" class="btn btn-outline-dark" style="margin-top: 50px"/>	
+		<h:commandButton value="Alta de usuario" 	action="AltaUsuario" class="btn btn-outline-dark" style="margin-top: 100px"/>	
 	</h:form>
 
 	<h3 style="text-align:center">Usuarios seleccionados</h3>

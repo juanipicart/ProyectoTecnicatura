@@ -3,6 +3,7 @@ package com.bean;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import com.Remote.TIpoUsuarioBeanRemote;
 import com.Remote.UsuarioBeanRemote;
 import com.entidades.Localidad;
+import com.entidades.Observacion;
 import com.entidades.TipoUsuario;
 import com.entidades.Usuario;
 import com.exception.ServiciosException;
@@ -52,6 +54,8 @@ public class UsuarioBean implements Serializable{
 	private String mail;
 	private String tipoUsuario;
 	private List<Usuario> usuariosSeleccionados=new ArrayList<Usuario>();
+	private List<Usuario> usuarioFiltrados=new ArrayList<Usuario>();
+
 	private Usuario usuarioSeleccionado = new Usuario();
 	private boolean modo1 = false;
 	private boolean altaExitoso = false;
@@ -73,7 +77,14 @@ public class UsuarioBean implements Serializable{
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	
+	public List<Usuario> getUsuarioFiltrados() {
+		return usuarioFiltrados;
+	}
+
+	public void setUsuarioFiltrados(List<Usuario> usuarioFiltrados) {
+		this.usuarioFiltrados = usuarioFiltrados;
+	}
+
 	
 	public List<TipoUsuario> getTiposUsuarios() {
 		return tiposUsuarios;
@@ -314,6 +325,8 @@ public class UsuarioBean implements Serializable{
 	    public void init(){ 
 		  usuariosSeleccionados=usuarioBeanRemote.obtenerUsuarioActivos();
 		  tiposUsuarios = tipousuarioBeanRemote.obtenerTodoslosTipos();
+		  usuarioFiltrados= usuarioBeanRemote.obtenerUsuarios();
+		  
 	  }
 	
 
@@ -331,7 +344,37 @@ public class UsuarioBean implements Serializable{
 		mail = "";
 		tipoUsuario = "";
 	  }
+
+	public List<Usuario> seleccionUsuario(String username)
+	{
+		try {
+		usuariosSeleccionados=usuarioBeanRemote.obtenerUsuarioActivos();
+		List <Usuario> filtradas = new ArrayList<Usuario>();
+		for (Usuario u : usuariosSeleccionados) {
+			
+			if ((username==null || username.isEmpty() || u.getUsuario().toLowerCase().startsWith(username.toLowerCase())) &&
+			     (nombre==null || nombre.isEmpty() || u.getNombre().toLowerCase().startsWith(nombre.toLowerCase())))	
+			{
+				
+				filtradas.add(u);
+				}
+			
+		}
+		return filtradas;
 		
+	}catch (Exception ex) 
+		{	
+			ex.getMessage();
+			return null;
+		}
+	}
+	
+
+	
+	public String seleccionarUsuarios() {
+		usuariosSeleccionados = seleccionUsuario(username); 
+		return "";
+	}
 }
 
 
