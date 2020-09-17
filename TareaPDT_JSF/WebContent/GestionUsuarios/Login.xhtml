@@ -3,35 +3,38 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"
+      xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"	
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui">
       
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
 </h:head> 
-<body> 
 
-<h:form id="idDatosEmpleado">
+
+<body class="row bg-success align-items-center justify-content-center vh-100 "> 
+<h:form id="idDatosEmpleado" >
 		
-		
-	<ul class="list-group" style="text-align:center">
-	  <li class="list-group-item active">Ingresar a la Aplicación</li>
-	  <li class="list-group-item">Usuario:
-	  <h:inputText id="usuario" required="true" placeholder="Ingrese un username" maxlength="80" disabled="false" value="#{usuario.usuario}" />
-	  </li>
-	  <li class="list-group-item">Password: 
-	  	  <h:inputSecret  id="password" required="true" placeholder="Ingrese una password" maxlength="80" disabled="false" value="#{usuario.pass}" />
-	  </li>
-	 
-	</ul>
-	
-	<div style="display:block; text-align:center; margin-top: 20px" >
-	<h:commandButton id="idIngresar"  value="Ingresar" style="margin-left: 40px" action="#{usuario.Login}" class="btn btn-outline-dark"/>
-	</div>
+	 	
+			<div class="card"  style="width:22rem;height:20rem" >
+				<div class="card-header bg-success " style="color:white;text-align:center">Green Place</div>	
+							
+			   	 <h7 class="list-group-item">Usuario:
+				  	<h:inputText label="Usuario" id="usuario" class="form-control" required="true" a:placeholder="username" maxlength="80" disabled="false" value="#{usuario.usuario}" />
+				 </h7>
+				<h7 class="list-group-item">Password:
+				   <h:inputSecret label="Password" id="password" class="form-control" required="true" a:placeholder="password" maxlength="80" disabled="false" value="#{usuario.pass}" />
 				
-	</h:form>
-			<h:messages   style="color:red;margin:8px;" />
+				 </h7>
+					<br></br>			
+					  <h:commandButton   id="idIngresar"    value="Ingresar" action="#{usuario.Login}" class="btn btn-success btn-sm btn-block"/>
+			
+      		</div>		
+
+ <h:messages class="alert alert-danger" role="alert"  style="color:red" />
+</h:form>
+			 
 </body> 
 </html>
 
