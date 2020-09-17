@@ -121,6 +121,7 @@ public class ObservacionBean implements Serializable{
 		private Date desde;
 		private UploadedFile file;
 		private byte[] nuevaImagen;
+		private List<Estado> estados;
 		 
 		//Propiedades
 		
@@ -128,6 +129,14 @@ public class ObservacionBean implements Serializable{
 		
 		public List<Fenomeno> getFenomenos() {
 			return fenomenos;
+		}
+
+		public List<Estado> getEstados() {
+			return estados;
+		}
+
+		public void setEstados(List<Estado> estados) {
+			this.estados = estados;
 		}
 
 		public byte[] getNuevaImagen() {
@@ -397,6 +406,7 @@ public class ObservacionBean implements Serializable{
 		    zonas = zonaBeanRemote.obtenerTodasZonas();
 		    observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservaciones();
 		    observacionesFiltradas = observacionBeanRemote.obtenerTodasObservaciones();
+		    estados = estadoBeanRemote.obtenerTodosEstados();
 		}
 		
 		public void onDateSelect(SelectEvent event) {  
