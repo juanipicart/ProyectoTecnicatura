@@ -185,7 +185,7 @@ public class UsuarioBean implements Serializable{
 			
 			if (validarUsuario == true) {
 				
-				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 						"El usuario ya existe en el sistema ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 	 		}
@@ -193,7 +193,7 @@ public class UsuarioBean implements Serializable{
 				
 				if (tipodoc == "CI" && numerodoc.length()<7 || numerodoc.length()>8)
 				{
-					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 							"La CI debe contener entre 7 y 8 digitos", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 				}
@@ -237,7 +237,7 @@ public class UsuarioBean implements Serializable{
 			
 			if (usuarioValido.size() != 0) {
 					
-				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 						"El usuario ingresado ya existe en el sistema ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 			}
@@ -255,8 +255,18 @@ public class UsuarioBean implements Serializable{
 		}
 	}
 
-	public String darDeBajaUsuario(Usuario usuario) {
+	public void darDeBajaUsuario(Usuario usuario, String usuActual) {
 		try {
+			Usuario usuLogueado = usuarioBeanRemote.obtenerUsuario(usuActual);
+			
+			if (usuLogueado.getUsuario().equals(usuario.getUsuario()))
+			{
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+						"No se puede eliminar a usted mismo ", "");
+				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+			}
+			
+			else {
 			this.estado = "INACTIVO";
 			usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
 					usuario.getApellido(), this.estado, usuario.getTipodoc(), usuario.getNumerodoc(), 
@@ -265,16 +275,15 @@ public class UsuarioBean implements Serializable{
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"Se elimino el usuario. ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-			return "";
-		} catch(Exception e) {
-			return null;
+		} 
+		}catch(Exception e) {
+			e.getMessage();
 		}
 
 	}
 
 	public List<Usuario> obtenerUsuarios() {
 		try {
-			//System.out.println("El username para el select es " + username);
 			return usuarioBeanRemote.obtenerUsuarioActivos();
 		} catch(Exception e){
 			return null;

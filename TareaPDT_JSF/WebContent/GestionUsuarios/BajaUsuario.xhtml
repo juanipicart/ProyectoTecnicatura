@@ -33,7 +33,7 @@
 			
 		<div style="display:block; text-align:center; margin-top: 20px">		
 		<h:commandButton  id="idVolver" value="Volver"	action="GestionUsuarios.xhtml" class="btn btn-outline-dark" /> 
-		<h:commandButton id="idBaja"  value="Dar de baja" style="margin-left: 40px" action="#{usuario.darDeBajaUsuario(usuario.usuarioSeleccionado)}" class="btn btn-outline-dark">
+		<h:commandButton id="idBaja"  value="Dar de baja" style="margin-left: 40px" action="#{usuario.darDeBajaUsuario(usuario.usuarioSeleccionado, login.username)}" class="btn btn-outline-dark">
     			<f:param name="id" value="${usuario.id}" />
     	</h:commandButton>
 		</div>
