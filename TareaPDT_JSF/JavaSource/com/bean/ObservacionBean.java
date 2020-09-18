@@ -416,11 +416,11 @@ public class ObservacionBean implements Serializable{
 			}  
 		
 		public boolean VerificarTipo(String tipoEnviado) {
-			boolean tipo = false;
+			boolean tipo = true;
 			Usuario tipoUsu = usuarioBeanRemote.obtenerUsuario(tipoEnviado);
-			if ( tipoUsu.getTipousuario().getNombre() != "EXPERTO")		
+			if ( tipoUsu.getTipousuario().getNombre() == "EXPERTO" || tipoUsu.getTipousuario().getId() == 2)		
 			{
-				tipo = true;
+				tipo = false;
 			}
 			return tipo;
 		}
