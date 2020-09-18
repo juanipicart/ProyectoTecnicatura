@@ -363,14 +363,14 @@ public class ObservacionBean implements Serializable{
 		}
 		
 		//Actualizar
-		public String actualizarObservacion(Observacion observacion){
+		public void actualizarObservacion(Observacion observacion){
 			try{
 				byte[] imagen;
 				imagen = observacion.getImagen();
 				
 				upload();
 				
-				if (!nuevaImagen.equals(null))
+				if (nuevaImagen != null || nuevaImagen.length != 0)
 				{
 					imagen = nuevaImagen;					
 				}
@@ -384,9 +384,8 @@ public class ObservacionBean implements Serializable{
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"Se actualizo la observacion. ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-				return "";
 			}catch(Exception e){
-				return null;
+				e.getMessage();
 			}
 		}
 		
