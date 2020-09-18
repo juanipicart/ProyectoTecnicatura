@@ -368,7 +368,6 @@ public class ObservacionBean implements Serializable{
 				byte[] imagen;
 				imagen = observacion.getImagen();
 				
-				upload();
 				
 				if (nuevaImagen != null || nuevaImagen.length != 0)
 				{

@@ -68,7 +68,9 @@
 	  </li>
 	  <li class="list-group-item">Imagen:
   		<h:form enctype="multipart/form-data">
-    	<p:fileUpload mode="simple" value="#{observacion.file}" />
+    	<p:fileUpload mode="simple" value="#{observacion.file}"  skinSimple="true"/>
+    	 <br />
+    <p:commandButton value="Submit" ajax="false" action="#{observacion.upload}" disabled="false" />
 		</h:form>
 	  </li>
 	</ul>	
