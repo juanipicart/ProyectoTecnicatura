@@ -321,6 +321,16 @@ public class ObservacionBean implements Serializable{
 			this.fecha = fecha;
 		}
 		
+		@Override
+		public String toString() {
+		return "Observacion{" +
+		"mCodigo='" + this.codigo_OBS + '\'' +
+		", mFenomeno='" + this.fenomeno + '\'' +
+		", mLocalidad='" + this.localidad +
+		", mFecha='" + this.fecha +
+		'}';
+		}
+		
 		/***************METODOS******************/
 		
 		
