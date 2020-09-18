@@ -297,39 +297,7 @@ public class UsuarioBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Alta exitosa."));
 	}
 
-	public String Login (){
-		
-		boolean valid = false;
-		List <Usuario> usuarios = usuarioBeanRemote.Login(username, pass);
-		Usuario usu = new Usuario();
-
-		if (!(usuarios.isEmpty())) 
-			{
-				valid = true;
-				usu = usuarios.get(0);
-			}
-		
-		
-		if (valid) {
-			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("username", usu);
-			return "Index";
-		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Usuario o Password incorrecta",
-							"Por favor verifique los datos ingresados"));
-			return "Login";
-		}
-	}
-
-	//logout
-	public String logout() {
-		HttpSession session = SessionUtils.getSession();
-		session.invalidate();
-		return "Login";
-	}
+	
 	
 	  @PostConstruct 
 	    public void init(){ 

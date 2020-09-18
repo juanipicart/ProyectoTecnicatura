@@ -415,11 +415,12 @@ public class ObservacionBean implements Serializable{
 			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));  
 			}  
 		
-		public boolean VerificarTipo() {
-			boolean tipo = true; 
-			if (observacionSeleccionada.getUsuario().getTipousuario().getNombre().equals("EXPERTO"))		
+		public boolean VerificarTipo(String tipoEnviado) {
+			boolean tipo = false;
+			Usuario tipoUsu = usuarioBeanRemote.obtenerUsuario(tipoEnviado);
+			if ( tipoUsu.getTipousuario().getNombre() != "EXPERTO")		
 			{
-				tipo = false;
+				tipo = true;
 			}
 			return tipo;
 		}

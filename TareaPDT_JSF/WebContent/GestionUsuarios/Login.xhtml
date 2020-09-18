@@ -21,14 +21,14 @@
 				<div class="card-header bg-success " style="color:white;text-align:center">Green Place</div>	
 							
 			   	 <h7 class="list-group-item">Usuario:
-				  	<h:inputText label="Usuario" id="usuario" class="form-control" required="true" a:placeholder="username" maxlength="80" disabled="false" value="#{usuario.usuario}" />
+				  	<h:inputText label="Usuario" id="usuario" class="form-control" required="true" a:placeholder="username" maxlength="80" disabled="false" value="#{login.username}" />
 				 </h7>
 				<h7 class="list-group-item">Password:
-				   <h:inputSecret label="Password" id="password" class="form-control" required="true" a:placeholder="password" maxlength="80" disabled="false" value="#{usuario.pass}" />
+				   <h:inputSecret label="Password" id="password" class="form-control" required="true" a:placeholder="password" maxlength="80" disabled="false" value="#{login.pass}" />
 				
 				 </h7>
 					<br></br>			
-					  <h:commandButton   id="idIngresar"    value="Ingresar" action="#{usuario.Login}" class="btn btn-success btn-sm btn-block"/>
+					  <h:commandButton   id="idIngresar"    value="Ingresar" action="#{login.ValidarLogin()}" class="btn btn-success btn-sm btn-block"/>
 			
       		</div>		
 

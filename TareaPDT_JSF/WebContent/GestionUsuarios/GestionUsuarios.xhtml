@@ -30,7 +30,7 @@
           </li>
           <li>
             <div class="badge badge-info">
-             #{usuario.usuario} 
+             #{login.username} 
              </div>
           </li>
         </ul>
@@ -46,7 +46,7 @@
 			<h:inputText id="nombre" value="#{usuario.nombre}" style="text-align:left;margin-left:15px" />
 			<h:commandLink action="#{usuario.seleccionarUsuarios()}" value="Filtrar" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
    			
-		<h:commandLink action="#{usuario.logout}" value="Logout" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
+		<h:commandLink action="#{login.logout}" value="Logout" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
 		<h:commandButton value="Alta de usuario" 	action="AltaUsuario" class="btn btn-outline-dark" style="margin-top: 100px"/>	
 	</h:form>
 
