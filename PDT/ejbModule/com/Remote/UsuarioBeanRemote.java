@@ -26,7 +26,7 @@ public interface UsuarioBeanRemote {
 
 	List<Usuario> obtenerUsuarioActivos();
 
-	
+	Usuario obtenerUsuario(String usuario); 
 
 
 }

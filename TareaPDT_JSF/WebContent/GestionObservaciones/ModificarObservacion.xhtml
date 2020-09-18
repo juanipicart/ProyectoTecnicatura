@@ -13,7 +13,7 @@
 </h:head> 
 <body> 
 <f:metadata>
-    <f:viewParam name="id" value="#{observacion.id}" />
+	<f:viewParam name="id" value="#{observacion.id}" />
     <f:event type="preRenderView" listener="#{observacion.preRenderViewListener()}"/>
 </f:metadata>
 
@@ -40,12 +40,12 @@
    				/>
 	  </h:selectOneMenu><br/> 
 	  </li>
-	  <li class="list-group-item">Estado: 
-	  	<h:selectOneMenu value="#{observacion.observacionSeleccionada.estado.nombre}">
-   				<f:selectItem itemValue="ALTA" itemLabel="ALTA" />
-   				<f:selectItem itemValue="MEDIA" itemLabel="MEDIA" />
-   				<f:selectItem itemValue="BAJA" itemLabel="BAJA" />
-			</h:selectOneMenu>
+	   <li class="list-group-item">Estado: 
+			<h:selectOneMenu value="#{observacion.observacionSeleccionada.estado.nombre}" >
+   				<f:selectItems value="#{observacion.estados}" var="estado" itemValue="#{estado.nombre}" 
+   				itemLabel="#{estado.nombre}"
+   				/>
+	  </h:selectOneMenu><br/> 
 	  </li>
 	  <li class="list-group-item">Localidad: 
 			<h:selectOneMenu value="#{observacion.observacionSeleccionada.localidad.nombreLoc}" >
@@ -66,11 +66,15 @@
 	  <li class="list-group-item">Altitud: 
 	  	<h:inputText id="Altitud" required="true"  maxlength="100" disabled="false" value="#{observacion.observacionSeleccionada.altitud}" />
 	  </li>
-	  
+	  <li class="list-group-item">Imagen:
+  		<h:form enctype="multipart/form-data">
+    	<p:fileUpload mode="simple" value="#{observacion.file}" />
+		</h:form>
+	  </li>
 	</ul>	
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >
-	<h:commandButton id="idVolver" value="Volver"	action="ListadoObservaciones.xhtml" class="btn btn-outline-dark" /> 
+	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-primary" style="float:left;margin-left:40px"/> 
 	<h:commandButton id="idModificar"  value="Modificar" style="margin-left: 40px" action="#{observacion.actualizarObservacion(observacion.observacionSeleccionada)}" class="btn btn-outline-dark">
 	<f:param name="id" value="${observacion.id}" />
     	</h:commandButton>
