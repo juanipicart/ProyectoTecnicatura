@@ -1,5 +1,29 @@
 package com.bean;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import java.io.ByteArrayInputStream;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Named;
+
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
+
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import javax.faces.convert.ConverterException;
+import javax.faces.convert.FacesConverter;
+import javax.faces.model.SelectItem;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -22,7 +46,6 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 import javax.inject.Named;
@@ -38,8 +61,6 @@ import javax.swing.ImageIcon;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-import org.primefaces.model.file.UploadedFile;
-
 import com.Remote.EstadoBeanRemote;
 import com.Remote.FenomenoBeanRemote;
 import com.Remote.LocalidadBeanRemote;
@@ -120,7 +141,6 @@ public class ObservacionBean implements Serializable{
 		private Date hasta;
 		private Date desde;
 		private UploadedFile file;
-		private byte[] nuevaImagen;
 		private List<Estado> estados;
 		 
 		//Propiedades
@@ -137,14 +157,6 @@ public class ObservacionBean implements Serializable{
 
 		public void setEstados(List<Estado> estados) {
 			this.estados = estados;
-		}
-
-		public byte[] getNuevaImagen() {
-			return nuevaImagen;
-		}
-
-		public void setNuevaImagen(byte[] nuevaImagen) {
-			this.nuevaImagen = nuevaImagen;
 		}
 
 		public UploadedFile getFile() {
@@ -365,14 +377,8 @@ public class ObservacionBean implements Serializable{
 		//Actualizar
 		public void actualizarObservacion(Observacion observacion){
 			try{
-				byte[] imagen;
-				imagen = observacion.getImagen();
 				
-				
-				if (nuevaImagen != null || nuevaImagen.length != 0)
-				{
-					imagen = nuevaImagen;					
-				}
+				observacionSeleccionada.setImagen(imagen);
 				
 				observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
 						observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
@@ -464,22 +470,21 @@ public class ObservacionBean implements Serializable{
 			}
 		}
 		
+		public StreamedContent obtenerImagen() {
+			return new DefaultStreamedContent(new ByteArrayInputStream(observacionSeleccionada.getImagen()));
+		}
+		
 		public String seleccionarObservaciones() {
 			observacionesFiltradas = seleccionarObservacionesLista(zona, hasta, desde); 
 			return "";
 		}
-		
-		//Modificar imagen 
-		public void upload() {
-		    String fileName = file.getFileName();
-		    String contentType = file.getContentType();
-		    nuevaImagen = file.getContent();
-		}
-		
+
 		public void handleFileUpload(FileUploadEvent event) {
-	        FacesMessage msg = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
-	        FacesContext.getCurrentInstance().addMessage(null, msg);
-	    }
+			UploadedFile file = event.getFile();
+			byte[] content = file.getContents();
+			imagen = content;
+
+		}
 
 
 }	
