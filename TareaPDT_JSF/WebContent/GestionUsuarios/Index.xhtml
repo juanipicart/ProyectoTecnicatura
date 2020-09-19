@@ -7,6 +7,46 @@
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
+<style>
+
+.Bimage{background-image:url ("resources/img/incendios.jpg");}
+.Bimage{background-image:url ("resources/img/incendios1.jpg");}
+.Bimage{background-image:url ("resources/img/incendios2.jpg");}
+
+
+#home-carousel {
+	border-bottom: 4px solid #FF8F00;
+}
+
+#home-carousel .fill {
+	height: 600px;
+	background-size: cover;
+	background-position: center center;
+}
+
+#home h1 span {
+	font-weight: 300;
+}
+
+@media (max-width: 767px) {
+	#home-carousel .fill {
+		height: 250px;
+	}
+	#home h1 {
+		font-size: 26px;
+	}
+
+}
+body {
+	padding-top: 54px;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Lato', sans-serif;
+}
+
+
+</style>
+
 </h:head>
 <body>
 <f:metadata>
@@ -14,7 +54,7 @@
     <f:event type="preRenderView" listener="#{usuario.preRenderViewListener()}"/>
 </f:metadata>
 
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
     <div class="container">
       <a class="navbar-brand" href="Index.xhtml">Green Place</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +81,56 @@
       </div>
     </div>
   </nav>
-  
+  <div id="home">
+
+		<!-- Home Carousel -->
+	    <div id="home-carousel" class="carousel slide " data-ride="carousel">
+	        <!-- Indicators -->
+	        <ol class="carousel-indicators">
+	            <li data-target="#home-carousel" data-slide-to="0" class="active"></li>
+	            <li data-target="#home-carousel" data-slide-to="1"></li>
+	            <li data-target="#home-carousel" data-slide-to="2"></li>
+	        </ol>
+
+	        <!-- Wrapper for slides -->
+	        <div class="carousel-inner">
+	            <div class="carousel-item  active">
+						<h:graphicImage class="fill" library="img" name="incendios2.jpg" />
+	                <div class="carousel-caption">
+	                    <h2>Cambios Forestales</h2>
+	                </div>
+	            </div>
+	            <div class="carousel-item">
+	              
+	                  <h:graphicImage  class="fill" library="img" name="incendios1.jpg" />
+	                
+	                <div class="carousel-caption">
+	                    <h2>Huracanes</h2>
+	                </div>
+	            </div>
+	            <div class="carousel-item ">
+	            	
+	            	   <h:graphicImage class="fill"  library="img" name="incendios.jpg" />
+	              	
+	                <div class="carousel-caption">
+	                    <h2>Incendios</h2>
+	                </div>
+	            </div>
+			
+	        </div>
+	     
+	
+	        <!-- Controls -->
+	        <a class="left carousel-control" href="#home-carousel" role="button" data-slide="prev" >
+	             <span class="glyphicon glyphicon-chevron-left"></span>
+       			  <span class="sr-only">Previous</span>
+	        </a>
+	        <a class="right carousel-control" href="#home-carousel"  role="button" data-slide="next">
+	              <span class="glyphicon glyphicon-chevron-right"></span>
+        			 <span class="sr-only">Next</span>
+	        </a>
+	    </div><!-- /#home-carousel -->
+  </div> 
    <!-- Page Content -->
   <div class="container">
 
@@ -51,5 +140,6 @@
       que nos rodea. Lo que hacemos marca la diferencia, y tenemos que decidir qué tipo de diferencia queremos hacer.</p>
     </header>
    </div>
+  
 </body>
 </html>
