@@ -11,33 +11,34 @@
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
 </h:head> 
-<body> 
+<body >
+
 
 <h:form id="idDatosEmpleado" >
 
 		
-	<div class="card border-primary mb-12" style="max-width:100rem;margin-left:15px"  >
+	<div class="card border-success mb-12" style="max-width:100rem;margin-left:15px"  >
 		<ul class="list-group" style="text-align:left">
-	  	  <li class="list-group-item active">Alta de Usuario</li><br></br>
+	  	  <li class="list-group-item active bg-success">Alta de Usuario</li><br></br>
 	  		<h2 style="text-align:left;margin-left:15px" class="text-muted" >Datos del Usuario:</h2><br> </br>
 	  <div class="cord w-75">
 	  	
 	  	     <div class="form-row" style="margin-left:25px">
-	  		     <div class="form-group col-md-5">
+	  		     <div class="form-group col-md-4">
 		   		  
 		   		   <h:outputLabel for="inputUsuario" >Usuario:</h:outputLabel>
 		  		   <h:inputText  id="inputusuario" class="form-control" label="*Usuario*" required="true" a:placeholder="Ingrese un usuario..."  
 		  		   maxlength="80" disabled="false" value="#{usuario.usuario}">
 		  		   	 </h:inputText>
-		  		    <h:message for="inputusuario"  style="color:red" ></h:message>
+
 		  		        </div>
 	  	    	
 	  	         <div class="form-group col-md-5">
 			       <label for="inputPass" >Password:</label> 
-			  	   <h:inputSecret label="*Pass Requerida*" id="inputPass" class="form-control" required="true" a:placeholder="Ingrese una password..." maxlength="80" disabled="false" value="#{usuario.pass}" />
-			  		<h:message for="inputPass"  style="color:red" ></h:message>
+			  	   <h:inputSecret   label="*Pass Requerida*" id="inputPass" class="form-control" required="true" a:placeholder="Ingrese una password..." maxlength="80" disabled="false" value="#{usuario.pass}" />
+
       	         </div>
-      	         <div class="form-group col-md-2">
+      	         <div class="form-group col-md-3">
 	   		       <label for="tipoUsuario" >Tipo de Usuario:</label>
 				    <h:selectOneMenu class="form-control" value="#{usuario.tipousuario}" >
 	   				<f:selectItems value="#{usuario.tiposUsuarios}" var="tipos" itemValue="#{tipos.nombre}" 
@@ -46,17 +47,17 @@
 	             </div>
              </div>
       	      <div class="form-row" style="margin-left:25px"> 
-			     <div class="col-md-5 mb-3">
+			     <div class="col-md-4 mb-3">
 			       <label for="inputNombre">Nombre:</label> 	 
 			  	   <h:inputText label="*Nombre Requerido*" id="inputNombre" class="form-control" required="true" a:placeholder="Ingrese un nombre..." maxlength="80" disabled="false" value="#{usuario.nombre}" />
-			  	   <h:message for="inputNombre"  style="color:red" ></h:message>
+
 	  	         </div>
                  <div class="col-md-5 mb-3">
 	  			   <label for="inputApellido">Apellido:</label>
 		  	  	   <h:inputText label="*Apellido Requerido*" id="apellido" class="form-control" required="true" a:placeholder="Ingrese un apellido..." maxlength="80" disabled="false" value="#{usuario.apellido}" />
-		  	  	    <h:message for="apellido"  style="color:red" ></h:message>
+		  	  	
 	  		     </div>
-	  		     <div class="col-md-2 mb-3">
+	  		     <div class="col-md-3 mb-3">
 	   		       <label for="inputApellido">Estado</label>
 	   			   <h:inputText id="estado" required="true" maxlength="80" disabled="true" class="form-control" value="ACTIVO"/>
 	   			   
@@ -75,19 +76,19 @@
 	         <div class="col-md-3 mb-3">	
 	   		   <label for="inputDocumento">Documento:</label> 
 	  		    <h:inputText label="*Documento Requerido*" id="inputDocumento"  class="form-control" required="true" a:placeholder="Ingrese un numero de documento..." maxlength="50" disabled="false" value="#{usuario.numerodoc}" />
-	  		    <h:message for="inputDocumento"  style="color:red" ></h:message>
+	  		    
 	  		 </div>
 	         <div class="col-md-3 mb-3">
 	   		 	 <label for="inputDireccion">Direccion:</label>
 				  	<h:inputText label="*Dirección Requerido*" id="inputDireccion" class="form-control" required="true" a:placeholder="Ingrese la direccion del usuario..." maxlength="50" disabled="false" value="#{usuario.direccion}" />
-				  	<h:message for="inputDireccion"  style="color:red" ></h:message>
+				
 	  	     </div>
 	  	     <div class="col-md-4 mb-4">
 	   		  <label for="inputMail">Mail:</label>
 			  	<h:inputText label="*Mail Requerido*" id="inputMail" required="true" class="form-control" type="email" a:placeholder="Ingrese el mail del usuario..." maxlength="100" disabled="false" value="#{usuario.mail}" validatorMessage="El formato del email no es correcto">
 			  	<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" /> 
 			  	</h:inputText>
-			  	<h:message for="inputMail"  style="color:red" ></h:message>
+			  	
 		     </div>
 	    </div>
    </div>
@@ -95,13 +96,14 @@
 	
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >
-	<h:link value="Volver" outcome="GestionUsuarios.xhtml" class="btn btn-primary" style="float:left;margin-left:15px"/> 
-	<h:commandButton   value="Dar de Alta" style="float:left;margin-left:15px" action="#{usuario.crearUsuario()}"  class="btn btn-primary"/>
+	<h:link value="Volver" outcome="GestionUsuarios.xhtml" class="btn btn-success" style="float:left;margin-left:15px"/> 
+	<h:commandButton  id="crear" value="Dar de Alta" style="float:left;margin-left:15px" action="#{usuario.crearUsuario()}"  class="btn btn-success"/><br />
+	  
 	<h:outputText  />
 	
 	</div>
 	
-    		  <h:messages  style="color:red;margin:8px;" class="alert alert-danger"  role="alert"/> 
+    		  <h:messages errorStyle="color:red" infoStyle="color:green"   /> <br />
 	</div>	
 	</h:form>
 	

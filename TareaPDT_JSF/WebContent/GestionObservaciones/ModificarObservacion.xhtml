@@ -20,8 +20,8 @@
 <h:form id="idDatosEmpleado2">
 
 <ul class="list-group" style="text-align:center">
-	  <li class="list-group-item active">Modificacion de observacion</li>
-	  <li class="list-group-item">Id:
+  <li class="list-group-item active bg-success">Modificacion de observacion</li>	
+    <li class="list-group-item">Id:
 	  <h:inputText id="id" required="true" maxlength="80" disabled="true" value="#{observacion.observacionSeleccionada.id}" />
 	  </li>
 	  <li class="list-group-item">codigo:
@@ -34,21 +34,21 @@
 			<p:calendar id="inline" value="#{observacion.observacionSeleccionada.fecha}" mode="popup" pattern="dd/MM/yyyy"/>
 	  </li>
 	  <li class="list-group-item">Fenomeno: 
-			<h:selectOneMenu value="#{observacion.observacionSeleccionada.fenomeno.nombreFen}" >
+			<h:selectOneMenu value="#{observacion.observacionSeleccionada.fenomeno}" >
    				<f:selectItems value="#{observacion.fenomenos}" var="obser" itemValue="#{obser.nombreFen}" 
    				itemLabel="#{obser.nombreFen}"
    				/>
 	  </h:selectOneMenu><br/> 
 	  </li>
 	   <li class="list-group-item">Estado: 
-			<h:selectOneMenu value="#{observacion.observacionSeleccionada.estado.nombre}" >
+			<h:selectOneMenu value="#{observacion.observacionSeleccionada.estado}" >
    				<f:selectItems value="#{observacion.estados}" var="estado" itemValue="#{estado.nombre}" 
    				itemLabel="#{estado.nombre}"
    				/>
 	  </h:selectOneMenu><br/> 
 	  </li>
 	  <li class="list-group-item">Localidad: 
-			<h:selectOneMenu value="#{observacion.observacionSeleccionada.localidad.nombreLoc}" >
+			<h:selectOneMenu value="#{observacion.observacionSeleccionada.localidad}" >
    				<f:selectItems value="#{observacion.localidades}" var="local" itemValue="#{local.nombreLoc}" 
    				itemLabel="#{local.nombreLoc}"
    				/>
@@ -66,11 +66,14 @@
 	  <li class="list-group-item">Altitud: 
 	  	<h:inputText id="Altitud" required="true"  maxlength="100" disabled="false" value="#{observacion.observacionSeleccionada.altitud}" />
 	  </li>
-	  <li class="list-group-item">Imagen:
   		<h:form enctype="multipart/form-data">
-    	<p:fileUpload mode="simple" value="#{observacion.file}" />
+    	<p:outputLabel id="imagen" value="Imagen" />
+				<p:graphicImage value="#{observacion.obtenerImagen()}" cache="false">
+				</p:graphicImage>
+			<p:message for="imagen" display="text" />
+			<p:outputLabel id="modImagen" value="Modificar Imagen" />
+			<p:fileUpload fileUploadListener="#{observacion.handleFileUpload()}"/>
 		</h:form>
-	  </li>
 	</ul>	
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >

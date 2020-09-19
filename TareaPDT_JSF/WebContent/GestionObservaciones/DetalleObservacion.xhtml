@@ -20,7 +20,7 @@
 		
 		
 	<ul class="list-group" style="text-align:center">
-	  <li class="list-group-item active">Detalles de Observacion</li>
+	  <li class="list-group-item active bg-success">Detalles de Observacion</li>
 	  <li class="list-group-item">Id: #{observacion.id}</li>
 	  <li class="list-group-item">Codigo: #{observacion.observacionSeleccionada.codigo_OBS}</li>
 	  <li class="list-group-item">Usuario: #{observacion.observacionSeleccionada.usuario.usuario}</li>
@@ -38,8 +38,8 @@
 	</ul>
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >	
-	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-outline-dark" />
-	<h:commandButton id="idModificar"  value="Editar Informacion" style="margin-left: 40px" disabled="#{observacion.VerificarTipo(login.username)}" action="ModificarObservacion.xhtml" class="btn btn-outline-dark">
+	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-success" />
+	<h:commandButton id="idModificar"  value="Editar Informacion" style="margin-left: 40px" disabled="#{observacion.VerificarTipo(login.username)}" action="ModificarObservacion.xhtml" class="btn btn-success">
 	<f:param name="id" value="${observacion.id}" />
 	 </h:commandButton>	
 	</div>

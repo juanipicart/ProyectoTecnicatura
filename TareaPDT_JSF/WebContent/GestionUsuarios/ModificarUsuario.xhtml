@@ -4,6 +4,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"> 
 
 <h:head>
@@ -16,62 +17,99 @@
 </f:metadata>
 
 <h:form id="idDatosEmpleado2">
+ <div class="card border-success mb-12" style="max-width:100rem;margin-left:15px"  >
+		<ul class="list-group" style="text-align:left">
+	  	  <li class="list-group-item active bg-success">Modificación de Usuario</li><br></br>
+	  		<h2 style="text-align:left;margin-left:15px" class="text-muted" >Datos del Usuario:</h2><br> </br>
+	  <div class="cord w-75">
+	  	
+	  	     <div class="form-row" style="margin-left:25px">
+	  		     
+	  		     
+	  		     <div class="form-group col-md-1">
+	  		     	 <h:outputLabel for="id" >Id:</h:outputLabel>
+	  		          <h:inputText id="id" required="true" placeholder="Id" class="form-control" maxlength="80" disabled="true" value="#{usuario.usuarioSeleccionado.id}" />
+	  		     </div>
+	  		     
+	  		     <div class="form-group col-md-4">
+		   		  
+		   		   <h:outputLabel for="inputUsuario" >Usuario:</h:outputLabel>
+		  		   <h:inputText  id="inputusuario" class="form-control" label="*Usuario*" required="true" a:placeholder="Ingrese un usuario..."  
+		  		   maxlength="80" disabled="false" value="#{usuario.usuarioSeleccionado.usuario}">
+		  		   	 </h:inputText>
 
-<ul class="list-group" style="text-align:center">
-	  <li class="list-group-item active">Modificacion de Usuario</li>
-	  <li class="list-group-item">Id:
-	  <h:inputText id="id" required="true" placeholder="Id" maxlength="80" disabled="true" value="#{usuario.usuarioSeleccionado.id}" />
-	  </li>
-	  <li class="list-group-item">Usuario:
-	  <h:inputText id="usuario" required="true" placeholder="Ingrese un username" maxlength="80" disabled="false" value="#{usuario.usuarioSeleccionado.usuario}" />
-	  </li>
-	  <li class="list-group-item">Password: 
-	  	  <h:inputSecret id="password" required="true" placeholder="Ingrese una password" maxlength="80" disabled="false" value="#{usuario.usuarioSeleccionado.pass}" />
-	  </li>
-	  <li class="list-group-item">Nombre: 
-	  	  <h:inputText id="nombre" required="true" requiredMessage="Password is required" placeholder="Ingrese un nombre" maxlength="80" disabled="false" value="#{usuario.usuarioSeleccionado.nombre}" />
-	  </li>
-	  <li class="list-group-item">Apellido:
-	  	  	  <h:inputText id="apellido" required="true" placeholder="Ingrese un apellido" maxlength="80" disabled="false" value="#{usuario.usuarioSeleccionado.apellido}" />
-	  </li>
-	  <li class="list-group-item">Estado: 
-	   <h:inputText id="estado" required="true" maxlength="80" disabled="true" value="ACTIVO"/>
-	  </li>
-	  <li class="list-group-item">Tipo de Documento: 
-			<h:selectOneMenu value="#{usuario.usuarioSeleccionado.tipodoc}" >
-   				<f:selectItem itemValue="CI" itemLabel="CI" />
-   				<f:selectItem itemValue="PASAPORTE" itemLabel="Pasaporte" />
-   				<f:selectItem itemValue="OTROS" itemLabel="Otros" />
-			</h:selectOneMenu><br/> 
-	  </li>
-	  <li class="list-group-item">Documento: 
-	  	<h:inputText id="numeroDoc"  required="true" placeholder="Ingrese un numero de documento" maxlength="50" disabled="false" value="#{usuario.usuarioSeleccionado.numerodoc}" />
-	  </li>
-	  <li class="list-group-item">Direccion:
-	  	<h:inputText id="direccion" required="true" placeholder="Ingrese la direccion del usuario" maxlength="50" disabled="false" value="#{usuario.usuarioSeleccionado.direccion}" />
-	  </li>
-	  <li class="list-group-item">Mail: 
-	  	<h:inputText id="mail" required="true" type="email" placeholder="Ingrese el mail del usuario" maxlength="100" disabled="false" value="#{usuario.usuarioSeleccionado.mail}" validatorMessage="El formato del email no es correcto">
-	  	<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" /> 
-	  	</h:inputText>
-	  </li>
-	  <li class="list-group-item">Tipo de Usuario: 
-	  	<h:selectOneMenu class="form-control" value="#{usuario.tipousuario}" >
+		  		        </div>
+	  	    	
+	  	         <div class="form-group col-md-4">
+			       <label for="inputPass" >Password:</label> 
+			  	   <h:inputSecret   label="*Pass Requerida*" id="inputPass" class="form-control" required="true" a:placeholder="Ingrese una password..." maxlength="80" disabled="false" value="#{usuario.usuarioSeleccionado.pass}"/>
+
+      	         </div>
+      	         <div class="form-group col-md-3">
+	   		       <label for="tipoUsuario" >Tipo de Usuario:</label>
+				    <h:selectOneMenu class="form-control" value="#{usuario.tipousuario}" >
 	   				<f:selectItems value="#{usuario.tiposUsuarios}" var="tipos" itemValue="#{tipos.nombre}" 
 	   				itemLabel="#{tipos.nombre}"></f:selectItems>
-		</h:selectOneMenu>
-	  </li>
+	   				</h:selectOneMenu>
+	             </div>
+             </div>
+      	      <div class="form-row" style="margin-left:25px"> 
+			     <div class="col-md-4 mb-3">
+			       <label for="inputNombre">Nombre:</label> 	 
+			  	   <h:inputText label="*Nombre Requerido*" id="inputNombre" class="form-control" required="true" a:placeholder="Ingrese un nombre..." maxlength="80" disabled="false" value="#{usuario.usuarioSeleccionado.nombre}" />
+
+	  	         </div>
+                 <div class="col-md-5 mb-3">
+	  			   <label for="inputApellido">Apellido:</label>
+		  	  	   <h:inputText label="*Apellido Requerido*" id="apellido" class="form-control" required="true" a:placeholder="Ingrese un apellido..." maxlength="80" disabled="false" value="#{usuario.usuarioSeleccionado.apellido}" />
+		  	  	
+	  		     </div>
+	  		     <div class="col-md-3 mb-3">
+	   		       <label for="inputApellido">Estado</label>
+	   			   <h:inputText id="estado" required="true" maxlength="80" disabled="true" class="form-control" value="ACTIVO"/>
+	   			   
+			     </div>	   
+	          </div>
+	  	<div class="form-row" style="margin-left:25px"> 
+			<div class="col-md-2 mb-3">
+	   		    <label for="inputTipoDoc">Tipo de Documento:</label>
+			    <h:selectOneMenu value="#{usuario.usuarioSeleccionado.tipodoc}" class="form-control" >
+   			      <f:selectItem itemValue="CI" itemLabel="CI"/>
+   			      <f:selectItem itemValue="PASAPORTE" itemLabel="Pasaporte" />
+   			      <f:selectItem itemValue="OTROS" itemLabel="Otros" 
+   			      />
+			    </h:selectOneMenu><br/> 
+	   		 </div>	   
+	         <div class="col-md-3 mb-3">	
+	   		   <label for="inputDocumento">Documento:</label> 
+	  		    <h:inputText label="*Documento Requerido*" id="inputDocumento"  class="form-control" required="true" a:placeholder="Ingrese un numero de documento..." maxlength="50" disabled="false" value="#{usuario.usuarioSeleccionado.numerodoc}" />
+	  		    
+	  		 </div>
+	         <div class="col-md-3 mb-3">
+	   		 	 <label for="inputDireccion">Direccion:</label>
+				  	<h:inputText label="*Dirección Requerido*" id="inputDireccion" class="form-control" required="true" a:placeholder="Ingrese la direccion del usuario..." maxlength="50" disabled="false" value="#{usuario.usuarioSeleccionado.direccion}" />
+				
+	  	     </div>
+	  	     <div class="col-md-4 mb-4">
+	   		  <label for="inputMail">Mail:</label>
+			  	<h:inputText label="*Mail Requerido*" id="inputMail" required="true" class="form-control" type="email" a:placeholder="Ingrese el mail del usuario..." maxlength="100" disabled="false" value="#{usuario.usuarioSeleccionado.mail}" validatorMessage="El formato del email no es correcto">
+			  	<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" /> 
+			  	</h:inputText>
+			  	
+		     </div>
+	    </div>
+   </div>
 	</ul>
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >
-	<h:link value="Volver" outcome="GestionUsuarios.xhtml" class="btn btn-primary" style="float:left;margin-left:15px"/> 
-	<h:commandButton id="idModificar"  value="Modificar" style="margin-left: 40px" action="#{usuario.actualizarUsuario(usuario.usuarioSeleccionado)}" class="btn btn-outline-dark">
+	<h:link value="Volver" outcome="GestionUsuarios.xhtml" class="btn btn-success" style="float:left;margin-left:15px"/> 
+	<h:commandButton id="idModificar"  value="Modificar" style="float:left;margin-left:15px" action="#{usuario.actualizarUsuario(usuario.usuarioSeleccionado)}" class="btn btn-success"><br/>
 	<f:param name="id" value="${usuario.id}" />
     	</h:commandButton>
 	</div>
 	
 	<h:messages   style="color:red;margin:8px;" />
-
+  </div>
 </h:form>
 
 </body> 
