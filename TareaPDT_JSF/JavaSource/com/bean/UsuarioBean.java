@@ -232,16 +232,7 @@ public class UsuarioBean implements Serializable{
 
 	public void actualizarUsuario(Usuario usuario){
 		try{
-			
-			List<Usuario> usuarioValido = usuarioBeanRemote.existeUsuario(usuario.getUsuario());
-			
-			if (usuarioValido.size() != 0) {
-					
-				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-						"El usuario ingresado ya existe en el sistema ", "");
-				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-			}
-			else {
+						
 			usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
 					usuario.getApellido(), usuario.getEstado(), usuario.getTipodoc(), usuario.getNumerodoc(), 
 					usuario.getDireccion(), usuario.getMail(), usuario.getTipousuario().getNombre());
@@ -249,7 +240,6 @@ public class UsuarioBean implements Serializable{
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 					"Se actualizo el usuario. ", "");
 			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-			}	
 		}catch(Exception e){
 			e.getMessage();
 		}
