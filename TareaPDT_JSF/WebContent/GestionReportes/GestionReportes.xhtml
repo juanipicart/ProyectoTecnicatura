@@ -8,6 +8,7 @@
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../resources/css/style.css"/>
 </h:head>
 <body>
 	
@@ -29,10 +30,13 @@
           <li class="nav-item active">
             <a class="nav-link" href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a>
           </li>
-          <li>
+            <li>
             <div class="badge badge-info">
              #{login.username} 
              </div>
+          </li>
+            <li class="nav-item active">
+            <h:commandLink action="#{login.logout}"  class="close" style="margin-right:1px;color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></h:commandLink>
           </li>
         </ul>
       </div>
@@ -43,24 +47,44 @@
 	<h:form class="form-group">
 		<h:messages style="color:red;margin:8px;" />
 		
-		<h:panelGrid columns="1">
+		<div id="Filtros">
+		<div class="container">
+			<div class="row">
+	            <div class="col-xs-7"><br/>
+	                <h1>Filtros de Busqueda:</h1>
+	            </div>	
+	        </div>
+			<hr></hr>	
+	  			<div class="row">
+				<div class="col-md-3">
+					
+					<div class="form-group">
+							<label for="zona">Zona:</label>
+							<h:outputLabel  name="zona"/>
+							<h:selectOneMenu value="#{observaciozona}"  class="form-control" >
+			   					<f:selectItems   value="#{observacion.zonas}" var="zona" itemValue="#{zona.nombre_zona}" 
+			   					itemLabel="#{zona.nombre_zona}" />
+							</h:selectOneMenu>
+					</div>
+					<div class="form-group">
+							<label for="fechahasta">Fecha Hasta:</label>
+							<h:outputLabel  name="fechahasta"/>
+							<p:calendar id="hasta" value="#{observacion.hasta}" outcome="#{observacion.hasta}" var="hasta" mode="popup" pattern="dd/MM/yy" />
+					</div>
+					<div class="form-group">
+							<label for="fechadesde">Fecha Desde:</label>
+							<h:outputLabel  name="fechadesde"/>
+							<p:calendar id="desde" value="#{observacion.desde}" outcome="#{observacion.desde}" var="desde" mode="popup" pattern="dd/MM/yy"  />
+					</div>
+						
+						<h:commandButton value="Filtrar"	action="#{observacion.seleccionarObservaciones()}" class="btn btn-outline-success"/>
+				 </div>
+				</div>
+		</div>
+	</div>
+			
+</h:form>
 		
-		<h:outputLabel value="Observacion" />
-			<h:selectOneMenu value="#{observacion.zona}" style="margin-top: 100px">
-   				<f:selectItems   value="#{observacion.zonas}" var="zona" itemValue="#{zona.nombre_zona}" 
-   				itemLabel="#{zona.nombre_zona}" />
-			</h:selectOneMenu>
-		<p:outputLabel value= "Fecha Hasta" style="margin-top: 100px"/>
-			<p:calendar id="hasta" value="#{observacion.hasta}" outcome="#{observacion.hasta}" var="hasta" mode="popup" pattern="dd/MM/yy" style="margin-top: 100px"/>
-			
-			<p:outputLabel value= "Fecha Desde" style="margin-top: 100px"/>
-			<p:calendar id="desde" value="#{observacion.desde}" outcome="#{observacion.desde}" var="desde" mode="popup" pattern="dd/MM/yy" style="margin-top: 100px"/>
-			
-		</h:panelGrid>
-		<h:commandButton value="Buscar"	action="#{observacion.seleccionarObservaciones()}"/>
-		<h:commandLink action="#{login.logout}" value="Logout" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink>
-		</h:form>
-
 	<h3 style="text-align:center">Observaciones seleccionadas</h3>
 	<h:form id="formTabla">
 	<h:dataTable value="#{observacion.observacionesFiltradas}"
