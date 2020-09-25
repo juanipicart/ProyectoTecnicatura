@@ -109,6 +109,12 @@ public class FenomenoBean implements FenomenoBeanRemote {
 		return TelE;
 	}
 
+	@Override
+	public Fenomeno ObtenerFenomeno(String nombre) {
+		Fenomeno fenomeno = fenomenodao.obtenerNombreFen(nombre);
+		return fenomeno;
+	}
+
 	
 	
 	

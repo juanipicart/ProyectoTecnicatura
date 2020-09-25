@@ -16,5 +16,5 @@ public interface FenomenoBeanRemote {
 	 List<Fenomeno> existecodigo(String codigo)throws ServiciosException;
 	 List<Fenomeno> Obtenertodoslosfenomenos();
 	 List<Telefono> obtenerTelEmergencia();	 
-
+	 Fenomeno ObtenerFenomeno (String nombre);
 }

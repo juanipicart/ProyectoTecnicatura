@@ -10,5 +10,5 @@ import com.entidades.Estado;
 public interface EstadoBeanRemote {
 
 	List <Estado> obtenerTodosEstados();
-	
+	Estado ObtenerEstado(String nombre);
 }

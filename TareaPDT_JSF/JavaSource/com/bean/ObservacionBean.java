@@ -145,7 +145,12 @@ public class ObservacionBean implements Serializable{
 		 
 		//Propiedades
 		
-		
+		public boolean isModo1() {
+			return modo1;
+		}
+		public void setModo1(boolean modo1) {
+			this.modo1 = modo1;
+		}
 		
 		public List<Fenomeno> getFenomenos() {
 			return fenomenos;
@@ -388,13 +393,19 @@ public class ObservacionBean implements Serializable{
 		public void actualizarObservacion(Observacion observacion){
 			try{
 				
+				
+				Localidad l = localidadBeanRemote.obtenerLocalidad(localidad.getNombreLoc());
+				//Usuario u = usuarioBeanRemote.obtenerUsuario(usuario.getUsuario());
+				Estado e = estadoBeanRemote.ObtenerEstado(estado.getNombre());
+				Fenomeno f = fenomenoBeanRemote.ObtenerFenomeno(fenomeno.getNombreFen());
+				
 				observacionSeleccionada.setImagen(imagen);
 				
 				observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
-						observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
-						observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), 
+						"ADMIN", f.getNombreFen(), 
+						l.getNombreLoc(), observacion.getDescripcion(), 
 						imagen, observacion.getLatitud(), observacion.getLongitud(), 
-						observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
+						observacion.getAltitud(), e.getNombre(), observacion.getFecha());
 				//mensaje de actualizacion correcta
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"Se actualizo la observacion. ", "");
@@ -495,6 +506,9 @@ public class ObservacionBean implements Serializable{
 			imagen = content;
 
 		}
+		
+	   
+		
 
 
 }	

@@ -26,4 +26,11 @@ public class EstadoBean implements EstadoBeanRemote{
 		 return estados;
 	}
 
+
+	@Override
+	public Estado ObtenerEstado(String nombre) {
+		Estado estado = this.estdao.obtenerEstadonombre(nombre);
+		return estado;
+	}
+
 }

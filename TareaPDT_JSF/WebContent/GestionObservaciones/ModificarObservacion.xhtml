@@ -21,8 +21,8 @@
 
 <ul class="list-group" style="text-align:center">
   <li class="list-group-item active bg-success">Modificacion de observacion</li>	
-    <li class="list-group-item">Id:
-	  <h:inputText id="id" required="true" maxlength="80" disabled="true" value="#{observacion.observacionSeleccionada.id}" />
+	  <li class="list-group-item">Id: 
+	  	  <h:inputText id="Id" required="true" maxlength="80" disabled="false" value="#{observacion.observacionSeleccionada.id}" />
 	  </li>
 	  <li class="list-group-item">codigo:
 	  <h:inputText id="codigo" required="true" maxlength="80" disabled="false" value="#{observacion.observacionSeleccionada.codigo_OBS}" />
@@ -33,23 +33,25 @@
 	  <li class="list-group-item">Fecha:
 			<p:calendar id="inline" value="#{observacion.observacionSeleccionada.fecha}" mode="popup" pattern="dd/MM/yyyy"/>
 	  </li>
-	  <li class="list-group-item">Fenomeno: 
-			<h:selectOneMenu value="#{observacion.observacionSeleccionada.fenomeno}" >
-   				<f:selectItems value="#{observacion.fenomenos}" var="obser" itemValue="#{obser.nombreFen}" 
-   				itemLabel="#{obser.nombreFen}"
+	  	
+	  	<li class="list-group-item">Fenomeno: 
+			<h:selectOneMenu value="#{observacion.fenomeno}" converter="omnifaces.SelectItemsConverter">
+   				<f:selectItems value="#{observacion.fenomenos}" var="feno" itemValue="#{feno}" 
+   				itemLabel="#{feno.nombreFen}"
    				/>
 	  </h:selectOneMenu><br/> 
 	  </li>
+	  	
 	   <li class="list-group-item">Estado: 
-			<h:selectOneMenu value="#{observacion.observacionSeleccionada.estado}" >
-   				<f:selectItems value="#{observacion.estados}" var="estado" itemValue="#{estado.nombre}" 
+			<h:selectOneMenu value="#{observacion.estado}" converter="omnifaces.SelectItemsConverter">
+   				<f:selectItems value="#{observacion.estados}" var="estado" itemValue="#{estado}" 
    				itemLabel="#{estado.nombre}"
    				/>
 	  </h:selectOneMenu><br/> 
 	  </li>
 	  <li class="list-group-item">Localidad: 
-			<h:selectOneMenu value="#{observacion.observacionSeleccionada.localidad}" >
-   				<f:selectItems value="#{observacion.localidades}" var="local" itemValue="#{local.nombreLoc}" 
+			<h:selectOneMenu value="#{observacion.localidad}" converter="omnifaces.SelectItemsConverter">
+   				<f:selectItems value="#{observacion.localidades}" var="local" itemValue="#{local}" 
    				itemLabel="#{local.nombreLoc}"
    				/>
 	  </h:selectOneMenu><br/> 
@@ -66,20 +68,21 @@
 	  <li class="list-group-item">Altitud: 
 	  	<h:inputText id="Altitud" required="true"  maxlength="100" disabled="false" value="#{observacion.observacionSeleccionada.altitud}" />
 	  </li>
-  		<h:form enctype="multipart/form-data">
-    	<p:outputLabel id="imagen" value="Imagen" />
-				<p:graphicImage value="#{observacion.obtenerImagen()}" cache="false">
-				</p:graphicImage>
-			<p:message for="imagen" display="text" />
-			<p:outputLabel id="modImagen" value="Modificar Imagen" />
-			<p:fileUpload fileUploadListener="#{observacion.handleFileUpload()}"/>
+  		
+  		
+		<h:form enctype="multipart/form-data" model="simple">
+		    	<p:outputLabel id="imagen" value="Imagen" />
+						<p:graphicImage value="#{observacion.obtenerImagen()}" cache="false">
+						</p:graphicImage>
+					<p:message for="imagen" display="text" />
+					<p:outputLabel id="modImagen" value="Modificar Imagen" />
+					<p:fileUpload fileUploadListener="#{observacion.handleFileUpload()}"/>
 		</h:form>
 	</ul>	
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >
 	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-primary" style="float:left;margin-left:40px"/> 
-	<h:commandButton id="idModificar"  value="Modificar" style="margin-left: 40px" action="#{observacion.actualizarObservacion(observacion.observacionSeleccionada)}" class="btn btn-outline-dark">
-	<f:param name="id" value="${observacion.id}" />
+	<h:commandButton id="idModificar"   rendered="#{observacion.modo1}" value="Modificar" style="margin-left: 40px" action="#{observacion.actualizarObservacion(observacion.observacionSeleccionada)}" class="btn btn-outline-dark">
     	</h:commandButton>
 	</div>
 	

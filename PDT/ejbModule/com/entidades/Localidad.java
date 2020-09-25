@@ -78,6 +78,57 @@ public class Localidad implements Serializable {
 		this.longitud = longitud;
 		this.altitud = altitud;
 	}
+	
+	
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Float.floatToIntBits(altitud);
+		result = prime * result + ((departamento == null) ? 0 : departamento.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + Float.floatToIntBits(latitud);
+		result = prime * result + Float.floatToIntBits(longitud);
+		result = prime * result + ((nombreLoc == null) ? 0 : nombreLoc.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Localidad other = (Localidad) obj;
+		if (Float.floatToIntBits(altitud) != Float.floatToIntBits(other.altitud))
+			return false;
+		if (departamento == null) {
+			if (other.departamento != null)
+				return false;
+		} else if (!departamento.equals(other.departamento))
+			return false;
+		if (id != other.id)
+			return false;
+		if (Float.floatToIntBits(latitud) != Float.floatToIntBits(other.latitud))
+			return false;
+		if (Float.floatToIntBits(longitud) != Float.floatToIntBits(other.longitud))
+			return false;
+		if (nombreLoc == null) {
+			if (other.nombreLoc != null)
+				return false;
+		} else if (!nombreLoc.equals(other.nombreLoc))
+			return false;
+		return true;
+	}
+	
+	@Override
+	  public String toString() {
+	      return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
+	  }
+	
 
 }
 
