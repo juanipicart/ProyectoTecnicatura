@@ -68,21 +68,14 @@
 	  <li class="list-group-item">Altitud: 
 	  	<h:inputText id="Altitud" required="true"  maxlength="100" disabled="false" value="#{observacion.observacionSeleccionada.altitud}" />
 	  </li>
-  		
-  		
-		<h:form enctype="multipart/form-data" model="simple">
-		    	<p:outputLabel id="imagen" value="Imagen" />
-						<p:graphicImage value="#{observacion.obtenerImagen()}" cache="false">
-						</p:graphicImage>
-					<p:message for="imagen" display="text" />
-					<p:outputLabel id="modImagen" value="Modificar Imagen" />
-					<p:fileUpload fileUploadListener="#{observacion.handleFileUpload()}"/>
-		</h:form>
+  		<li class="list-group-item">Imagen: 
+	 <h:graphicImage value="data:image/jpg;base64,#{observacion.codificar()}" style="max-width: 200px; max-height: 200px;" />
+	  </li>	
 	</ul>	
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >
 	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-primary" style="float:left;margin-left:40px"/> 
-	<h:commandButton id="idModificar"   rendered="#{observacion.modo1}" value="Modificar" style="margin-left: 40px" action="#{observacion.actualizarObservacion(observacion.observacionSeleccionada)}" class="btn btn-outline-dark">
+	<h:commandButton id="idModificar"   value="Modificar" style="margin-left: 40px" action="#{observacion.actualizarObservacion(observacion.observacionSeleccionada)}" class="btn btn-outline-dark">
     	</h:commandButton>
 	</div>
 	

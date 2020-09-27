@@ -140,7 +140,6 @@ public class ObservacionBean implements Serializable{
 		private String zona;
 		private Date hasta;
 		private Date desde;
-		private UploadedFile file;
 		private List<Estado> estados;
 		 
 		//Propiedades
@@ -162,14 +161,6 @@ public class ObservacionBean implements Serializable{
 
 		public void setEstados(List<Estado> estados) {
 			this.estados = estados;
-		}
-
-		public UploadedFile getFile() {
-			return file;
-		}
-
-		public void setFile(UploadedFile file) {
-			this.file = file;
 		}
 
 		public List<Observacion> getObservacionesFiltradas() {
@@ -393,19 +384,23 @@ public class ObservacionBean implements Serializable{
 		public void actualizarObservacion(Observacion observacion){
 			try{
 				
+				Observacion aux = observacionBeanRemote.obtenerObservacionPorId(id);
 				
 				Localidad l = localidadBeanRemote.obtenerLocalidad(localidad.getNombreLoc());
-				//Usuario u = usuarioBeanRemote.obtenerUsuario(usuario.getUsuario());
 				Estado e = estadoBeanRemote.ObtenerEstado(estado.getNombre());
 				Fenomeno f = fenomenoBeanRemote.ObtenerFenomeno(fenomeno.getNombreFen());
 				
-				observacionSeleccionada.setImagen(imagen);
+				observacion.setLocalidad(l);
+				observacion.setEstado(e);
+				observacion.setFenomeno(f);
+				observacion.setUsuario(aux.getUsuario());
+				observacion.setImagen(aux.getImagen());
 				
 				observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
-						"ADMIN", f.getNombreFen(), 
-						l.getNombreLoc(), observacion.getDescripcion(), 
-						imagen, observacion.getLatitud(), observacion.getLongitud(), 
-						observacion.getAltitud(), e.getNombre(), observacion.getFecha());
+						observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
+						observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), 
+						observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), 
+						observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
 				//mensaje de actualizacion correcta
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"Se actualizo la observacion. ", "");
@@ -465,8 +460,7 @@ public class ObservacionBean implements Serializable{
 				return ("Error al cargar imagen");
 			}
 		}
-		
-		
+
 		
 		public List<Observacion>seleccionarObservacionesLista(String zona, Date hasta, Date desde)
 		{
@@ -491,24 +485,9 @@ public class ObservacionBean implements Serializable{
 			}
 		}
 		
-		public StreamedContent obtenerImagen() {
-			return new DefaultStreamedContent(new ByteArrayInputStream(observacionSeleccionada.getImagen()));
-		}
-		
+
 		public String seleccionarObservaciones() {
 			observacionesFiltradas = seleccionarObservacionesLista(zona, hasta, desde); 
 			return "";
 		}
-
-		public void handleFileUpload(FileUploadEvent event) {
-			UploadedFile file = event.getFile();
-			byte[] content = file.getContents();
-			imagen = content;
-
-		}
-		
-	   
-		
-
-
 }	

@@ -1,6 +1,7 @@
 package com.entidades;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -140,6 +141,85 @@ public class Observacion implements Serializable {
 		this.fecha = fecha;
 	}
 
+	@Override
+	  public String toString() {
+	      return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
+	  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Float.floatToIntBits(altitud);
+		result = prime * result + ((codigo_OBS == null) ? 0 : codigo_OBS.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
+		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
+		result = prime * result + ((fenomeno == null) ? 0 : fenomeno.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + Arrays.hashCode(imagen);
+		result = prime * result + Float.floatToIntBits(latitud);
+		result = prime * result + ((localidad == null) ? 0 : localidad.hashCode());
+		result = prime * result + Float.floatToIntBits(longitud);
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Observacion other = (Observacion) obj;
+		if (Float.floatToIntBits(altitud) != Float.floatToIntBits(other.altitud))
+			return false;
+		if (codigo_OBS == null) {
+			if (other.codigo_OBS != null)
+				return false;
+		} else if (!codigo_OBS.equals(other.codigo_OBS))
+			return false;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (estado == null) {
+			if (other.estado != null)
+				return false;
+		} else if (!estado.equals(other.estado))
+			return false;
+		if (fecha == null) {
+			if (other.fecha != null)
+				return false;
+		} else if (!fecha.equals(other.fecha))
+			return false;
+		if (fenomeno == null) {
+			if (other.fenomeno != null)
+				return false;
+		} else if (!fenomeno.equals(other.fenomeno))
+			return false;
+		if (id != other.id)
+			return false;
+		if (!Arrays.equals(imagen, other.imagen))
+			return false;
+		if (Float.floatToIntBits(latitud) != Float.floatToIntBits(other.latitud))
+			return false;
+		if (localidad == null) {
+			if (other.localidad != null)
+				return false;
+		} else if (!localidad.equals(other.localidad))
+			return false;
+		if (Float.floatToIntBits(longitud) != Float.floatToIntBits(other.longitud))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
+			return false;
+		return true;
+	}
     
-    
+	
+	
 }
