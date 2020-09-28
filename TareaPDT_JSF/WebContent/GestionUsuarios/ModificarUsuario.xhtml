@@ -71,15 +71,13 @@
 			     </div>	   
 	          </div>
 	  	<div class="form-row" style="margin-left:25px"> 
-			<div class="col-md-2 mb-3">
-	   		    <label for="inputTipoDoc">Tipo de Documento:</label>
-			    <h:selectOneMenu value="#{usuario.usuarioSeleccionado.tipodoc}" class="form-control" >
-   			      <f:selectItem itemValue="CI" itemLabel="CI"/>
-   			      <f:selectItem itemValue="PASAPORTE" itemLabel="Pasaporte" />
-   			      <f:selectItem itemValue="OTROS" itemLabel="Otros" 
-   			      />
-			    </h:selectOneMenu><br/> 
-	   		 </div>	   
+			 <div class="form-group col-md-3">
+	   		       <label for="tipoUsuario" >Tipo de Usuario:</label>
+				    <h:selectOneMenu class="form-control"  value="#{usuario.usuarioSeleccionado.tipousuario.nombre}">
+	   				<f:selectItems value="#{usuario.tiposUsuarios}" var="tipos" itemValue="#{tipos.nombre}" 
+	   				itemLabel="#{tipos.nombre}"></f:selectItems>
+	   				</h:selectOneMenu>
+	             </div> 
 	         <div class="col-md-3 mb-3">	
 	   		   <label for="inputDocumento">Documento:</label> 
 	  		    <h:inputText label="*Documento Requerido*" id="inputDocumento"  class="form-control" required="true" a:placeholder="Ingrese un numero de documento..." maxlength="50" disabled="false" value="#{usuario.usuarioSeleccionado.numerodoc}" />
