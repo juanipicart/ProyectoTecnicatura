@@ -9,6 +9,7 @@
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../resources/css/style.css"/>
 </h:head> 
 <body> 
 <f:metadata>
@@ -19,33 +20,60 @@
 <h:form id="idDatosObservacion">
 		
 		
-	<ul class="list-group" style="text-align:center">
-	  <li class="list-group-item active bg-success">Detalles de Observacion</li>
-	  <li class="list-group-item">Id: #{observacion.observacionSeleccionada.id}</li>
-	  <li class="list-group-item">Codigo: #{observacion.observacionSeleccionada.codigo_OBS}</li>
-	  <li class="list-group-item">Usuario: #{observacion.observacionSeleccionada.usuario.usuario}</li>
-	  <li class="list-group-item">Fecha: #{observacion.NuevaFecha(observacion.observacionSeleccionada.fecha)}</li>
-	  <li class="list-group-item">Fenomeno: #{observacion.observacionSeleccionada.fenomeno.nombreFen}</li>
-	  <li class="list-group-item">Estado: #{observacion.observacionSeleccionada.estado.nombre}</li>
-	  <li class="list-group-item">Localidad: #{observacion.observacionSeleccionada.localidad.nombreLoc}</li>
-	  <li class="list-group-item">Descripcion: #{observacion.observacionSeleccionada.descripcion}</li>
-	  <li class="list-group-item">Latitud: -#{observacion.observacionSeleccionada.latitud}°</li>
-	  <li class="list-group-item">Longitud: -#{observacion.observacionSeleccionada.longitud}°</li>
-	  <li class="list-group-item">Altitud: #{observacion.observacionSeleccionada.altitud} mts</li>
-	  <li class="list-group-item">Imagen: 
+	<ul class="list-group" style="text-align:center" >
+	  <li class="list-group-item active bg-success fixed-top"   style="border-bottom: 4px solid #FF8F00;">Detalles de Observacion</li>
+	  <li class="list-group-item"><strong>Id:</strong>  #{observacion.observacionSeleccionada.id}</li>
+	  <li class="list-group-item"><strong>Codigo:</strong>  #{observacion.observacionSeleccionada.codigo_OBS}</li>
+	  <li class="list-group-item"><strong>Usuario:</strong>  #{observacion.observacionSeleccionada.usuario.usuario}</li>
+	  <li class="list-group-item"><strong>Fecha:</strong>  #{observacion.NuevaFecha(observacion.observacionSeleccionada.fecha)}</li>
+	  <li class="list-group-item"><strong>Fenomeno:</strong>  #{observacion.observacionSeleccionada.fenomeno.nombreFen}</li>
+	  <li class="list-group-item"><strong>Estado:</strong>  #{observacion.observacionSeleccionada.estado.nombre}</li>
+	  <li class="list-group-item"><strong>Localidad:</strong>  #{observacion.observacionSeleccionada.localidad.nombreLoc}</li>
+	  <li class="list-group-item"><strong>Descripcion:</strong> #{observacion.observacionSeleccionada.descripcion}</li>
+	  <li class="list-group-item"><strong>Latitud:</strong>  #{observacion.observacionSeleccionada.latitud}°</li>
+	  <li class="list-group-item"><strong>Longitud:</strong> #{observacion.observacionSeleccionada.longitud}°</li>
+	  <li class="list-group-item"><strong>Altitud:</strong> #{observacion.observacionSeleccionada.altitud} mts</li>
+	  <li class="list-group-item"><strong>Imagen:</strong> 
 	 <h:graphicImage value="data:image/jpg;base64,#{observacion.codificar()}" style="max-width: 200px; max-height: 200px;" />
 	  </li>
 	</ul>
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >	
-	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-success" />
-	<h:link value="Editar Informacion" outcome="ModificarObservacion.xhtml" class="btn btn-success" disabled="#{observacion.VerificarTipo(login.username)}">
+	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-success" style="float:left;margin-left:850px" />
+	<h:link value="Editar Informacion" outcome="ModificarObservacion.xhtml" class="btn btn-success"  style="float:left;margin-left:50px" disabled="#{observacion.VerificarTipo(login.username)}">
 	<f:param name="id" value="${observacion.id}" />
 			</h:link>
 	</div>
-		<h:messages style="color:red;margin:8px;" />
+		<h:messages style="color:red;margin:8px;" /><br/><br/>
 		
 	</h:form>
+	 <div id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<img id="footer-logo" src="../resources/img/404-notfound-logo.png" alt="Logo404" />
+					 
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="GestionUsuarios.xhtml">Gestion de Usuarios</a></li>
+						<li><a href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a></li>
+						<li><a href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#contacto-modal">Contacto</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<p style="color:#DDD;">Copyright &copy; 404-NotFound</p>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+
+		</div><!-- /.container -->
+	</div>
 
 </body> 
 </html>
