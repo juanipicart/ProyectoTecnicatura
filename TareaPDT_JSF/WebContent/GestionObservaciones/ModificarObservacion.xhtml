@@ -76,10 +76,10 @@
 	<div style="display:block; text-align:center; margin-top: 20px" >
 	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-primary" style="float:left;margin-left:40px"/> 
 	<h:commandButton id="idModificar"   value="Modificar" style="margin-left: 40px" action="#{observacion.actualizarObservacion(observacion.observacionSeleccionada)}" class="btn btn-outline-dark">
-    	</h:commandButton>
+    	</h:commandButton><br />
 	</div>
 	
-	<h:messages   style="color:red;margin:8px;" />
+	    <h:messages errorStyle="color:red" infoStyle="color:green"   /> 
 
 </h:form>
 
