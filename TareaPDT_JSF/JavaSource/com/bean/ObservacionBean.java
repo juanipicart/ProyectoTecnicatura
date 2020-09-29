@@ -469,9 +469,11 @@ public class ObservacionBean implements Serializable{
 				List <Observacion> filtradas = new ArrayList<Observacion>();
 				for (Observacion o : observacionesFiltradas)
 				{
-					if ((zona ==null || zona.isEmpty() || o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona))  
+					if (
+							(zona == null || zona.isEmpty() || o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona))  
 							&& (hasta == null || hasta.toString().isEmpty() || o.getFecha().before(hasta)) 
-							&& (desde == null || desde.toString().isEmpty() || o.getFecha().after(desde)))
+							&& (desde == null || desde.toString().isEmpty() || o.getFecha().after(desde))
+						)
 							{
 								filtradas.add(o);
 							}
