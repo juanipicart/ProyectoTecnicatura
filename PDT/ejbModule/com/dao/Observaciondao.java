@@ -33,6 +33,16 @@ public class Observaciondao {
 				throw new ServiciosException ("Error al querer agregar la observacion.");
 			}
 	}
+    
+    public void revisarObservación(ExRevisaObs revision) throws ServiciosException {
+    	
+    	try {
+    		em.merge(revision);
+    		em.flush();
+    	} catch(PersistenceException e) {
+    		throw new ServiciosException("Error al ingresar la revisión de la observacion.");
+    	}
+    }
 
     public void ModificarObservacion(Observacion observacion) throws ServiciosException
 	{

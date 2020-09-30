@@ -26,4 +26,6 @@ public interface ObservacionBeanRemote {
 	Observacion obtenerObservacionPorId(long id);
 	
 	List<Observacion> obtenerObservacionFechaZona(Date hasta, Date desde, String zona);
+
+	boolean revisarObservacion(long usuario, long id_observacion, Date fecha, String estado, String comentarios);
 }

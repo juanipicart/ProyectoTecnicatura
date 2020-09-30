@@ -142,6 +142,22 @@ public class ObservacionBean implements ObservacionBeanRemote {
 		
 		return estaLimpia;		
 	}
+	
+	@Override
+	public boolean revisarObservacion(long usuario, long id_observacion, Date fecha, String estado, String comentarios) {
+		boolean pudeRevisar = false;
+		try {
+			PK_ExRevisaObs revisaPk = new PK_ExRevisaObs(usuario, id_observacion, fecha);
+			ExRevisaObs revisa = new ExRevisaObs(revisaPk, estado, comentarios);
+			obsDao.revisarObservación(revisa);
+			pudeRevisar = true;
+		} catch (Exception e){
+			e.getMessage();
+		}
+		
+		return pudeRevisar;
+		
+	}
 
 	@Override
 	public List<Observacion> existeObservacion(String identificacion){

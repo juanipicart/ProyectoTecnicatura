@@ -39,10 +39,16 @@
 	</ul>
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >	
-	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-success" style="float:left;margin-left:850px" />
-	<h:commandButton value="Editar Informacion" action="ModificarObservacion.xhtml" class="btn btn-success"  style="float:left;margin-left:50px" disabled="#{observacion.VerificarTipo(login.username)}">
+	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-success" style="float:left;margin-left:500px" />
+	<h:commandButton value="Editar Informacion" action="ModificarObservacion.xhtml" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
 	<f:param name="id" value="${observacion.id}" />
 			</h:commandButton>
+	<h:commandButton value="Aprobar" action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+	<f:param name="id" value="${observacion.id}" />
+	</h:commandButton>
+	<h:commandButton value="Rechazar" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+	<f:param name="id" value="${observacion.id}" />
+	</h:commandButton>
 	</div>
 		<h:messages style="color:red;margin:8px;" /><br/><br/>
 		

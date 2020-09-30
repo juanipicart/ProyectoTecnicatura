@@ -38,6 +38,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -78,6 +79,7 @@ import com.entidades.Localidad;
 import com.entidades.Observacion;
 import com.entidades.Usuario;
 import com.entidades.Zona;
+import com.exception.ServiciosException;
 import com.sun.prism.Image;
 import com.sun.xml.internal.ws.client.RequestContext;
 
@@ -408,6 +410,32 @@ public class ObservacionBean implements Serializable{
 			}catch(Exception e){
 				e.getMessage();
 			}
+		}
+		
+		public void aprobarObservacion(Observacion observacion) {
+			
+			observacion = observacionBeanRemote.obtenerObservacionPorId(id);
+			Estado estado = estadoBeanRemote.ObtenerEstado("APROBADA");
+			observacion.setEstado(estado);
+			actualizarObservacion(observacion);
+			
+			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+			
+			observacionBeanRemote.revisarObservacion(observacion.getUsuario().getId(), observacion.getId(), 
+					date, observacion.getEstado().getNombre(), "");
+		}
+		
+		public void rechazarObservacion(Observacion observacion) {
+			
+			observacion = observacionBeanRemote.obtenerObservacionPorId(id);
+			Estado estado = estadoBeanRemote.ObtenerEstado("RECHAZADA");
+			observacion.setEstado(estado);
+			actualizarObservacion(observacion);
+			
+			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+			
+			observacionBeanRemote.revisarObservacion(observacion.getUsuario().getId(), observacion.getId(), 
+					date, observacion.getEstado().getNombre(), "");
 		}
 		
 		//Transformar Fecha
