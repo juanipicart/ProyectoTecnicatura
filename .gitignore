@@ -5,3 +5,11 @@
 *.classpath
 *.project
 *.class
+
+TareaPDT_JSF/WebContent/WEB-INF/classes/
+
+PDT/
+
+ProyectoEAR/
+
+TareaPDT_JSF/.settings/
