@@ -22,10 +22,10 @@
 <ul class="list-group" style="text-align:center">
   <li class="list-group-item active bg-success">Modificacion de observacion</li>	
 	  <li class="list-group-item">Id: 
-	  	  <h:inputText id="Id" required="true" maxlength="80" disabled="false" value="#{observacion.observacionSeleccionada.id}" />
+	  	  <h:inputText id="Id" required="true" maxlength="80" disabled="true" value="#{observacion.observacionSeleccionada.id}" />
 	  </li>
 	  <li class="list-group-item">codigo:
-	  <h:inputText id="codigo" required="true" maxlength="80" disabled="false" value="#{observacion.observacionSeleccionada.codigo_OBS}" />
+	  <h:inputText id="codigo" required="true" maxlength="80" disabled="true" value="#{observacion.observacionSeleccionada.codigo_OBS}" />
 	  </li>
 	  <li class="list-group-item">Usuario: 
 	  	  <h:inputText id="usuario" required="true" maxlength="80" disabled="true" value="#{observacion.observacionSeleccionada.usuario.usuario}" />
@@ -41,14 +41,7 @@
    				/>
 	  </h:selectOneMenu><br/> 
 	  </li>
-	  	
-	   <li class="list-group-item">Estado: 
-			<h:selectOneMenu value="#{observacion.estado}" converter="omnifaces.SelectItemsConverter">
-   				<f:selectItems value="#{observacion.estados}" var="estado" itemValue="#{estado}" 
-   				itemLabel="#{estado.nombre}"
-   				/>
-	  </h:selectOneMenu><br/> 
-	  </li>
+
 	  <li class="list-group-item">Localidad: 
 			<h:selectOneMenu value="#{observacion.localidad}" converter="omnifaces.SelectItemsConverter">
    				<f:selectItems value="#{observacion.localidades}" var="local" itemValue="#{local}" 

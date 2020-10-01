@@ -389,14 +389,15 @@ public class ObservacionBean implements Serializable{
 				Observacion aux = observacionBeanRemote.obtenerObservacionPorId(id);
 				
 				Localidad l = localidadBeanRemote.obtenerLocalidad(localidad.getNombreLoc());
-				Estado e = estadoBeanRemote.ObtenerEstado(estado.getNombre());
 				Fenomeno f = fenomenoBeanRemote.ObtenerFenomeno(fenomeno.getNombreFen());
 				
 				observacion.setLocalidad(l);
-				observacion.setEstado(e);
 				observacion.setFenomeno(f);
 				observacion.setUsuario(aux.getUsuario());
 				observacion.setImagen(aux.getImagen());
+				observacion.setEstado(aux.getEstado());
+				observacion.setId(aux.getId());
+				observacion.setCodigo_OBS(aux.getCodigo_OBS());
 				
 				observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
 						observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
@@ -418,7 +419,6 @@ public class ObservacionBean implements Serializable{
 			observacion = observacionBeanRemote.obtenerObservacionPorId(id);
 			Estado estado = estadoBeanRemote.ObtenerEstado("APROBADA");
 			observacion.setEstado(estado);
-			//actualizarObservacion(observacion);
 			
 			observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
 					observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
@@ -447,7 +447,6 @@ public class ObservacionBean implements Serializable{
 			observacion = observacionBeanRemote.obtenerObservacionPorId(id);
 			Estado estado = estadoBeanRemote.ObtenerEstado("RECHAZADA");
 			observacion.setEstado(estado);
-			//actualizarObservacion(observacion);
 			
 			observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
 					observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
