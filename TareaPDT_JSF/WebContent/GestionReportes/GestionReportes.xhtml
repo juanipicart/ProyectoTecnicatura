@@ -66,6 +66,7 @@
 			   					itemLabel="#{zona.nombre_zona}" />
 							</h:selectOneMenu>
 					</div>
+					
 					<div class="form-group">
 							<label for="fechadesde">Fecha Desde:</label>
 							<h:outputLabel  name="fechadesde"/>
@@ -116,6 +117,11 @@
 			<h:outputText value="#{obserTabla.fecha}" >
     		<f:convertDateTime pattern="dd/MM/yyyy" />
 			</h:outputText>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Estado</f:facet>
+      		#{obserTabla.estado.nombre}
 		</h:column>
 		
 		<h:column>

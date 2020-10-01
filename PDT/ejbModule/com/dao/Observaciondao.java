@@ -79,6 +79,14 @@ public class Observaciondao {
 		return observaciones;
 	}
    
+    //Listar todas las observaciones pendientes
+    public List<Observacion> obtenerTodasObservacionesPendientes(Estado pendiente) 
+    {
+		TypedQuery<Observacion> query = this.em.createQuery("select o from Observacion o where o.estado LIKE :estado", Observacion.class).setParameter("estado", pendiente);
+		List<Observacion> observaciones = query.getResultList();
+		return observaciones;
+	}
+    
     //Lista de observaciones por codigo
     public List<Observacion> existeObservacion(String codigo_OBS) {
   		

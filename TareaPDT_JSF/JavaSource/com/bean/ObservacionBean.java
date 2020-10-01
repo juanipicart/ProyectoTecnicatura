@@ -414,29 +414,62 @@ public class ObservacionBean implements Serializable{
 		
 		public void aprobarObservacion(Observacion observacion) {
 			
+			try {
 			observacion = observacionBeanRemote.obtenerObservacionPorId(id);
 			Estado estado = estadoBeanRemote.ObtenerEstado("APROBADA");
 			observacion.setEstado(estado);
-			actualizarObservacion(observacion);
+			//actualizarObservacion(observacion);
+			
+			observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
+					observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
+					observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), 
+					observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), 
+					observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
+			//mensaje de actualizacion correcta
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+					"Se aprobo la observacion. ", "");
+			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 			
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 			
 			observacionBeanRemote.revisarObservacion(observacion.getUsuario().getId(), observacion.getId(), 
 					date, observacion.getEstado().getNombre(), "");
-		}
+			}
+			catch(Exception ex)
+			{
+				ex.getMessage();
+			}
+			}
 		
 		public void rechazarObservacion(Observacion observacion) {
 			
+			try {
 			observacion = observacionBeanRemote.obtenerObservacionPorId(id);
 			Estado estado = estadoBeanRemote.ObtenerEstado("RECHAZADA");
 			observacion.setEstado(estado);
-			actualizarObservacion(observacion);
+			//actualizarObservacion(observacion);
+			
+			observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
+					observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
+					observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), 
+					observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), 
+					observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
+			//mensaje de actualizacion correcta
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+					"Se rechazo la observacion. ", "");
+			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+			
 			
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 			
 			observacionBeanRemote.revisarObservacion(observacion.getUsuario().getId(), observacion.getId(), 
 					date, observacion.getEstado().getNombre(), "");
-		}
+			}
+			catch (Exception ex)
+			{
+				ex.getMessage();
+			}
+			}
 		
 		//Transformar Fecha
 		public String NuevaFecha(Date fecha)
@@ -452,7 +485,8 @@ public class ObservacionBean implements Serializable{
 		    fenomenos = fenomenoBeanRemote.Obtenertodoslosfenomenos();
 		    localidades = localidadBeanRemote.obtenerTodasLocalidades();
 		    zonas = zonaBeanRemote.obtenerTodasZonas();
-		    observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservaciones();
+		    Estado e = estadoBeanRemote.ObtenerEstado("PENDIENTE");
+		    observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservacionesPendientes(e);
 		    observacionesFiltradas = observacionBeanRemote.obtenerTodasObservaciones();
 		    estados = estadoBeanRemote.obtenerTodosEstados();
 		}

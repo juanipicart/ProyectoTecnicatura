@@ -49,7 +49,7 @@
 		<h:commandLink action="#{login.logout}" value="Logout" class="btn btn-outline-dark" style="margin-top: 100px"></h:commandLink> 
 		</h:form>
 
-	<h3 style="text-align:center">Observaciones seleccionadas</h3>
+	<h3 style="text-align:center">Observaciones Pendientes</h3>
 	<h:form id="formTabla">
 	<h:dataTable value="#{observacion.observacionesSeleccionadas}"
 		var="observacion"
@@ -78,6 +78,11 @@
 		<h:column>
 			<f:facet name="header">Descripcion</f:facet>
       		#{observacion.descripcion}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Estado</f:facet>
+      		#{observacion.estado.nombre}
 		</h:column>
 		
 		<h:column>

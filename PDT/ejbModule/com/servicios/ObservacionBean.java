@@ -171,6 +171,12 @@ public class ObservacionBean implements ObservacionBeanRemote {
 		 
 		return observacion;
 	}
+
+	@Override
+	public List<Observacion> obtenerTodasObservacionesPendientes(Estado pendiente) {
+		List<Observacion> obs = obsDao.obtenerTodasObservacionesPendientes(pendiente);
+		return obs;
+	}
 	
 	
 	
