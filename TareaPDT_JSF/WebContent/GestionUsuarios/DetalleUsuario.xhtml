@@ -8,6 +8,7 @@
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../resources/css/styleusuario.css"/>
 </h:head> 
 <body> 
 <f:metadata>
@@ -18,8 +19,8 @@
 <h:form id="idDatosEmpleado">
 		
 		
-	<ul class="list-group" style="text-align:center">
-	  <li class="list-group-item active bg-success">Detalles del Usuario</li>
+	<ul class="list-group" style="text-align:center; ">
+	  <li class="list-group-item active bg-success fixed-top"   style="border-bottom: 4px solid #FF8F00;">Detalles del Usuario</li>
 	  <li class="list-group-item">Id: #{usuario.id}</li>
 	  <li class="list-group-item">Usuario: #{usuario.usuarioSeleccionado.usuario}</li>
 	  <li class="list-group-item">Nombre: #{usuario.usuarioSeleccionado.nombre}</li>
@@ -34,12 +35,39 @@
 	</ul>
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >	
-	<h:link value="Volver" outcome="GestionUsuarios.xhtml" class="btn btn-outline-success" />	
+	<h:link value="Volver" outcome="GestionUsuarios.xhtml" class="btn btn-outline-success" /><br/><br/>
 	</div>
 		<h:messages   style="color:red;margin:8px;" />
 		
 		
 	</h:form>
+	<div id="footer" >
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<img id="footer-logo" src="../resources/img/404-notfound-logo.png" alt="Logo404" />
+					 
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="../GestionUsuarios/GestionUsuarios.xhtml">Gestion de Usuarios</a></li>
+						<li><a href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a></li>
+						<li><a href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#contacto-modal">Contacto</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<p style="color:#DDD;">Copyright &copy; 404-NotFound</p>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+
+		</div><!-- /.container -->
+	</div>
 
 </body> 
 </html>
