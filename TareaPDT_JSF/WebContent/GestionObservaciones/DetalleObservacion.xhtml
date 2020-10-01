@@ -43,10 +43,10 @@
 	<h:commandButton value="Editar Informacion" action="ModificarObservacion.xhtml" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
 	<f:param name="id" value="${observacion.id}" />
 			</h:commandButton>
-	<h:commandButton value="Aprobar" action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+	<h:commandButton value="Aprobar" rendered="#{observacion.VerificarEstado()}" action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
 	<f:param name="id" value="${observacion.id}" />
 	</h:commandButton>
-	<h:commandButton value="Rechazar" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+	<h:commandButton value="Rechazar" rendered="#{observacion.VerificarEstado()}" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
 	<f:param name="id" value="${observacion.id}" />
 	</h:commandButton>
 	</div>

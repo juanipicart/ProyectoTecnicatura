@@ -500,11 +500,23 @@ public class ObservacionBean implements Serializable{
 		public boolean VerificarTipo(String tipoEnviado) {
 			boolean tipo = true;
 			Usuario tipoUsu = usuarioBeanRemote.obtenerUsuario(tipoEnviado);
-			if ( tipoUsu.getTipousuario().getNombre() == "EXPERTO" || tipoUsu.getTipousuario().getId() == 2)		
+			if ((tipoUsu.getTipousuario().getNombre() == "EXPERTO" || tipoUsu.getTipousuario().getId() == 2))		
 			{
 				tipo = false;
 			}
 			return tipo;
+		}
+
+		public boolean VerificarEstado() {
+			boolean bandera = false;
+			Observacion o = observacionBeanRemote.obtenerObservacionPorId(id);
+			String estado = o.getEstado().getNombre(); 
+			
+			if (estado.equals("PENDIENTE"))
+			{
+				bandera = true;
+			}
+			return bandera;
 		}
 		
 		public String codificar()
