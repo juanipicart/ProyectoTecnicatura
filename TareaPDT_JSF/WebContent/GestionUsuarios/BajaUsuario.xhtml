@@ -6,6 +6,7 @@
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../resources/css/bajausuario.css"/>
 </h:head> 
 <body> 
 
@@ -18,7 +19,7 @@
 		
 		
 	<ul class="list-group" style="text-align:center">
-	  <li class="list-group-item active bg-success">Eliminar Usuario</li>
+	  <li class="list-group-item active bg-success fixed-top">Eliminar Usuario</li>
 	  <li class="list-group-item">Id: #{usuario.id}</li>
 	  <li class="list-group-item">Usuario: #{usuario.usuarioSeleccionado.usuario}</li>
 	  <li class="list-group-item">Nombre: #{usuario.usuarioSeleccionado.nombre}</li>
@@ -31,7 +32,7 @@
 	  <li class="list-group-item">Tipo de Usuario: #{usuario.usuarioSeleccionado.tipousuario.nombre}</li>
 	</ul>
 			
-		<div style="display:block; text-align:center; margin-top: 20px">		
+		<div style="display:block; text-align:center; margin-top: 40px">		
 		<h:commandButton  id="idVolver" value="Volver"	action="GestionUsuarios.xhtml" class="btn btn-success" /> 
 		<h:commandButton id="idBaja"  value="Dar de baja" style="margin-left: 40px" action="#{usuario.darDeBajaUsuario(usuario.usuarioSeleccionado, login.username)}" class="btn btn-success">
     			<f:param name="id" value="${usuario.id}" />
@@ -40,7 +41,33 @@
 		<h:messages   style="color:red;margin:8px;" />
 		
 	</h:form>
-	
+	<div id="footer" style="bottom:0px" >
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<img id="footer-logo" src="../resources/img/404-notfound-logo.png" alt="Logo404" />
+					 
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="../GestionUsuarios/GestionUsuarios.xhtml">Gestion de Usuarios</a></li>
+						<li><a href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a></li>
+						<li><a href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+						<li><a href="mailto:404NotFound@gmail.com?body=Escriba su mensaje&amp;subject=Consulta desde el formulario de contacto">Contacto</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<p style="color:#DDD;">Copyright &copy; 404-NotFound</p>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+
+		</div><!-- /.container -->
+	</div>
 
 </body> 
 </html>
