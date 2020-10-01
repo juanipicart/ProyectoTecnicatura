@@ -515,7 +515,7 @@ public class ObservacionBean implements Serializable{
 			return tipo;
 		}
 
-		public boolean VerificarEstado() {
+		public boolean VerificarEstado(long id) {
 			boolean bandera = false;
 			Observacion o = observacionBeanRemote.obtenerObservacionPorId(id);
 			String estado = o.getEstado().getNombre(); 
