@@ -143,11 +143,20 @@ public class ObservacionBean implements Serializable{
 		private Date hasta;
 		private Date desde;
 		private List<Estado> estados;
+		private String estadoStr;
 		 
 		//Propiedades
 		
+		
+		
 		public boolean isModo1() {
 			return modo1;
+		}
+		public String getEstadoStr() {
+			return estadoStr;
+		}
+		public void setEstadoStr(String estadoStr) {
+			this.estadoStr = estadoStr;
 		}
 		public void setModo1(boolean modo1) {
 			this.modo1 = modo1;
@@ -535,7 +544,7 @@ public class ObservacionBean implements Serializable{
 		}
 
 		
-		public List<Observacion>seleccionarObservacionesLista(String zona, Date hasta, Date desde)
+		public List<Observacion>seleccionarObservacionesLista(String zona, Date hasta, Date desde, String estadoStr)
 		{
 			try {
 				observacionesFiltradas = observacionBeanRemote.obtenerTodasObservaciones();
@@ -544,6 +553,7 @@ public class ObservacionBean implements Serializable{
 				{
 					if (
 							(zona == null || zona.isEmpty() || o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona))  
+							&& (estadoStr == null || estadoStr.isEmpty() || o.getEstado().getNombre().equals(estadoStr))  
 							&& (hasta == null || hasta.toString().isEmpty() || o.getFecha().before(hasta)) 
 							&& (desde == null || desde.toString().isEmpty() || o.getFecha().after(desde))
 						)
@@ -562,7 +572,7 @@ public class ObservacionBean implements Serializable{
 		
 
 		public String seleccionarObservaciones() {
-			observacionesFiltradas = seleccionarObservacionesLista(zona, hasta, desde); 
+			observacionesFiltradas = seleccionarObservacionesLista(zona, hasta, desde, estadoStr); 
 			return "";
 		}
 }	

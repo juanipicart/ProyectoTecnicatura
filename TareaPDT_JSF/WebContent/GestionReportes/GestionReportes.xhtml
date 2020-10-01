@@ -68,6 +68,15 @@
 					</div>
 					
 					<div class="form-group">
+							<label for="estado">Estado:</label>
+							<h:outputLabel  name="estado"/>
+							<h:selectOneMenu value="#{observacion.estadoStr}"  class="form-control" >
+			   					<f:selectItems   value="#{observacion.estados}" var="estado" itemValue="#{estado.nombre}" 
+			   					itemLabel="#{estado.nombre}" />
+							</h:selectOneMenu>
+					</div>
+					
+					<div class="form-group">
 							<label for="fechadesde">Fecha Desde:</label>
 							<h:outputLabel  name="fechadesde"/>
 							<p:calendar id="desde" value="#{observacion.desde}" outcome="#{observacion.desde}" var="desde" mode="popup" pattern="dd/MM/yy"  />
