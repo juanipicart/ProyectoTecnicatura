@@ -46,25 +46,32 @@
     </div>
   </nav>
 	
-	<h:form class="form-group">
+	<h:form class="form-group"><br/><br/>
 		<h:messages style="color:red;margin:8px;" />
-		<h:commandLink value="Alta de usuario" 	action="AltaUsuario" class="btn btn-outline-success" style="margin-top: 100px"></h:commandLink>
-		
-			
-			
+			  <div id="Filtros">
+					<div class="container">
+						<div class="row">
+				            <div class="col-xs-7"><br/>
+				                <h1>Filtros de Busqueda:</h1>
+				            </div>	
+				        </div>
+						<hr></hr>	
+				  </div>
+				</div>
 				<div class="form-row">
 				
-	  		     <div class="form-group col-md-4" style="margin-top: 100px;margin-left:15px"> 
+	  		     <div class="form-group col-md-4" style="margin-top: 50px;margin-left:100px"> 
 		   			<h:outputLabel value="Usuario" id="usuario" />
 					<h:inputText for="usuario" value="#{usuario.usuario}" class="form-control"/>  
 				 </div>
-				 <div class="form-group col-md-4" style="margin-top: 100px">
+				 <div class="form-group col-md-4" style="margin-top: 50px">
 				 
 					<h:outputLabel value="Nombre"/>
 					<h:inputText id="nombre" value="#{usuario.nombre}" class="form-control" />
 			    </div>
-			    <div class="form-group col-md-3" style="margin-top: 132px">
+			    <div class="form-group col-md-3" style="margin-top: 80px">
 					<h:commandButton action="#{usuario.seleccionarUsuarios()}" value="Filtrar" class="btn btn-outline-success"></h:commandButton>
+					<h:commandLink value="Alta de usuario" 	action="AltaUsuario" class="btn btn-outline-success"></h:commandLink>
    			    </div>
    			   </div> 
 				
@@ -73,7 +80,7 @@
 				
 				
 	</h:form>
-
+	  		
 	<h3 style="text-align:center;">Usuarios seleccionados</h3>
 	<h:form id="formTabla" >
 	<h:dataTable  value="#{usuario.usuariosSeleccionados}"
