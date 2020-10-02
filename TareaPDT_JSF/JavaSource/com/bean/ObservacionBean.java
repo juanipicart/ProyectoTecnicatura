@@ -144,13 +144,21 @@ public class ObservacionBean implements Serializable{
 		private Date desde;
 		private List<Estado> estados;
 		private String estadoStr;
+		private int totalPen;
 		 
 		//Propiedades
 		
 		
 		
+		
 		public boolean isModo1() {
 			return modo1;
+		}
+		public int getTotalPen() {
+			return totalPen;
+		}
+		public void setTotalPen(int totalPen) {
+			this.totalPen = totalPen;
 		}
 		public String getEstadoStr() {
 			return estadoStr;
@@ -495,6 +503,7 @@ public class ObservacionBean implements Serializable{
 		    zonas = zonaBeanRemote.obtenerTodasZonas();
 		    Estado e = estadoBeanRemote.ObtenerEstado("PENDIENTE");
 		    observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservacionesPendientes(e);
+		    totalPen = observacionesSeleccionadas.size();
 		    observacionesFiltradas = observacionBeanRemote.obtenerTodasObservaciones();
 		    estados = estadoBeanRemote.obtenerTodosEstados();
 		}
