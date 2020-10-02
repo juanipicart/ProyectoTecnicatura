@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+ <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="../resources/css/style.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <title>404NOTFOUND</title>
+	
+	
+</h:head>
+<h:body>
+<f:metadata>
+    <f:viewParam name="id" value="#{usuario.id}" />
+    <f:event type="preRenderView" listener="#{usuario.preRenderViewListener()}"/>
+</f:metadata>
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top" style="border-bottom: 4px solid #FF8F00;">
+    <div class="container" >
+      <a class="navbar-brand" href="Index.xhtml">Green Place</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="GestionUsuarios.xhtml">Gestion de Usuarios
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones
+            <span class="badge badge-light"> #{observacion.totalPen}</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a>
+          </li>
+          <li>
+            <div class="badge badge-primary">
+             #{login.username}
+             </div>
+             </li>
+               <li>
+               <h:form class="form-group">
+               <h:commandLink action="#{login.logout}" value="Salir" class="btn btn-success"></h:commandLink>
+               </h:form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+	<div id="sobrenosotros">
+		<div class="container">
+
+			<div class="row">
+	            <div class="col-lg-12">
+	                <h1 class="page-header">Sobre Nosotros</h1>
+	                <hr />
+	            </div>
+	        </div>
+
+	        <div class="row">
+	            <div class="col-md-6">
+	                <img id="company-photo" class="img-responsive" src="../resources/img/404-notfound-logo.png" alt=""/>
+	            </div>
+	            <div class="col-md-6">
+	                <h2><span>404</span><strong>NOT FOUND</strong></h2>
+	                <p> Desarrollamos software o aplicaciones integralmente con procesos ágiles. Se establecen una o más equipos ágiles de trabajo. El cliente recibe capacitación sobre la metodología y se desarrolla la solución con miras a entregas cortas de software funcional con flexibilidad para el cliente.</p>
+	               
+	            </div>
+	        </div><!-- /.row --><br/>
+
+			<!-- Equipo -->
+	        <div class="row">
+	            <div class="col-lg-12">
+	                <h2 class="page-header">Nuestro Equipo</h2>
+	                <hr></hr>
+	            </div>
+	            <div class="col-md-4 text-center">
+	                <div class="thumbnail">
+	                    <img class="img-responsive" src="../resources/img/404-notfound-logo.png" alt=""/>
+	                    <div class="caption">
+	                        <h3>Ricardo Damian Boz<br/>
+	                            <small>Desarrollador backend</small>
+	                        </h3>
+	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
+	                        <ul class="list-inline">
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-facebook-square"></i></a>
+	                            </li>
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-linkedin"></i></a>
+	                            </li>
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-twitter-square"></i></a>
+	                            </li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div><!-- /.col -->
+	            <div class="col-md-4 text-center">
+	                <div class="thumbnail">
+	                    <img class="img-responsive" src="../resources/img/404-notfound-logo.png" alt=""/>
+	                    <div class="caption">
+	                        <h3>Juan Picart<br/>
+	                            <small>Desarrollador Android</small>
+	                        </h3>
+	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
+	                        <ul class="list-inline">
+								<li>
+									<a href="#"><i class="fab fa-2x fa-facebook-square"></i></a>
+	                            </li>
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-linkedin"></i></a>
+	                            </li>
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-twitter-square"></i></a>
+	                            </li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div><!-- /.col -->
+	            <div class="col-md-4 text-center">
+	                <div class="thumbnail">
+	                    <img class="img-responsive" src="../resources/img/404-notfound-logo.png" alt=""/>
+	                    <div class="caption">
+	                        <h3>Michel Sanchez<br/>
+	                            <small>Tester funcional</small>
+	                        </h3>
+	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
+	                        <ul class="list-inline">
+								<li>
+									<a href="#"><i class="fab fa-2x fa-facebook-square"></i></a>
+	                            </li>
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-linkedin"></i></a>
+	                            </li>
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-twitter-square"></i></a>
+	                            </li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div><!-- /.col -->
+	            
+	            <div class="col-md-4 text-center">
+	                <div class="thumbnail">
+	                    <img class="img-responsive" src="../resources/img/404-notfound-logo.png" alt=""/>
+	                    <div class="caption">
+	                        <h3>Christian Viera<br/>
+	                            <small>Tester Funcional</small>
+	                        </h3>
+	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
+	                        <ul class="list-inline">
+								<li>
+									<a href="#"><i class="fab fa-2x fa-facebook-square"></i></a>
+	                            </li>
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-linkedin"></i></a>
+	                            </li>
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-twitter-square"></i></a>
+	                            </li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div><!-- /.col -->
+	            <div class="col-md-4 text-center">
+	                <div class="thumbnail">
+	                    <img class="img-responsive" src="../resources/img/404-notfound-logo.png" alt=""/>
+	                    <div class="caption">
+	                        <h3>Rodrigo Castro<br/>
+	                            <small>DB</small>
+	                        </h3>
+	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
+	                        <ul class="list-inline">
+								<li>
+									<a href="#"><i class="fab fa-2x fa-facebook-square"></i></a>
+	                            </li>
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-linkedin"></i></a>
+	                            </li>
+	                            <li>
+									<a href="#"><i class="fab fa-2x fa-twitter-square"></i></a>
+	                            </li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div><!-- /.col -->
+	            
+	            
+			</div><!-- /.row -->
+			
+		</div><!-- /.container -->
+	</div><!-- /#about-us -->
+	  <div id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<img id="footer-logo" src="../resources/img/404-notfound-logo.png" alt="Logo404" />
+					 
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="GestionUsuarios.xhtml">Gestion de Usuarios</a></li>
+						<li><a href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a></li>
+						<li><a href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="../GestionUsuarios/sobrenosotros.xhtml">Sobre Nosotros</a></li>
+						
+						<li><a href="mailto:404NotFound@gmail.com?body=Escriba su mensaje&amp;subject=Consulta desde el formulario de contacto">Contacto</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<p style="color:#DDD;">Copyright &copy; 404-NotFound</p>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+
+		</div><!-- /.container -->
+	</div>
+  
+
+
+</h:body>
+</html>

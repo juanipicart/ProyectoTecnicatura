@@ -56,7 +56,7 @@
 		<div class="container">
 			<div class="row">
 	            <div class="col-xs-7"><br/>
-	                <h1>Filtros de Busqueda:</h1>
+	                <h1 style="color:#adad85;">Filtros de Busqueda:</h1>
 	            </div>	
 	        </div>
 			<hr></hr>	
@@ -66,7 +66,7 @@
 					<div class="form-group">
 							<label for="zona">Zona:</label>
 							<h:outputLabel  name="zona"/>
-							<h:selectOneMenu value="#{observacion.zona}"  class="form-control" >
+							<h:selectOneMenu value="#{observacion.zona}"  class="form-control" style="border: 1px solid #00b300" >
 							    <f:selectItem itemLabel="Seleccione" itemValue="#{null}"/>
 			   					<f:selectItems   value="#{observacion.zonas}" var="zona" itemValue="#{zona.nombre_zona}" 
 			   					itemLabel="#{zona.nombre_zona}" />
@@ -76,7 +76,7 @@
 					<div class="form-group">
 							<label for="estado">Estado:</label>
 							<h:outputLabel  name="estado"/>
-							<h:selectOneMenu value="#{observacion.estadoStr}"  class="form-control" >
+							<h:selectOneMenu value="#{observacion.estadoStr}"  class="form-control" style="border: 1px solid #00b300" >
 							    <f:selectItem itemLabel="Selecccione" itemValue="#{null}"/>
 			   					<f:selectItems   value="#{observacion.estados}" var="estado" itemValue="#{estado.nombre}" 
 			   					itemLabel="#{estado.nombre}" />
@@ -91,7 +91,7 @@
 					<div class="form-group">
 							<label for="fechahasta">Fecha Hasta:</label>
 							<h:outputLabel  name="fechahasta"/>
-							<p:calendar id="hasta" value="#{observacion.hasta}" outcome="#{observacion.hasta}" var="hasta" mode="popup" pattern="dd/MM/yy" />
+							<p:calendar id="hasta" value="#{observacion.hasta}" outcome="#{observacion.hasta}" var="hasta" mode="popup" pattern="dd/MM/yy"  />
 					</div>
 						
 						<h:commandButton value="Filtrar"	action="#{observacion.seleccionarObservaciones()}" class="btn btn-outline-success"></h:commandButton>
