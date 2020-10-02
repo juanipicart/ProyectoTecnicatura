@@ -67,6 +67,7 @@
 							<label for="zona">Zona:</label>
 							<h:outputLabel  name="zona"/>
 							<h:selectOneMenu value="#{observacion.zona}"  class="form-control" >
+							    <f:selectItem itemLabel="Seleccione" itemValue="#{null}"/>
 			   					<f:selectItems   value="#{observacion.zonas}" var="zona" itemValue="#{zona.nombre_zona}" 
 			   					itemLabel="#{zona.nombre_zona}" />
 							</h:selectOneMenu>
@@ -76,6 +77,7 @@
 							<label for="estado">Estado:</label>
 							<h:outputLabel  name="estado"/>
 							<h:selectOneMenu value="#{observacion.estadoStr}"  class="form-control" >
+							    <f:selectItem itemLabel="Selecccione" itemValue="#{null}"/>
 			   					<f:selectItems   value="#{observacion.estados}" var="estado" itemValue="#{estado.nombre}" 
 			   					itemLabel="#{estado.nombre}" />
 							</h:selectOneMenu>
