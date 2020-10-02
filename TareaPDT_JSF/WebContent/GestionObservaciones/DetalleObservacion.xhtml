@@ -36,23 +36,32 @@
 	  <li class="list-group-item"><strong>Imagen:</strong> 
 	 <h:graphicImage value="data:image/jpg;base64,#{observacion.codificar()}" style="max-width: 200px; max-height: 200px;" />
 	  </li>
-	</ul>
+	</ul><br/><br/>
+	<div class="container">
+      <div class="vertical-center">
+		<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-success" style="float:left;margin-left:350px" />
+	  </div>
+	  <div class="vertical-center">
+		 <h:link value="Editar Informacion" outcome="ModificarObservacion.xhtml" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+	  	
+		<f:param name="id" value="${observacion.id}" />
+				</h:link>
+	 </div>	
+	 <div class="vertical-center">		
+		<h:commandButton value="Aprobar"  action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+		<f:param name="id" value="${observacion.id}" />
+		</h:commandButton>
+	 </div>
+	 <div class="vertical-center">	
+		<h:commandButton value="Rechazar" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+		<f:param name="id" value="${observacion.id}" />
+		</h:commandButton>
+	</div>	
+</div><br/><br/>
+			<h:messages style="color:red;margin:8px;" /><br/><br/>
 	
-	<div style="display:block; text-align:center; margin-top: 20px" >	
-	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-success" style="float:left;margin-left:500px" />
-	<h:link value="Editar Informacion" outcome="ModificarObservacion.xhtml" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
-	<f:param name="id" value="${observacion.id}" />
-			</h:link>
-	<h:commandButton value="Aprobar"  action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
-	<f:param name="id" value="${observacion.id}" />
-	</h:commandButton>
-	<h:commandButton value="Rechazar" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
-	<f:param name="id" value="${observacion.id}" />
-	</h:commandButton><br/><br/>
-	</div>
-		<h:messages style="color:red;margin:8px;" /><br/><br/>
-		
-	</h:form>
+			
+		</h:form>
 	 <div id="footer">
 		<div class="container">
 			<div class="row">

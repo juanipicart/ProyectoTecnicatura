@@ -1,41 +1,35 @@
- #myCarousel {
-
-	border-bottom: 4px solid #FF8F00;
-	
+.container {
+  height: 200px;
+  position: relative;
+  border: 3px solid green;
 }
 
-#myCarousel .fill {
-	height: 600px;
-	background-size: cover;
-	background-position: center center;
-	
-	
-}
-@media (max-width: 767px) {
-	#myCarousel .fill {
-		height: 250px;
-	}
-	#home h1 {
-		font-size: 26px;
-	}
-#home h1 span {
-	font-weight: 300;
-}
-}
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+} 
 
 
 #footer {
 	border-top: 4px solid #FF8F00;
 	background-color: #101010;
-	margin-top: 0px;
+	margin-top: 50px;
 	color: #EEEEEE;
 	padding: 40px 0 40px 0;
 	font-size: 16px;
+	width: 100%;
 	bottom:0px;
-	width:100%;
 	
+
 	
-	
+}
+html
+{
+  height: 100%;
+  position: relative;
 }
 
 #footer-logo {
@@ -54,12 +48,14 @@
 	list-style: none;
 	margin-bottom: 6px;
 	
+	
 }
 
 #footer ul li a,
 #footer ul li a:visited {
 	color: #EEEEEE;
 	width: 100vw;
+	
 }
 
 
@@ -77,8 +73,4 @@ h1, h2, h3, h4, h5, h6 {
 #header-logo {
 	width: auto;
 	height: 20px;
-}
-#form-row
-{
-margin-top: 100px;
 }
