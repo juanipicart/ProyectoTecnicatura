@@ -42,10 +42,10 @@
 		<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-success" style="float:left;margin-left:350px" />
 	  </div>
 	  <div class="vertical-center">
-		 <h:link value="Editar Informacion" outcome="ModificarObservacion.xhtml" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+		 <h:commandButton value="Editar Informacion" action="ModificarObservacion.xhtml" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
 	  	
 		<f:param name="id" value="${observacion.id}" />
-				</h:link>
+				</h:commandButton>
 	 </div>	
 	 <div class="vertical-center">		
 		<h:commandButton value="Aprobar"  action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
