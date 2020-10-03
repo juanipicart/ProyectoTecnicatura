@@ -53,13 +53,18 @@
 	  	<h:inputText id="descripcion" required="true" maxlength="50" disabled="false" value="#{observacion.observacionSeleccionada.descripcion}" />
 	  </li>
 	  <li class="list-group-item">Latitud: 
-	  	<h:inputText id="latitud" required="true"  maxlength="100" disabled="false" value="#{observacion.observacionSeleccionada.latitud}" />
+	  <p:inputNumber id="latitud" disabled="false" value="#{observacion.observacionSeleccionada.latitud}" symbol="°" 
+                                symbolPosition="s" required="true" emptyValue="empty">
+      </p:inputNumber>
 	  </li>
 	  <li class="list-group-item">Longitud: 
-	  	<h:inputText id="longitud" required="true"  maxlength="100" disabled="false" value="#{observacion.observacionSeleccionada.longitud}" />
-	  </li>
+	  <p:inputNumber id="longitud" disabled="false" value="#{observacion.observacionSeleccionada.longitud}" symbol="°" 
+                                symbolPosition="s" required="true" emptyValue="empty">
+      </p:inputNumber>	  </li>
 	  <li class="list-group-item">Altitud: 
-	  	<h:inputText id="Altitud" required="true"  maxlength="100" disabled="false" value="#{observacion.observacionSeleccionada.altitud}" />
+	  <p:inputNumber id="altitud" disabled="false" value="#{observacion.observacionSeleccionada.altitud}" symbol=" mts" 
+                                symbolPosition="s" required="true" emptyValue="empty">
+      </p:inputNumber>
 	  </li>
   		<li class="list-group-item">Imagen: 
 	 <h:graphicImage value="data:image/jpg;base64,#{observacion.codificar()}" style="max-width: 200px; max-height: 200px;" />
@@ -73,7 +78,7 @@
     	</h:commandButton><br />
 	</div>
 	
-	    <h:messages errorStyle="color:red" infoStyle="color:green"   /> 
+	    <h:messages errorStyle="color:red" infoStyle="color:green"/>
 
 </h:form>
 

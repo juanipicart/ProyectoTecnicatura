@@ -59,6 +59,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.swing.ImageIcon;
+import javax.validation.constraints.Size;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -127,7 +128,7 @@ public class ObservacionBean implements Serializable{
 	    private String descripcion;
 	    private byte[] imagen;
 	    private float latitud;
-		private float longitud;
+	    private float longitud;
 		private float altitud;
 		private Estado estado;
 	    private Date fecha;
@@ -416,6 +417,29 @@ public class ObservacionBean implements Serializable{
 				observacion.setId(aux.getId());
 				observacion.setCodigo_OBS(aux.getCodigo_OBS());
 				
+				if (observacion.getAltitud() > 520 || observacion.getAltitud()<0)
+				{
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+							"La altitud ingresada no es valida, desde 0 mts a 520 mts", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				}
+				
+				else if (observacion.getLongitud() > 60 || observacion.getLongitud()<-60)
+				{
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+							"La longitud ingresada no es valida, desde -60° a 60°", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				}
+				
+				else if (observacion.getLatitud() > 60 || observacion.getLatitud()<-60)
+				{
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+							"La latitud ingresada no es valida, desde -60° a 60°", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				}
+				
+				else
+				{
 				observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
 						observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
 						observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), 
@@ -425,8 +449,9 @@ public class ObservacionBean implements Serializable{
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"Se actualizo la observacion. ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				}
 			}catch(Exception e){
-				e.getMessage();
+			e.getMessage();
 			}
 		}
 		
