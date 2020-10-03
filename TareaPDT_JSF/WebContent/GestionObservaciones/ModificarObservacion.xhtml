@@ -9,6 +9,7 @@
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../resources/css/styleusuario.css"/>
 
 </h:head> 
 <body> 
@@ -72,8 +73,8 @@
 	</ul>	
 	
 	<div style="display:block; text-align:center; margin-top: 20px" >
-	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-primary" style="float:left;margin-left:40px"/> 
-	<h:commandButton id="idModificar"   value="Modificar" style="margin-left: 40px" action="#{observacion.actualizarObservacion(observacion.observacionSeleccionada)}" class="btn btn-outline-dark">
+	<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-success" style="float:center;margin-left:15px"/>
+	<h:commandButton id="idModificar"   value="Modificar" style="float:center;margin-left:15px"  action="#{observacion.actualizarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success">
 	<f:param name="id" value="${observacion.id}" />
     	</h:commandButton><br />
 	</div>
@@ -81,6 +82,35 @@
 	    <h:messages errorStyle="color:red" infoStyle="color:green"/>
 
 </h:form>
+
+	<div id="footer" style="bottom:0px" >
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<img id="footer-logo" src="../resources/img/404-notfound-logo.png" alt="Logo404" />
+					 
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="../GestionUsuarios/GestionUsuarios.xhtml">Gestion de Usuarios</a></li>
+						<li><a href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a></li>
+						<li><a href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="../GestionUsuarios/sobrenosotros.xhtml">Sobre Nosotros</a></li>
+						<li><a href="mailto:404NotFound@gmail.com?body=Escriba su mensaje&amp;subject=Consulta desde el formulario de contacto">Contacto</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<p style="color:#DDD;">Copyright &copy; 404-NotFound</p>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+
+		</div><!-- /.container -->
+	</div>
+
 
 </body> 
 </html>

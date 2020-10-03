@@ -39,10 +39,10 @@
 	</ul><br/><br/>
 	<div class="container">
       <div class="vertical-center">
-		<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-success" style="float:left;margin-left:350px" />
+		<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-primary" style="float:left;margin-left:350px" />
 	  </div>
 	  <div class="vertical-center">
-		 <h:commandButton value="Editar Informacion" action="ModificarObservacion.xhtml" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+		 <h:commandButton value="Editar Informacion" action="ModificarObservacion.xhtml" class="btn btn-primary"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
 	  	
 		<f:param name="id" value="${observacion.id}" />
 				</h:commandButton>
@@ -53,7 +53,7 @@
 		</h:commandButton>
 	 </div>
 	 <div class="vertical-center">	
-		<h:commandButton value="Rechazar" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+		<h:commandButton value="Rechazar" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" class="btn btn-danger"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
 		<f:param name="id" value="${observacion.id}" />
 		</h:commandButton>
 	</div>	
@@ -78,8 +78,8 @@
 				</div><!-- /.col -->
 				<div class="col-md-3">
 					<ul>
-						<li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#contacto-modal">Contacto</a></li>
+						<li><a href="../GestionUsuarios/sobrenosotros.xhtml">Sobre Nosotros</a></li>
+						<li><a href="mailto:404NotFound@gmail.com?body=Escriba su mensaje&amp;subject=Consulta desde el formulario de contacto" data-toggle="modal" data-target="#contacto-modal">Contacto</a></li>
 					</ul>
 				</div><!-- /.col -->
 				<div class="col-md-3">
