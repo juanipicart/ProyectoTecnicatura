@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"
+      xmlns:o="http://java.sun.com/jsf/html"
+      xmlns:p="http://java.sun.com/jsf/html"> 
+
+<h:head>
+<h:outputStylesheet name="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../resources/css/style.css"/>
+</h:head> 
+<body> 
+<f:metadata>
+    <f:viewParam name="id" value="#{observacion.id}" />
+    <f:event type="preRenderView" listener="#{observacion.preRenderViewListener()}"/>
+</f:metadata>
+
+<h:form id="idDatosObservacion">
+		
+		
+	<ul class="list-group" style="text-align:center" >
+	  <li class="list-group-item active bg-success fixed-top"   style="border-bottom: 4px solid #FF8F00;">Detalles de Observacion</li>
+	  <li class="list-group-item"><strong>Id:</strong>  #{observacion.observacionSeleccionada.id}</li>
+	  <li class="list-group-item"><strong>Codigo:</strong>  #{observacion.observacionSeleccionada.codigo_OBS}</li>
+	  <li class="list-group-item"><strong>Usuario:</strong>  #{observacion.observacionSeleccionada.usuario.usuario}</li>
+	  <li class="list-group-item"><strong>Fecha:</strong>  #{observacion.NuevaFecha(observacion.observacionSeleccionada.fecha)}</li>
+	  <li class="list-group-item"><strong>Fenomeno:</strong>  #{observacion.observacionSeleccionada.fenomeno.nombreFen}</li>
+	  <li class="list-group-item"><strong>Estado:</strong>  #{observacion.observacionSeleccionada.estado.nombre}</li>
+	  <li class="list-group-item"><strong>Localidad:</strong>  #{observacion.observacionSeleccionada.localidad.nombreLoc}</li>
+	  <li class="list-group-item"><strong>Descripcion:</strong> #{observacion.observacionSeleccionada.descripcion}</li>
+	  <li class="list-group-item"><strong>Latitud:</strong>  #{observacion.observacionSeleccionada.latitud}°</li>
+	  <li class="list-group-item"><strong>Longitud:</strong> #{observacion.observacionSeleccionada.longitud}°</li>
+	  <li class="list-group-item"><strong>Altitud:</strong> #{observacion.observacionSeleccionada.altitud} mts</li>
+	  <li class="list-group-item"><strong>Imagen:</strong> 
+	 <h:graphicImage value="data:image/jpg;base64,#{observacion.codificar()}" style="max-width: 200px; max-height: 200px;" />
+	  </li>
+	</ul><br/><br/>
+	<div class="container">
+      <div class="vertical-center">
+		<h:link value="Volver" outcome="GestionReportes.xhtml" class="btn btn-success" style="float:left;margin-left:350px" />
+	  </div>
+	  <div class="vertical-center">
+		 <h:link value="Editar Informacion" outcome="/GestionObservaciones/ModificarObservacion.xhtml" class="btn btn-success"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+		<f:param name="id" value="${observacion.id}" />
+				</h:link>
+	 </div>	
+</div><br/><br/>
+			<h:messages style="color:red;margin:8px;" /><br/><br/>
+	
+			
+		</h:form>
+	 <div id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<img id="footer-logo" src="../resources/img/404-notfound-logo.png" alt="Logo404" />
+					 
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="../GestionUsuarios/GestionUsuarios.xhtml">Gestion de Usuarios</a></li>
+						<li><a href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a></li>
+						<li><a href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<ul>
+						<li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#contacto-modal">Contacto</a></li>
+					</ul>
+				</div><!-- /.col -->
+				<div class="col-md-3">
+					<p style="color:#DDD;">Copyright &copy; 404-NotFound</p>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+
+		</div><!-- /.container -->
+	</div>
+
+</body> 
+</html>
