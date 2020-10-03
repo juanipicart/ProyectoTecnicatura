@@ -48,7 +48,7 @@ public class Login implements Serializable {
 		List <Usuario> usuarios = usuarioBeanRemote.Login(username, pass);
 		Usuario usu = new Usuario();
 
-		if (!(usuarios.isEmpty())) 
+		if (!(usuarios.isEmpty()) && usuarios.get(0).getEstado().equalsIgnoreCase("ACTIVO")) 
 			{
 				valid = true;
 				usu = usuarios.get(0);
