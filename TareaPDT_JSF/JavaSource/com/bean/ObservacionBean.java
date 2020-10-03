@@ -581,19 +581,38 @@ public class ObservacionBean implements Serializable{
 		public List<Observacion>seleccionarObservacionesLista(String zona, Date hasta, Date desde, String estadoStr)
 		{
 			try {
-				observacionesFiltradas = observacionBeanRemote.obtenerTodasObservaciones();
 				List <Observacion> filtradas = new ArrayList<Observacion>();
-				for (Observacion o : observacionesFiltradas)
+				java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+				if (hasta !=null && desde != null && hasta.before(desde))
 				{
-					if (
-							(zona == null || zona.isEmpty() || o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona))  
-							&& (estadoStr == null || estadoStr.isEmpty() || o.getEstado().getNombre().equals(estadoStr))  
-							&& (hasta == null || hasta.toString().isEmpty() || o.getFecha().before(hasta)) 
-							&& (desde == null || desde.toString().isEmpty() || o.getFecha().after(desde))
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+							"La fecha Hasta no puede ser anterior a la fecha Desde", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				}
+				
+				else if (hasta !=null && hasta.after(date))
+				{
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+							"La fecha no puede ser posterior al dia de hoy", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				}
+				
+				else 
+				{
+					observacionesFiltradas = observacionBeanRemote.obtenerTodasObservaciones();
+					for (Observacion o : observacionesFiltradas)
+					{
+						if(
+								(zona == null || zona.isEmpty() || o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona))  
+								&& (estadoStr == null || estadoStr.isEmpty() || o.getEstado().getNombre().equals(estadoStr))  
+								&& (hasta == null || hasta.toString().isEmpty() || o.getFecha().before(hasta)) 
+								&& (desde == null || desde.toString().isEmpty() || o.getFecha().after(desde))
 						)
-							{
-								filtradas.add(o);
-							}
+								{
+									filtradas.add(o);
+								}
+					}
 				}
 				return filtradas;
 			}
