@@ -32,7 +32,7 @@
             <a class="nav-link" href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a>
           </li>
           <li>
-            <div class="badge badge-primary">
+            <div class="badge badge-light" style="float:left;margin-top:12px">
              #{login.username} 
              </div>
           </li>
@@ -61,12 +61,12 @@
 				<div class="form-row">
 				
 	  		     <div class="form-group col-md-4" style="margin-top: 50px;margin-left:100px"> 
-		   			<h:outputLabel value="Usuario" id="usuario" />
+		   			<h:outputLabel value="Usuario:" id="usuario" />
 					<h:inputText for="usuario" value="#{usuario.usuario}" class="form-control" style="border: 1px solid #00b300"/>  
 				 </div>
 				 <div class="form-group col-md-4" style="margin-top: 50px">
 				 
-					<h:outputLabel value="Nombre"/>
+					<h:outputLabel value="Nombre:"/>
 					<h:inputText id="nombre" value="#{usuario.nombre}" class="form-control" style="border: 1px solid #00b300" />
 			    </div>
 			    <div class="form-group col-md-3" style="margin-top: 80px">
