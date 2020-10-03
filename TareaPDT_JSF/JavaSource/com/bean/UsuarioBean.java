@@ -191,7 +191,7 @@ public class UsuarioBean implements Serializable{
 	 		}
 			else {
 				
-				if (tipodoc == "CI" && numerodoc.length()<7 || numerodoc.length()>8)
+				if (tipodoc.equals("CI") && numerodoc.length()<7 || numerodoc.length()>8)
 				{
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 							"La CI debe contener entre 7 y 8 digitos", "");
@@ -232,16 +232,28 @@ public class UsuarioBean implements Serializable{
 
 	public void actualizarUsuario(Usuario usuario){
 		try{
-						
-			usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
-					usuario.getApellido(), usuario.getEstado(), usuario.getTipodoc(), usuario.getNumerodoc(), 
-					usuario.getDireccion(), usuario.getMail(), usuario.getTipousuario().getNombre());
-			//mensaje de actualizacion correcta
-			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-					"Se actualizo el usuario. ", "");
-			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-		}catch(Exception e){
-			e.getMessage();
+			String tipo = tipodoc;
+			
+			if ((tipo.equals("CI")) && (usuario.getNumerodoc().length()<7 || usuario.getNumerodoc().length()>8))
+			{
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+						"La CI debe contener entre 7 y 8 digitos", "");
+				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+			}
+			
+			else
+				{
+				usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
+						usuario.getApellido(), usuario.getEstado(), tipo, usuario.getNumerodoc(), 
+						usuario.getDireccion(), usuario.getMail(), usuario.getTipousuario().getNombre());
+				//mensaje de actualizacion correcta
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+						"Se actualizo el usuario. ", "");
+				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				}
+			}
+			catch(Exception e){
+				e.getMessage();
 		}
 	}
 
