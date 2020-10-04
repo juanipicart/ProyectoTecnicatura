@@ -48,12 +48,12 @@
 				</h:commandButton>
 	 </div>	
 	 <div class="vertical-center">		
-		<h:commandButton value="Aprobar"  action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:350px; margin-top:10px"  disabled="#{observacion.VerificarTipo(login.username)}">
+		<h:commandButton value="Aprobar"  action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" class="btn btn-success"  style="float:left;margin-left:25px"  disabled="#{observacion.VerificarTipo(login.username)}">
 		<f:param name="id" value="${observacion.id}" />
 		</h:commandButton>
 	 </div>
 	 <div class="vertical-center">	
-		<h:commandButton value="Rechazar" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" class="btn btn-danger"  style="float:left;margin-left:25px; margin-top:10px" disabled="#{observacion.VerificarTipo(login.username)}">
+		<h:commandButton value="Rechazar" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" class="btn btn-danger"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
 		<f:param name="id" value="${observacion.id}" />
 		</h:commandButton>
 	</div>	
