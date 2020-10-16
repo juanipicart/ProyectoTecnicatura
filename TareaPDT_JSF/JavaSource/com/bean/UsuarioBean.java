@@ -183,12 +183,20 @@ public class UsuarioBean implements Serializable{
 			
 			boolean validarUsuario = ValidarUsuario();
 			
-			if (validarUsuario == true) {
+			if (pass.length()<8) {
+				
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+						"La password no puede ser menor que 8 caracteres", "");
+				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+	 		}
+			
+			else if (validarUsuario == true && estado.equals("ACTIVO")) {
 				
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 						"El usuario ya existe en el sistema ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 	 		}
+			
 			else {
 				
 				if (tipodoc.equals("CI") && numerodoc.length()<7 || numerodoc.length()>8)
@@ -197,7 +205,16 @@ public class UsuarioBean implements Serializable{
 							"La CI debe contener entre 7 y 8 digitos", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 				}
-				else
+				else if (validarUsuario == true && estado.equals("INACTIVO")) {
+					this.estado = "ACTIVO";
+					usuarioBeanRemote.ModificarUsuario(id,pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
+					//mensaje de actualizacion correcta
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+							"Se creo el usuario correctamente ", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+					limpiar();
+				}
+				else 
 				{
 			this.estado = "ACTIVO";
 			usuarioBeanRemote.CrearUsuario(pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
@@ -234,7 +251,14 @@ public class UsuarioBean implements Serializable{
 		try{
 			String tipo = tipodoc;
 			
-			if ((tipo.equals("CI")) && (usuario.getNumerodoc().length()<7 || usuario.getNumerodoc().length()>8))
+			if (usuario.getPass().length()<8) {
+				
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+						"La password no puede ser menor que 8 caracteres", "");
+				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+	 		}
+			
+			else if ((tipo.equals("CI")) && (usuario.getNumerodoc().length()<7 || usuario.getNumerodoc().length()>8))
 			{
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 						"La CI debe contener entre 7 y 8 digitos", "");
