@@ -12,7 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.Remote.EstadoBeanRemote;
 import com.Remote.ObservacionBeanRemote;
+import com.entidades.Estado;
 import com.entidades.Observacion;
 import com.entidades.Usuario;
 
@@ -20,6 +22,7 @@ import com.entidades.Usuario;
 public class ObservacionesRest {
 	
 	@EJB ObservacionBeanRemote observacionBean;
+	@EJB EstadoBeanRemote estadoBean;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -55,7 +58,6 @@ public class ObservacionesRest {
 	@Produces("application/json")
 	public Response updateObservacion(Observacion observacion) {
 	try {
-
 		observacionBean.ModificarObservacion(observacion.getId(),observacion.getCodigo_OBS(),observacion.getUsuario().getUsuario(),observacion.getFenomeno().getNombreFen(),observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
 		return Response.ok().entity("{\"message\":\"Modificacion de observacion exitosa\"}").build();
 				
@@ -72,6 +74,8 @@ public class ObservacionesRest {
 	@Produces("application/json")
 	public Response deleteObservacion(Observacion observacion) {
 	try {
+		Estado estado = estadoBean.ObtenerEstado("ELIMINADA");
+		observacion.setEstado(estado);
 		observacionBean.ModificarObservacion(observacion.getId(),observacion.getCodigo_OBS(),observacion.getUsuario().getUsuario(),observacion.getFenomeno().getNombreFen(),observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
 		return Response.ok().entity("{\"message\":\"Eliminacion de observacion exitosa\"}").build();
 				
