@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 //Se comenta el filtro
-
-//@WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
-//public class AuthorizationFilter implements Filter {
 /*
+@WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
+public class AuthorizationFilter implements Filter {
+
 	public AuthorizationFilter() {
 	}
 
@@ -50,5 +50,5 @@ import javax.servlet.http.HttpSession;
 	@Override
 	public void destroy() {
 
-	}*/
-//}
+	}
+}*/

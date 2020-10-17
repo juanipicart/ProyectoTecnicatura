@@ -89,12 +89,12 @@ public class Login implements Serializable {
 	public static boolean authenticateJndi (String username, String password)
 	{
 		// obtenemos el dominio en base al email provisto
-		Integer corteString = username.indexOf("@");
-		String nombreUsuario = username.substring(0, corteString);
+		//Integer corteString = username.indexOf("@");
+		String nombreUsuario = username;
 		Properties props = new Properties();
 		props.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-		props.put(Context.PROVIDER_URL, "ldap://192.168.219.242:389");
-
+		//props.put(Context.PROVIDER_URL, "ldap://192.168.210.100:389");
+		props.put(Context.PROVIDER_URL, "ldap://serv404notfound.greenplace.utec.edu.uy:389");
 
 		// login con cuenta con usuario provisto
 		props.put(Context.SECURITY_PRINCIPAL, username);
@@ -117,8 +117,9 @@ public class Login implements Serializable {
 		
 		NamingEnumeration<javax.naming.directory.SearchResult> answers;
 		
-		answers = context.search("CN=Users,DC=utec,DC=edu,DC=uy",
-					"sAMAccountName=" + nombreUsuario, ctrls);
+		answers = context.search("CN=Users,DC=greenplace,DC=utec,DC=edu,DC=uy",
+		//answers = context.search(",DC=greenplace,DC=utec,DC=edu,DC=uy",
+			   "sAMAccountName=" + nombreUsuario, ctrls);
 	 
 		SearchResult result = answers.nextElement();
 
@@ -144,7 +145,4 @@ public class Login implements Serializable {
 				}
 		return false;
 		}	
-
-
-	
 }
