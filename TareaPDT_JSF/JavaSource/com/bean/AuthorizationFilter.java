@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 //Se comenta el filtro
-/*
+
 @WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
 public class AuthorizationFilter implements Filter {
 
@@ -38,10 +38,12 @@ public class AuthorizationFilter implements Filter {
 			if (reqURI.indexOf("/Login.xhtml") >= 0
 					|| (ses != null && ses.getAttribute("username") != null)
 					|| reqURI.indexOf("/public/") >= 0
-					|| reqURI.contains("javax.faces.resource"))
+					|| reqURI.contains("javax.faces.resource")
+					|| reqURI.indexOf("/LoginLDAP.xhtml") >= 0
+					|| reqURI.indexOf("/Inicio.xhtml") >= 0)
 				chain.doFilter(request, response);
 			else
-				resp.sendRedirect(reqt.getContextPath() + "/faces/GestionUsuarios/Login.xhtml");
+				resp.sendRedirect(reqt.getContextPath() + "/faces/GestionUsuarios/Inicio.xhtml");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -51,4 +53,4 @@ public class AuthorizationFilter implements Filter {
 	public void destroy() {
 
 	}
-}*/
+}

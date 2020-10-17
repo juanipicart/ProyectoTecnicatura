@@ -1,8 +1,11 @@
 package com.bean;
 
 import java.io.Serializable;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -11,8 +14,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
+import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
@@ -25,6 +30,7 @@ import com.entidades.Usuario;
 @SessionScoped
 public class Login implements Serializable {
 	
+	static final String LDAP_URL = "ldap://serv404notfound.greenplace.utec.edu.uy:389/DC=greenplace,DC=utec,DC=edu,DC=uy";
 	private String pass;
 	private String username;
 	private Usuario usuario;
@@ -86,6 +92,48 @@ public class Login implements Serializable {
 		return "Login";
 	}
 	
+	
+	public String loginLDAP(String username, String password) {
+		
+		Usuario usu = new Usuario();
+		Properties env = new Properties();
+
+		env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+
+		env.put(Context.PROVIDER_URL, LDAP_URL);
+
+		env.put(Context.SECURITY_AUTHENTICATION, "simple");
+
+		env.put(Context.SECURITY_PRINCIPAL, "CN="+username+ ", cn=Users, DC=greenplace,DC=utec,DC=edu,DC=uy");
+
+		env.put(Context.SECURITY_CREDENTIALS, password);
+
+		try {
+
+
+		DirContext ctx = new InitialDirContext(env);
+		usu = usuarioBeanRemote.obtenerUsuario(username);
+		HttpSession session = SessionUtils.getSession();
+		session.setAttribute("username", usu);
+		return "Index";
+	
+		} 
+		catch (NamingException ex) {
+
+		             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+		         }
+
+			FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_WARN,
+						"Usuario o Password incorrecta",
+						"Por favor verifique los datos ingresados"));
+		return "LoginLDAP";		    
+	}
+	
+	
+	
+	
+	/*
 	public static boolean authenticateJndi (String username, String password)
 	{
 		// obtenemos el dominio en base al email provisto
@@ -144,5 +192,5 @@ public class Login implements Serializable {
 						System.out.println("error");
 				}
 		return false;
-		}	
+		}*/	
 }
