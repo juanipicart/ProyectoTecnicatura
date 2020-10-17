@@ -2,12 +2,20 @@ package com.bean;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.naming.Context;
+import javax.naming.NamingEnumeration;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.InitialDirContext;
+import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
 import javax.servlet.http.HttpSession;
 
 import com.Remote.UsuarioBeanRemote;
@@ -68,6 +76,8 @@ public class Login implements Serializable {
 			return "Login";
 		}
 	}
+	
+	
 
 	//logout
 	public String logout() {
@@ -75,4 +85,66 @@ public class Login implements Serializable {
 		session.invalidate();
 		return "Login";
 	}
+	
+	public static boolean authenticateJndi (String username, String password)
+	{
+		// obtenemos el dominio en base al email provisto
+		Integer corteString = username.indexOf("@");
+		String nombreUsuario = username.substring(0, corteString);
+		Properties props = new Properties();
+		props.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+		props.put(Context.PROVIDER_URL, "ldap://192.168.219.242:389");
+
+
+		// login con cuenta con usuario provisto
+		props.put(Context.SECURITY_PRINCIPAL, username);
+
+		props.put(Context.SECURITY_CREDENTIALS, password);
+		
+		
+		
+		
+		// CONEXION AL AD
+
+
+	try {
+		InitialDirContext context;	
+								context = new InitialDirContext(props);
+								
+		SearchControls ctrls = new SearchControls();
+		ctrls.setReturningAttributes(new String[] { "sn", "parametroBuscado", "otroParametro" });
+		ctrls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+		
+		NamingEnumeration<javax.naming.directory.SearchResult> answers;
+		
+		answers = context.search("CN=Users,DC=utec,DC=edu,DC=uy",
+					"sAMAccountName=" + nombreUsuario, ctrls);
+	 
+		SearchResult result = answers.nextElement();
+
+		Attributes attributes = result.getAttributes();
+		Attribute atributoSipa = attributes.get("sipaUser");
+
+		
+		// VALIDAMOS LA PRESENCIA DEL ATRIBUTO
+
+
+
+			if (atributoSipa != null) {
+					//Controla que el usuario este habilitado para sipa
+						if (atributoSipa.get().equals("TRUE")) {
+								return true;
+						}
+			}
+			return false;
+
+		} catch (Exception e) {
+				e.printStackTrace();
+						System.out.println("error");
+				}
+		return false;
+		}	
+
+
+	
 }

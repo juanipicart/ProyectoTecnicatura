@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core_1_1"	
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+      
+
+<h:head>
+<h:outputStylesheet name="css/bootstrap.min.css"/>
+
+</h:head> 
+
+
+<body class="row bg-success  align-items-center justify-content-center vh-100" > 
+
+
+<h:form id="idDatosEmpleado"  >
+		
+	 	
+			<div class="card"  style="width:22rem;height:20rem" >
+				<div class="card-header bg-success " style="color:white;text-align:center">Modo de inicio</div>	
+					
+					<h:commandLink value="Login con LDAP" 	action="LoginLDAP" class="btn btn-outline-success"></h:commandLink>
+					<h:commandLink value="Login Local" 	action="Login" class="btn btn-outline-success"></h:commandLink>
+      		</div>		
+</h:form>
+			 
+</body> 
+</html>
+
+
+
+
+
+
+
