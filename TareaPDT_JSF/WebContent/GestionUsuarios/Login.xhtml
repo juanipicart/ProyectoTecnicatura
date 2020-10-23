@@ -21,7 +21,7 @@
 		
 	 	
 			<div class="card"  style="width:22rem;height:20rem" >
-				<div class="card-header bg-success " style="color:white;text-align:center">Login Local</div>	
+				<div class="card-header bg-dark " style="color:white;text-align:center">Login Local</div>	
 							
 			   	    <h7 class="list-group-item">Usuario:
 				  	 <h:inputText label="Usuario" id="usuario" class="form-control" required="true" a:placeholder="username" maxlength="80" disabled="false" value="#{login.username}" />
@@ -32,7 +32,7 @@
 					<br></br>			
 					<h:commandButton   id="idIngresar"    value="Ingresar" action="#{login.ValidarLogin()}" class="btn btn-success btn-sm btn-block"/>
 			
-			<h:link value="Volver al Inicio" 	outcome="Inicio.xhtml" class="btn btn-outline-success"></h:link>					
+			<h:link value="Volver al Inicio" 	outcome="Inicio.xhtml" class="btn btn-primary"></h:link>					
       		</div>		
 
  <h:messages class="alert alert-danger" role="alert"  errorstyle="color:red" />
