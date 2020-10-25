@@ -1,5 +1,6 @@
 package com.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -40,6 +41,16 @@ public class UbicacionesRest {
 	@Path("/fenomenos")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Fenomeno> getFenomenos() {
-		return fenomenoBean.Obtenertodoslosfenomenos();
+		List<Fenomeno> fenomenos = fenomenoBean.Obtenertodoslosfenomenos();
+		List<Fenomeno> response = new ArrayList<Fenomeno>();
+		for (int i=0; i<fenomenos.size(); i++) {
+			long id = fenomenos.get(i).getId();
+			String codigo = fenomenos.get(i).getCodigo();
+			String nombre = fenomenos.get(i).getNombreFen();
+			Fenomeno fenomeno = new Fenomeno(id, codigo, nombre);
+			response.add(fenomeno);
+		}
+		
+		return response;
 	}
 }

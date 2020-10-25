@@ -62,6 +62,14 @@ public class Fenomeno implements Serializable{
 	}
 
 
+	public Fenomeno(long id, String codigo, String nombre) {
+		this.id = id;
+		this.codigo = codigo;
+		this.nombreFen = nombre;
+	
+	}
+
+
 	public String getEstado() {
 		return estado;
 	}
