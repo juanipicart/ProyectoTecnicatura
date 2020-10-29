@@ -30,6 +30,8 @@ public interface ObservacionBeanRemote {
 	boolean revisarObservacion(long usuario, long id_observacion, Date fecha, String estado, String comentarios);
 	
 	List <Observacion> obtenerTodasObservacionesPendientes(Estado pendiente);
+	
+	List<Observacion> obtenerObservacionesPorUsuario(Usuario usuario);
 
 	
 }

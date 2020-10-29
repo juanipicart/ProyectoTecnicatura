@@ -24,18 +24,18 @@ public class Zona implements Serializable {
 	@SequenceGenerator(name="secuenciazona",sequenceName="SEQ_IDZONA", initialValue=1, allocationSize=100)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="secuenciazona")
 	@Column(name="ID_ZONA")
-    private long id;
+    private long id_zona;
 	
 	@Column(name="NOMBRE_ZONA",length=(40),nullable=false)
 	private String nombre_zona;
 	
 	
 	
-	public long getId() {
-		return id;
+	public long getId_Zona() {
+		return id_zona;
 	}
 	public void setId(long id) {
-		this.id = id;
+		this.id_zona = id;
 	}
 	public String getNombre_zona() {
 		return nombre_zona;
@@ -45,7 +45,7 @@ public class Zona implements Serializable {
 	}
 	
 	public Zona(long id, String nombre_zona){
-		this.id = id;
+		this.id_zona = id;
 		this.nombre_zona = nombre_zona;
 }
 

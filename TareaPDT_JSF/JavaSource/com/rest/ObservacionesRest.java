@@ -1,5 +1,6 @@
 package com.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -16,41 +17,101 @@ import javax.ws.rs.core.Response;
 
 import com.Remote.EstadoBeanRemote;
 import com.Remote.ObservacionBeanRemote;
+import com.Remote.UsuarioBeanRemote;
 import com.entidades.Estado;
 import com.entidades.Observacion;
 import com.entidades.Usuario;
+import com.models.ObservacionDTO;
 
 @Path("/observaciones")
 public class ObservacionesRest {
 	
 	@EJB ObservacionBeanRemote observacionBean;
 	@EJB EstadoBeanRemote estadoBean;
+	@EJB UsuarioBeanRemote usuarioBean;
 	
 	//Todas las observaciones
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Observacion> getObservaciones() {
-		return observacionBean.obtenerTodasObservaciones();
+	public List<ObservacionDTO> getObservaciones() {
+		List<Observacion> observaciones = observacionBean.obtenerTodasObservaciones();
+		List<ObservacionDTO> response = new ArrayList<ObservacionDTO>();
+		for (Observacion observacion: observaciones) {
+			long id = observacion.getId();
+			String codigo = observacion.getCodigo_OBS();
+			String descripcion = observacion.getDescripcion();
+			float latitud = observacion.getLatitud();
+			float altitud = observacion.getAltitud();
+			float longitud = observacion.getLongitud();
+			String localidad = observacion.getLocalidad().getNombreLoc();
+			String fenomeno = observacion.getFenomeno().getNombreFen();
+			String estado = observacion.getEstado().getNombre();
+			String usuario = observacion.getUsuario().getUsuario();
+			String fecha = observacion.getFecha().toString();
+			ObservacionDTO nuevaObs = new ObservacionDTO(id, codigo, descripcion, latitud, altitud, longitud, localidad, 
+					fenomeno, estado, usuario, formatoFecha(fecha));
+			response.add(nuevaObs);
+		}
+		return response;
 	}
 	
 	//Observacion por Id
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Observacion getObservacionById(@PathParam("id") Long id) {
-		return observacionBean.obtenerObservacionPorId(id);
+	public ObservacionDTO getObservacionById(@PathParam("id") Long id) {
+		Observacion observacion = observacionBean.obtenerObservacionPorId(id);
+		ObservacionDTO response = new ObservacionDTO();
+		response.setId(observacion.getId());
+		response.setCodigo(observacion.getCodigo_OBS());
+		response.setDescripcion(observacion.getDescripcion());
+		response.setFenomeno(observacion.getFenomeno().getNombreFen());
+		response.setLongitud(observacion.getLongitud());
+		response.setLatitud(observacion.getLatitud());
+		response.setAltitud(observacion.getAltitud());
+		response.setEstado(observacion.getEstado().getNombre());
+		response.setFecha(formatoFecha(observacion.getFecha().toString()));
+		response.setLocalidad(observacion.getLocalidad().getNombreLoc());
+		response.setUsuario(observacion.getUsuario().getUsuario());
+		return response;
 	}
+	
+	//Observacion por usuario
+		@GET
+		@Path("/usuario/{username}")
+		@Produces(MediaType.APPLICATION_JSON)
+		public List<ObservacionDTO> getObservacionById(@PathParam("username") String username) {
+			Usuario usuario = usuarioBean.obtenerUsuario(username);
+			List<Observacion> observaciones = observacionBean.obtenerObservacionesPorUsuario(usuario);
+			List<ObservacionDTO> obsResponse = new ArrayList<ObservacionDTO>();
+			for (int i=0; i < observaciones.size(); i++) {
+			ObservacionDTO response = new ObservacionDTO();
+			response.setId(observaciones.get(i).getId());
+			response.setCodigo(observaciones.get(i).getCodigo_OBS());
+			response.setDescripcion(observaciones.get(i).getDescripcion());
+			response.setFenomeno(observaciones.get(i).getFenomeno().getNombreFen());
+			response.setLongitud(observaciones.get(i).getLongitud());
+			response.setLatitud(observaciones.get(i).getLatitud());
+			response.setAltitud(observaciones.get(i).getAltitud());
+			response.setEstado(observaciones.get(i).getEstado().getNombre());
+			response.setFecha(formatoFecha(observaciones.get(i).getFecha().toString()));
+			response.setLocalidad(observaciones.get(i).getLocalidad().getNombreLoc());
+			response.setUsuario(observaciones.get(i).getUsuario().getUsuario());
+			obsResponse.add(response);
+			}
+			return obsResponse;
+		}
 	
 	//Agregar observacion
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response addObservacion(Observacion observacion) {
+	public Response addObservacion(ObservacionDTO observacion) {
 	try {
-		List <Observacion> existe = observacionBean.existeObservacion(observacion.getCodigo_OBS());
+		List <Observacion> existe = observacionBean.existeObservacion(observacion.getCodigo());
 		if (existe.size() == 0)
 		{
-		observacionBean.CrearObservacion(observacion.getCodigo_OBS(),observacion.getUsuario().getUsuario(),observacion.getFenomeno().getNombreFen(),observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha()); 
+		//observacionBean.CrearObservacion(observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), observacion.getDescripcion(), observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado(), observacion.getFecha()); 
 		return Response.ok().entity("{\"message\":\"Alta de observacion exitosa\"}").build();
 		}
 		else {
@@ -104,4 +165,11 @@ public class ObservacionesRest {
 	}
 	}
 	
+	public String formatoFecha(String fecha) {
+		String[] soloFecha = fecha.split(" ");
+		String[] parseFecha = soloFecha[0].split("-");
+		String nuevaFecha = parseFecha[2] + "-" + parseFecha[1] + "-" + parseFecha[0];
+		return nuevaFecha;
+		
+	}
 }

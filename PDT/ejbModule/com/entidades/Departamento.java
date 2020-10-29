@@ -34,7 +34,7 @@ public class Departamento implements Serializable {
 
 	}
 	
-	public long getId_localidad() {
+	public long getId_Departamento() {
 		return id;
 	}
 	public void setId(long id) {

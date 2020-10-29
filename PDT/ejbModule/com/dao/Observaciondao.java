@@ -116,5 +116,12 @@ public class Observaciondao {
   		List<Observacion> observaciones = query.getResultList();
 		return observaciones;
   	}
+
+	public List<Observacion> obtenerObservacionesUsuario(Usuario usuario) {
+		TypedQuery<Observacion> query = em.createQuery("SELECT o FROM Observacion o where o.usuario LIKE : usuario ",Observacion.class)
+  				.setParameter("usuario",usuario);
+  		List<Observacion> observaciones = query.getResultList();
+		return observaciones;
+	}
     
 }

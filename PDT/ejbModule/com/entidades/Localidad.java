@@ -18,7 +18,7 @@ public class Localidad implements Serializable {
 	@SequenceGenerator(name="secuencialoc",sequenceName="SEQ_IDLOCALIDADID", initialValue=1, allocationSize=100)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="secuencialoc")
 	@Column(name="ID_LOCALIDAD")
-	private long id;
+	private long id_localidad;
 	@ManyToOne (optional=false)
     @JoinColumn (name="ID_DEPARTAMENTO")
 	private Departamento departamento; 
@@ -31,12 +31,11 @@ public class Localidad implements Serializable {
 	@Column(name="ALTITUD",length=(50),nullable=false)
 	private float altitud;
 
-
-	public long getId() {
-		return id;
+	public long getId_Localidad() {
+		return id_localidad;
 	}
 	public void setId(long id) {
-		this.id = id;
+		this.id_localidad = id;
 	}
 	public Departamento getDepartamento() {
 		return departamento;
@@ -71,7 +70,7 @@ public class Localidad implements Serializable {
 	public Localidad(long id, Departamento departamento, String nombreLoc, float latitud, float longitud,
 			float altitud) {
 		super();
-		this.id = id;
+		this.id_localidad = id;
 		this.departamento = departamento;
 		this.nombreLoc = nombreLoc;
 		this.latitud = latitud;
@@ -79,8 +78,13 @@ public class Localidad implements Serializable {
 		this.altitud = altitud;
 	}
 	
-	
-	
+	public Localidad(long id, String nombre, float latitud, float altitud, float longitud) {
+		this.id_localidad = id;
+		this.nombreLoc = nombre;
+		this.latitud = latitud;
+		this.altitud = altitud;
+		this.longitud = longitud;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -88,7 +92,7 @@ public class Localidad implements Serializable {
 		int result = 1;
 		result = prime * result + Float.floatToIntBits(altitud);
 		result = prime * result + ((departamento == null) ? 0 : departamento.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (id_localidad ^ (id_localidad >>> 32));
 		result = prime * result + Float.floatToIntBits(latitud);
 		result = prime * result + Float.floatToIntBits(longitud);
 		result = prime * result + ((nombreLoc == null) ? 0 : nombreLoc.hashCode());
@@ -110,7 +114,7 @@ public class Localidad implements Serializable {
 				return false;
 		} else if (!departamento.equals(other.departamento))
 			return false;
-		if (id != other.id)
+		if (id_localidad != other.id_localidad)
 			return false;
 		if (Float.floatToIntBits(latitud) != Float.floatToIntBits(other.latitud))
 			return false;
@@ -126,7 +130,7 @@ public class Localidad implements Serializable {
 	
 	@Override
 	  public String toString() {
-	      return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
+	      return String.format("%s[id=%d]", getClass().getSimpleName(), getId_Localidad());
 	  }
 	
 

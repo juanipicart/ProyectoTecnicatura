@@ -177,6 +177,12 @@ public class ObservacionBean implements ObservacionBeanRemote {
 		List<Observacion> obs = obsDao.obtenerTodasObservacionesPendientes(pendiente);
 		return obs;
 	}
+
+	@Override
+	public List<Observacion> obtenerObservacionesPorUsuario(Usuario usuario) {
+		List<Observacion> obs = obsDao.obtenerObservacionesUsuario(usuario);
+		return obs;
+	}
 	
 	
 	

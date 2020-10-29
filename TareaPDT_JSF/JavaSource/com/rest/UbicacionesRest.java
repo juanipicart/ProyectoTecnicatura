@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import com.Remote.FenomenoBeanRemote;
 import com.Remote.LocalidadBeanRemote;
 import com.Remote.ZonaBeanRemote;
+import com.entidades.Departamento;
 import com.entidades.Fenomeno;
 import com.entidades.Localidad;
 import com.entidades.Zona;
@@ -27,13 +28,25 @@ public class UbicacionesRest {
 	@Path("/localidades")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Localidad> getLocalidades() {
-		return localidadBean.obtenerTodasLocalidades();
+		List<Localidad> localidades = localidadBean.obtenerTodasLocalidades();
+		List<Localidad> response = new ArrayList<Localidad>();
+		for (int i=0; i<localidades.size();i++) {
+			long id = localidades.get(i).getId_Localidad();
+			String nombre = localidades.get(i).getNombreLoc();
+			float latitud = localidades.get(i).getLatitud();
+			float altitud = localidades.get(i).getAltitud();
+			float longitud = localidades.get(i).getLongitud();
+			Localidad localidad = new Localidad(id, nombre, latitud, altitud, longitud);
+			response.add(localidad);
+		}
+		return response;
 	}
 	
 	@GET
 	@Path("/zonas")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Zona> getZonas() {
+	
 		return zonaBean.obtenerTodasZonas();
 	}
 
