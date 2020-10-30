@@ -1,6 +1,9 @@
 package com.rest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -111,16 +114,18 @@ public class ObservacionesRest {
 		List <Observacion> existe = observacionBean.existeObservacion(observacion.getCodigo());
 		if (existe.size() == 0)
 		{
-		//observacionBean.CrearObservacion(observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), observacion.getDescripcion(), observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado(), observacion.getFecha()); 
+		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
+		Date date = format.parse(observacion.getFecha());
+		observacionBean.CrearObservacion(observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), observacion.getDescripcion(), null, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado(), date); 
 		return Response.ok().entity("{\"message\":\"Alta de observacion exitosa\"}").build();
 		}
 		else {
-		return	Response.status(Response.Status.BAD_REQUEST).entity("{\"message\": \"Codgo de observacion repetido\"}").build();
+		return	Response.status(Response.Status.BAD_REQUEST).entity("{\"id\": 1, \"message\": \"Codigo de observacion repetido\"}").build();
 		}
 		}catch(Exception e)
 		{
 		e.printStackTrace();
-		return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\": \"Datos invalidos\"}").build();
+		return Response.status(Response.Status.BAD_REQUEST).entity("{\"id\": 2, \"message\": \"Datos invalidos\"}").build();
 		}
 	}
 	
@@ -168,7 +173,7 @@ public class ObservacionesRest {
 	public String formatoFecha(String fecha) {
 		String[] soloFecha = fecha.split(" ");
 		String[] parseFecha = soloFecha[0].split("-");
-		String nuevaFecha = parseFecha[2] + "-" + parseFecha[1] + "-" + parseFecha[0];
+		String nuevaFecha = parseFecha[2] + "/" + parseFecha[1] + "/" + parseFecha[0];
 		return nuevaFecha;
 		
 	}

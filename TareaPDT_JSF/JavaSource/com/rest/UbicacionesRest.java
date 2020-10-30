@@ -16,6 +16,7 @@ import com.entidades.Departamento;
 import com.entidades.Fenomeno;
 import com.entidades.Localidad;
 import com.entidades.Zona;
+import com.models.LocalidadDTO;
 
 @Path("/ubicaciones")
 public class UbicacionesRest {
@@ -27,16 +28,13 @@ public class UbicacionesRest {
 	@GET
 	@Path("/localidades")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Localidad> getLocalidades() {
+	public List<LocalidadDTO> getLocalidades() {
 		List<Localidad> localidades = localidadBean.obtenerTodasLocalidades();
-		List<Localidad> response = new ArrayList<Localidad>();
+		List<LocalidadDTO> response = new ArrayList<LocalidadDTO>();
 		for (int i=0; i<localidades.size();i++) {
 			long id = localidades.get(i).getId_Localidad();
 			String nombre = localidades.get(i).getNombreLoc();
-			float latitud = localidades.get(i).getLatitud();
-			float altitud = localidades.get(i).getAltitud();
-			float longitud = localidades.get(i).getLongitud();
-			Localidad localidad = new Localidad(id, nombre, latitud, altitud, longitud);
+			LocalidadDTO localidad = new LocalidadDTO(id, nombre);
 			response.add(localidad);
 		}
 		return response;

@@ -29,7 +29,24 @@ public class ObservacionDTO {
 		this.usuario = usuario;
 		this.fecha = fecha;
 	}
-	
+		
+	public ObservacionDTO(String codigo, String descripcion, float latitud, float altitud, float longitud,
+			String localidad, String fenomeno, String estado, String usuario, String fecha) {
+		super();
+		this.codigo = codigo;
+		this.descripcion = descripcion;
+		this.latitud = latitud;
+		this.altitud = altitud;
+		this.longitud = longitud;
+		this.localidad = localidad;
+		this.fenomeno = fenomeno;
+		this.estado = estado;
+		this.usuario = usuario;
+		this.fecha = fecha;
+	}
+
+
+
 	public ObservacionDTO() {
 		super();
 	}
