@@ -180,7 +180,8 @@ public class ObservacionBean implements ObservacionBeanRemote {
 
 	@Override
 	public List<Observacion> obtenerObservacionesPorUsuario(Usuario usuario) {
-		List<Observacion> obs = obsDao.obtenerObservacionesUsuario(usuario);
+		Estado estado = estDao.obtenerEstadonombre("ELIMINADA");
+		List<Observacion> obs = obsDao.obtenerObservacionesUsuario(usuario, estado);
 		return obs;
 	}
 	

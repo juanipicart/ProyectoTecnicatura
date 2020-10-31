@@ -9,13 +9,14 @@ public class ObservacionDTO {
 	private float altitud;
 	private float longitud;
 	private String localidad;
+	private String departamento;
 	private String fenomeno;
 	private String estado;
 	private String usuario;
 	private String fecha;
 	
 	public ObservacionDTO(long id, String codigo, String descripcion, float latitud, float altitud, float longitud,
-			String localidad, String fenomeno, String estado, String usuario, String fecha) {
+			String localidad, String departamento, String fenomeno, String estado, String usuario, String fecha) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -24,6 +25,7 @@ public class ObservacionDTO {
 		this.altitud = altitud;
 		this.longitud = longitud;
 		this.localidad = localidad;
+		this.departamento = departamento;
 		this.fenomeno = fenomeno;
 		this.estado = estado;
 		this.usuario = usuario;
@@ -31,7 +33,7 @@ public class ObservacionDTO {
 	}
 		
 	public ObservacionDTO(String codigo, String descripcion, float latitud, float altitud, float longitud,
-			String localidad, String fenomeno, String estado, String usuario, String fecha) {
+			String localidad, String departamento, String fenomeno, String estado, String usuario, String fecha) {
 		super();
 		this.codigo = codigo;
 		this.descripcion = descripcion;
@@ -39,13 +41,12 @@ public class ObservacionDTO {
 		this.altitud = altitud;
 		this.longitud = longitud;
 		this.localidad = localidad;
+		this.departamento = departamento;
 		this.fenomeno = fenomeno;
 		this.estado = estado;
 		this.usuario = usuario;
 		this.fecha = fecha;
 	}
-
-
 
 	public ObservacionDTO() {
 		super();
@@ -93,6 +94,14 @@ public class ObservacionDTO {
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
+	public String getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
+
 	public String getFenomeno() {
 		return fenomeno;
 	}

@@ -47,11 +47,13 @@ public class ObservacionesRest {
 			float altitud = observacion.getAltitud();
 			float longitud = observacion.getLongitud();
 			String localidad = observacion.getLocalidad().getNombreLoc();
+			String departamento = observacion.getLocalidad().getDepartamento().getNombreDep();
 			String fenomeno = observacion.getFenomeno().getNombreFen();
 			String estado = observacion.getEstado().getNombre();
 			String usuario = observacion.getUsuario().getUsuario();
 			String fecha = observacion.getFecha().toString();
-			ObservacionDTO nuevaObs = new ObservacionDTO(id, codigo, descripcion, latitud, altitud, longitud, localidad, 
+		
+			ObservacionDTO nuevaObs = new ObservacionDTO(id, codigo, descripcion, latitud, altitud, longitud, localidad, departamento, 
 					fenomeno, estado, usuario, formatoFecha(fecha));
 			response.add(nuevaObs);
 		}
@@ -75,6 +77,7 @@ public class ObservacionesRest {
 		response.setEstado(observacion.getEstado().getNombre());
 		response.setFecha(formatoFecha(observacion.getFecha().toString()));
 		response.setLocalidad(observacion.getLocalidad().getNombreLoc());
+		response.setDepartamento(observacion.getLocalidad().getDepartamento().getNombreDep());
 		response.setUsuario(observacion.getUsuario().getUsuario());
 		return response;
 	}
@@ -99,6 +102,7 @@ public class ObservacionesRest {
 			response.setEstado(observaciones.get(i).getEstado().getNombre());
 			response.setFecha(formatoFecha(observaciones.get(i).getFecha().toString()));
 			response.setLocalidad(observaciones.get(i).getLocalidad().getNombreLoc());
+			response.setDepartamento(observaciones.get(i).getLocalidad().getDepartamento().getNombreDep());
 			response.setUsuario(observaciones.get(i).getUsuario().getUsuario());
 			obsResponse.add(response);
 			}
@@ -116,8 +120,14 @@ public class ObservacionesRest {
 		{
 		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
 		Date date = format.parse(observacion.getFecha());
-		observacionBean.CrearObservacion(observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), observacion.getDescripcion(), null, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado(), date); 
-		return Response.ok().entity("{\"message\":\"Alta de observacion exitosa\"}").build();
+			if (observacionBean.CrearObservacion(observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), 
+					observacion.getDescripcion(), null, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), 
+					observacion.getEstado(), date)) { 
+				
+				return Response.ok().entity("{\"message\":\"Alta de observacion exitosa\"}").build(); } else {
+					
+				return Response.status(Response.Status.BAD_REQUEST).entity("{\"id\": 2, \"message\": \"Datos invalidos\"}").build();
+		}
 		}
 		else {
 		return	Response.status(Response.Status.BAD_REQUEST).entity("{\"id\": 1, \"message\": \"Codigo de observacion repetido\"}").build();
@@ -134,10 +144,18 @@ public class ObservacionesRest {
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response updateObservacion(@PathParam("id") Long id, Observacion observacion) {
+	public Response updateObservacion(@PathParam("id") Long id, ObservacionDTO observacion) {
+		Observacion observacionPorID = observacionBean.obtenerObservacionPorId(id);
+		List<Observacion> existe = observacionBean.existeObservacion(observacion.getCodigo());
 	try {
-		if (id == observacion.getId()) {
-		observacionBean.ModificarObservacion(observacion.getId(),observacion.getCodigo_OBS(),observacion.getUsuario().getUsuario(),observacion.getFenomeno().getNombreFen(),observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
+		if (observacionPorID == null) {
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\": \"No se encontró una observacion para el id ingresado.\"}").build();
+		} else if (existe.size() == 0) {
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\": \"El código ingresado en el body no pertenece a ninguna observacion\"}").build();
+		} else if (id == existe.get(0).getId()) {
+		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
+		Date date = format.parse(observacion.getFecha());
+		observacionBean.ModificarObservacion(id,observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), observacion.getDescripcion(), null, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado(), date);
 		return Response.ok().entity("{\"message\":\"Modificacion de observacion exitosa\"}").build();
 		}
 		else {
