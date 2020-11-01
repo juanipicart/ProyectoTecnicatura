@@ -6,6 +6,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import com.Remote.LocalidadBeanRemote;
 import com.dao.Localidaddao;
+import com.entidades.Departamento;
 import com.entidades.Localidad;
 
 @Stateless
@@ -30,5 +31,16 @@ public class LocalidadBean implements LocalidadBeanRemote{
 		Localidad localidad = this.locdao.obtenerLocalidad(loc);
 	   	 return localidad;
 		
+	}
+	@Override
+	public List<Departamento> obtenerDepartamentos() {
+		List<Departamento> deptos = locdao.obtenerDepartamentos();
+		return deptos;
+	}
+	
+	@Override
+	public List<Localidad> obtenerLocalidadesPorDepto(String depto) {
+		List<Localidad> localidades = locdao.obtenerLocalidadesPorDepto(depto);
+		return localidades;
 	}
 }

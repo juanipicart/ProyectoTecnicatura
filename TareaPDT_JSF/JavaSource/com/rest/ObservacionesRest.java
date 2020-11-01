@@ -118,7 +118,7 @@ public class ObservacionesRest {
 		List <Observacion> existe = observacionBean.existeObservacion(observacion.getCodigo());
 		if (existe.size() == 0)
 		{
-		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = format.parse(observacion.getFecha());
 			if (observacionBean.CrearObservacion(observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), 
 					observacion.getDescripcion(), null, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), 
@@ -151,7 +151,7 @@ public class ObservacionesRest {
 		if (observacionPorID == null) {
 			return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\": \"No se encontró una observacion para el id ingresado.\"}").build();
 		} else if (existe.size() == 0) {
-			return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\": \"El código ingresado en el body no pertenece a ninguna observacion\"}").build();
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\": \"El codigo ingresado en el body no pertenece a ninguna observacion\"}").build();
 		} else if (id == existe.get(0).getId()) {
 		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
 		Date date = format.parse(observacion.getFecha());
