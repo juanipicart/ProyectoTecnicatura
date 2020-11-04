@@ -33,8 +33,9 @@
 	  <li class="list-group-item"><strong>Latitud:</strong>  #{observacion.observacionSeleccionada.latitud}°</li>
 	  <li class="list-group-item"><strong>Longitud:</strong> #{observacion.observacionSeleccionada.longitud}°</li>
 	  <li class="list-group-item"><strong>Altitud:</strong> #{observacion.observacionSeleccionada.altitud} mts</li>
-	  <li class="list-group-item"><strong>Imagen:</strong> 
-	 <h:graphicImage value="data:image/jpg;base64,#{observacion.codificar()}" style="max-width: 200px; max-height: 200px;" />
+	  <li class="list-group-item"><strong>Imagen: </strong> 
+	 <h:graphicImage value="#{observacion.codificar()}" style="max-width: 200px; max-height: 200px;"/>
+	  #{observacion.ImagenTxt()}
 	  </li>
 	</ul><br/><br/>
 	<div class="container">

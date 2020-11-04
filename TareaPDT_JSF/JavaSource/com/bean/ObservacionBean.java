@@ -565,10 +565,11 @@ public class ObservacionBean implements Serializable{
 		{
 			try {
 			if ( observacionSeleccionada.getImagen() != null) {	
-			return (encoded2 = Base64.getEncoder().encodeToString(observacionSeleccionada.getImagen()));
+				encoded2 = Base64.getEncoder().encodeToString(observacionSeleccionada.getImagen());
+				return ("data:image/jpg;base64,"+encoded2);
 			}
 			else
-				return ("No hay imagen disponible");
+				return ("");
 			}
 			catch (Exception ex)
 			{
@@ -576,6 +577,16 @@ public class ObservacionBean implements Serializable{
 				return ("Error al cargar imagen");
 			}
 		}
+		
+		public String ImagenTxt() {
+			if (codificar() == "")
+			{
+				return "No hay imagen disponible";
+			}
+			else 
+				return "";
+		}
+		
 
 		
 		public List<Observacion>seleccionarObservacionesLista(String zona, Date hasta, Date desde, String estadoStr)
