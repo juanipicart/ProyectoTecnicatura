@@ -1,6 +1,7 @@
 package com.bean;
 
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
@@ -105,11 +106,10 @@ public class Login implements Serializable {
 		env.put(Context.SECURITY_AUTHENTICATION, "simple");
 
 		env.put(Context.SECURITY_PRINCIPAL, "CN="+username+ ", cn=Users, DC=greenplace,DC=utec,DC=edu,DC=uy");
-
+		
 		env.put(Context.SECURITY_CREDENTIALS, password);
 
 		try {
-
 
 		DirContext ctx = new InitialDirContext(env);
 		usu = usuarioBeanRemote.obtenerUsuario(username);

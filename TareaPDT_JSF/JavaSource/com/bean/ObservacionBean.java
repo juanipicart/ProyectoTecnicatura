@@ -10,7 +10,9 @@ import java.util.List;
 
 import javax.inject.Named;
 
+import org.primefaces.event.CloseEvent;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.MoveEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -639,4 +641,25 @@ public class ObservacionBean implements Serializable{
 			observacionesFiltradas = seleccionarObservacionesLista(zona, hasta, desde, estadoStr); 
 			return "";
 		}
+		
+		public void handleClose(CloseEvent event) {
+	        addMessage(event.getComponent().getId() + " closed", "So you don't like nature?");
+	    }
+	     
+	    public void handleMove(MoveEvent event) {
+	        addMessage(event.getComponent().getId() + " moved", "Left: " + event.getLeft() + ", Top: " + event.getTop());
+	    }
+	     
+	    public void RechazoModal() {
+	        addMessage("Observacion Rechazada", "La observacion se Rechazo correctamente");
+	    }
+	    
+	    public void ApruebaModal() {
+	        addMessage("Observacion Aprobada", "La observacion se aprobo correctamente");
+	    }
+	     
+	    public void addMessage(String summary, String detail) {
+	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+	    }
 }	
