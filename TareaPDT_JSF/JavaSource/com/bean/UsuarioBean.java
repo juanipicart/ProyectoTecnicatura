@@ -388,6 +388,17 @@ public class UsuarioBean implements Serializable{
 		usuariosSeleccionados = seleccionUsuario(username); 
 		return "";
 	}
+	
+	
+	public boolean VerificarTipo(String tipoEnviado) {
+		boolean tipo = true;
+		Usuario tipoUsu = usuarioBeanRemote.obtenerUsuario(tipoEnviado);
+		if ((tipoUsu.getTipousuario().getNombre() == "ADMINISTRADOR" || tipoUsu.getTipousuario().getId() == 1))		
+		{
+			tipo = false;
+		}
+		return tipo;
+	}
 }
 
 

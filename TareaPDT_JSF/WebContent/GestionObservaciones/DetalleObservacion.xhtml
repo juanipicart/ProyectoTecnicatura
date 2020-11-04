@@ -50,19 +50,19 @@
 				</h:commandButton>
 	 </div>	
 	 <div class="vertical-center">
-		<p:commandButton value="Aprobar"   class="btn btn-success" action="#{observacion.ApruebaModal()}"  style="float:left;margin-left:25px" update="message">
+		<p:commandButton value="Aprobar"   class="btn btn-success" action="#{observacion.ApruebaModal()}" disabled="#{observacion.VerificarTipo(login.username)}" style="float:left;margin-left:25px" update="message">
 		<p:confirm header="Aprobación" message="¿Aprobar Observacion?" icon="pi pi-exclamation-triangle" />
 		<f:param name="id" value="${observacion.id}" />
 		</p:commandButton>
 		
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-        <p:commandButton value="Si" type="button" action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+        <p:commandButton value="Si" type="button" action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" disabled="#{observacion.VerificarTipo(login.username)}" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
    		 </p:confirmDialog> 
 		
 	 </div>
 	 <div class="vertical-center">	
-		<p:commandButton value="Rechazar" class="btn btn-danger" action="#{observacion.RechazoModal()}" style="float:left;margin-left:25px" update="message">
+		<p:commandButton value="Rechazar" class="btn btn-danger" action="#{observacion.RechazoModal()}" style="float:left;margin-left:25px" update="message" disabled="#{observacion.VerificarTipo(login.username)}">
 		<p:confirm header="Rechazo" message="¿Rechazar Observación?" icon="pi pi-exclamation-triangle" />
 		<f:param name="id" value="${observacion.id}" />
 		</p:commandButton>

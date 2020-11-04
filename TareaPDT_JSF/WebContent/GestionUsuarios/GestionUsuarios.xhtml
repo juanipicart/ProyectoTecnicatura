@@ -116,14 +116,14 @@
 		
 		<h:column>
 			<f:facet name="header">Modificar</f:facet>
-			<h:link value="Modificar usuario" outcome="ModificarUsuario.xhtml" class="badge badge-info">
+			<h:link value="Modificar usuario" outcome="ModificarUsuario.xhtml" class="badge badge-info" disabled="#{usuario.VerificarTipo(login.username)}">
     			<f:param name="id" value="${usuTabla.id}" />
 			</h:link>
 		</h:column>
 		
 		<h:column>
 			<f:facet name="header">Dar de baja</f:facet>
-			<h:link value="Dar de baja" outcome="BajaUsuario.xhtml" class="badge badge-danger">
+			<h:link value="Dar de baja" outcome="BajaUsuario.xhtml" class="badge badge-danger" disabled="#{usuario.VerificarTipo(login.username)}">
     			<f:param name="id" value="${usuTabla.id}" />
 			</h:link>
 		</h:column> 
