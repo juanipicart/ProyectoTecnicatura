@@ -99,8 +99,11 @@
 			<h:link value="Ver detalle" outcome="DetalleObservacion.xhtml" class="badge badge-success">
     			<f:param name="id" value="${observacion.id}" />
 			</h:link>
-		</h:column>
+		</h:column>		
 	</h:dataTable>
+					<div style="display:block; text-align:center; margin-top: 50px" >		
+	               <span class="badge badge-light"> #{observacion.SinObservaciones()}</span>
+	               </div> 
 	</h:form>
 	<div id="footer">
 		<div class="container">

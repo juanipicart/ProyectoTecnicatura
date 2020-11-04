@@ -636,6 +636,14 @@ public class ObservacionBean implements Serializable{
 			}
 		}
 		
+		public String SinObservaciones()
+		{
+			if (totalPen == 0)
+			{
+				return "Por el momento no hay mas observaciones pendientes";
+			}
+			return "";
+		}
 
 		public String seleccionarObservaciones() {
 			observacionesFiltradas = seleccionarObservacionesLista(zona, hasta, desde, estadoStr); 
