@@ -50,42 +50,13 @@
 				</h:commandButton>
 	 </div>	
 	 <div class="vertical-center">
-		<p:commandButton value="Aprobar"   class="btn btn-success" action="#{observacion.ApruebaModal()}" disabled="#{observacion.VerificarTipo(login.username)}" style="float:left;margin-left:25px" update="message">
-		<p:confirm header="Aprobación" message="¿Aprobar Observacion?" icon="pi pi-exclamation-triangle" />
-		<f:param name="id" value="${observacion.id}" />
-		</p:commandButton>
-		
-		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-		<h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel for="comment" value="Comentario:" />
-            <h:inputText  id="inputComentario" class="form-control" label="*Comentario*" required="true" maxlength="80" disabled="false" value="#{observacion.comentarios}">
-            		<f:param name="comment" value="${observacion.comentarios}" />
-            </h:inputText>
-        <p:commandButton value="Si" type="button" action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" disabled="#{observacion.VerificarTipo(login.username)}" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
- 		 </h:panelGrid>
-   		 </p:confirmDialog> 
-		
+		<p:commandButton value="Aprobar" class="btn btn-success" action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" style="float:left;margin-left:25px" update="message" disabled="#{observacion.VerificarTipo(login.username)}"/>
 	 </div>
 	 <div class="vertical-center">	
 		
-		<p:commandButton value="Rechazar" class="btn btn-danger" action="#{observacion.RechazoModal()}" style="float:left;margin-left:25px" update="message" disabled="#{observacion.VerificarTipo(login.username)}">
-		<p:confirm header="Rechazo" message="¿Rechazar Observación?" icon="pi pi-exclamation-triangle" />
-		<f:param name="id" value="${observacion.id}" />
-		</p:commandButton>
-		
-		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-        <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel for="comment2" value="Comentario:" />
-            <h:inputText  id="inputComentario2" class="form-control" label="*Comentario*" required="true" maxlength="80" disabled="false" value="#{observacion.comentarios}">
-	            		<f:param name="comment2" value="${observacion.comentarios}" />
-		 	 </h:inputText>
-            
-        <p:commandButton value="Si"  action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}"  styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-        <p:commandButton value="No"  styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-    	        </h:panelGrid>
-    	</p:confirmDialog>
+		<p:commandButton value="Rechazar" class="btn btn-danger" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" style="float:left;margin-left:25px" update="message" disabled="#{observacion.VerificarTipo(login.username)}"/>
 	</div>	
+	 
 </div><br/><br/>
 			<h:messages style="color:red;margin:8px;" /><br/><br/>
 			<p:growl id="message" showDetail="true" />		
