@@ -148,7 +148,8 @@ public class ObservacionBean implements Serializable{
 		private List<Estado> estados;
 		private String estadoStr;
 		private int totalPen;
-		private String comentarios;
+		private String rechazados;
+		private String aprobados;
 		 
 		//Propiedades
 		
@@ -158,11 +159,26 @@ public class ObservacionBean implements Serializable{
 		public boolean isModo1() {
 			return modo1;
 		}
-		public String getComentarios() {
-			return comentarios;
+		
+		
+		
+		public String getAprobados() {
+			return aprobados;
 		}
-		public void setComentarios(String comentarios) {
-			this.comentarios = comentarios;
+
+
+
+		public void setAprobados(String aprobados) {
+			this.aprobados = aprobados;
+		}
+
+
+
+		public String getRechazados() {
+			return rechazados;
+		}
+		public void setRechazados(String rechazados) {
+			this.rechazados = rechazados;
 		}
 		public int getTotalPen() {
 			return totalPen;
@@ -485,7 +501,7 @@ public class ObservacionBean implements Serializable{
 			
 			
 			observacionBeanRemote.revisarObservacion(observacion.getUsuario().getId(), observacion.getId(), 
-					date, observacion.getEstado().getNombre(), comentarios);
+					date, observacion.getEstado().getNombre(), aprobados);
 			}
 			catch(Exception ex)
 			{
@@ -515,7 +531,7 @@ public class ObservacionBean implements Serializable{
 			
 			
 			observacionBeanRemote.revisarObservacion(observacion.getUsuario().getId(), observacion.getId(), 
-					date, observacion.getEstado().getNombre(), comentarios);
+					date, observacion.getEstado().getNombre(), rechazados);
 			}
 			catch (Exception ex)
 			{
