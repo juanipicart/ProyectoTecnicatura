@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
@@ -122,6 +123,16 @@ public class Observaciondao {
   				.setParameter("usuario",usuario).setParameter("estado", estado);
   		List<Observacion> observaciones = query.getResultList();
 		return observaciones;
+	}
+
+	public Observacion obtenerObservacionPorCodigo(String codigo) {
+		TypedQuery<Observacion> query = em.createQuery("SELECT o FROM Observacion o where o.codigo_OBS LIKE : codigo",Observacion.class).setParameter("codigo",codigo);
+		try {
+			Observacion observacion = query.getSingleResult();
+			return observacion;
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
     
 }

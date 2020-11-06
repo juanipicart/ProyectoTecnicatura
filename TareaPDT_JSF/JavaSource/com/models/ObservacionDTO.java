@@ -14,9 +14,10 @@ public class ObservacionDTO {
 	private String estado;
 	private String usuario;
 	private String fecha;
+	private String imagen;
 	
 	public ObservacionDTO(long id, String codigo, String descripcion, float latitud, float altitud, float longitud,
-			String localidad, String departamento, String fenomeno, String estado, String usuario, String fecha) {
+			String localidad, String departamento, String fenomeno, String estado, String usuario, String fecha, String imagen) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -30,10 +31,11 @@ public class ObservacionDTO {
 		this.estado = estado;
 		this.usuario = usuario;
 		this.fecha = fecha;
+		this.setImagen(imagen);
 	}
 		
 	public ObservacionDTO(String codigo, String descripcion, float latitud, float altitud, float longitud,
-			String localidad, String departamento, String fenomeno, String estado, String usuario, String fecha) {
+			String localidad, String departamento, String fenomeno, String estado, String usuario, String fecha, String imagen) {
 		super();
 		this.codigo = codigo;
 		this.descripcion = descripcion;
@@ -46,6 +48,7 @@ public class ObservacionDTO {
 		this.estado = estado;
 		this.usuario = usuario;
 		this.fecha = fecha;
+		this.imagen = imagen;
 	}
 
 	public ObservacionDTO() {
@@ -125,6 +128,14 @@ public class ObservacionDTO {
 	}
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 }

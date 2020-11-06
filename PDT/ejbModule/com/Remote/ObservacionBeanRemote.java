@@ -33,5 +33,7 @@ public interface ObservacionBeanRemote {
 	
 	List<Observacion> obtenerObservacionesPorUsuario(Usuario usuario);
 
+	Observacion obtenerObservacionPorCodigo(String codigo);
+
 	
 }

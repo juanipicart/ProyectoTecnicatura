@@ -3,10 +3,12 @@ package com.rest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.persistence.NoResultException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -52,13 +54,45 @@ public class ObservacionesRest {
 			String estado = observacion.getEstado().getNombre();
 			String usuario = observacion.getUsuario().getUsuario();
 			String fecha = observacion.getFecha().toString();
+			String imagen;
+			if (!(observacion.getImagen() == null)) {
+				imagen = Base64.getEncoder().encodeToString(observacion.getImagen()); 
+			} else {
+				imagen = null;
+			}
 		
 			ObservacionDTO nuevaObs = new ObservacionDTO(id, codigo, descripcion, latitud, altitud, longitud, localidad, departamento, 
-					fenomeno, estado, usuario, formatoFecha(fecha));
+					fenomeno, estado, usuario, formatoFecha(fecha), imagen);
 			response.add(nuevaObs);
 		}
 		return response;
 	}
+	
+	//Observacion por Codigo
+	@GET
+	@Path("/codigo/{codigo}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getObservacionByCodigo(@PathParam("codigo") String codigo) {		
+			Observacion observacion = observacionBean.obtenerObservacionPorCodigo(codigo);
+			if (!(observacion == null)) {
+			ObservacionDTO response = new ObservacionDTO();
+			response.setId(observacion.getId());
+			response.setCodigo(observacion.getCodigo_OBS());
+			response.setDescripcion(observacion.getDescripcion());
+			response.setFenomeno(observacion.getFenomeno().getNombreFen());
+			response.setLongitud(observacion.getLongitud());
+			response.setLatitud(observacion.getLatitud());
+			response.setAltitud(observacion.getAltitud());
+			response.setEstado(observacion.getEstado().getNombre());
+			response.setFecha(formatoFecha(observacion.getFecha().toString()));
+			response.setLocalidad(observacion.getLocalidad().getNombreLoc());
+			response.setDepartamento(observacion.getLocalidad().getDepartamento().getNombreDep());
+			response.setUsuario(observacion.getUsuario().getUsuario());
+			return Response.ok().entity(response).build();
+		} else {
+			return Response.status(Response.Status.BAD_REQUEST).entity("{\"id\": 1, \"message\": \"No se encontro una observación\"}").build();
+		}
+	} 
 	
 	//Observacion por Id
 	@GET
@@ -120,11 +154,13 @@ public class ObservacionesRest {
 		{
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = format.parse(observacion.getFecha());
+		byte[] imagen = Base64.getDecoder().decode(observacion.getImagen().getBytes("UTF-8"));
 			if (observacionBean.CrearObservacion(observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), 
-					observacion.getDescripcion(), null, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), 
+					observacion.getDescripcion(), imagen, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), 
 					observacion.getEstado(), date)) { 
 				
-				return Response.ok().entity("{\"message\":\"Alta de observacion exitosa\"}").build(); } else {
+				Long id = observacionBean.obtenerObservacionPorCodigo(observacion.getCodigo()).getId();
+				return Response.ok().entity("{\"message\":\"Alta de observacion exitosa\", \"id\": " + id + "}").build(); } else {
 					
 				return Response.status(Response.Status.BAD_REQUEST).entity("{\"id\": 2, \"message\": \"Datos invalidos\"}").build();
 		}

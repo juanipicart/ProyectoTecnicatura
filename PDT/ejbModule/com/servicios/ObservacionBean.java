@@ -184,6 +184,12 @@ public class ObservacionBean implements ObservacionBeanRemote {
 		List<Observacion> obs = obsDao.obtenerObservacionesUsuario(usuario, estado);
 		return obs;
 	}
+
+	@Override
+	public Observacion obtenerObservacionPorCodigo(String codigo) {
+		Observacion observacion = obsDao.obtenerObservacionPorCodigo(codigo);
+		return observacion;
+	}
 	
 	
 	
