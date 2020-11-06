@@ -15,6 +15,9 @@
 <body> 
 <f:metadata>
     <f:viewParam name="id" value="#{observacion.id}" />
+    <f:viewParam name="comment" value="#{observacion.comentarios}" />
+    <f:viewParam name="comment2" value="#{observacion.comentarios}" />
+    
     <f:event type="preRenderView" listener="#{observacion.preRenderViewListener()}"/>
 </f:metadata>
 
@@ -47,15 +50,39 @@
 		 <h:commandButton value="Editar Informacion" action="ModificarObservacion.xhtml" class="btn btn-primary"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
 	  	
 		<f:param name="id" value="${observacion.id}" />
-				</h:commandButton>
+		</h:commandButton>				
+				
 	 </div>	
 	 <div class="vertical-center">
-		<p:commandButton value="Aprobar" class="btn btn-success" action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" style="float:left;margin-left:25px" update="message" disabled="#{observacion.VerificarTipo(login.username)}"/>
-	 </div>
-	 <div class="vertical-center">	
-		
-		<p:commandButton value="Rechazar" class="btn btn-danger" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}" style="float:left;margin-left:25px" update="message" disabled="#{observacion.VerificarTipo(login.username)}"/>
-	</div>	
+		<p:commandButton value="Aprobar" class="btn btn-success" onclick="PF('dlg1').show();"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+		</p:commandButton>
+		<p:dialog header="Aprobar observacion" widgetVar="dlg1" minHeight="40">
+            <h:outputLabel for="comment" value="Comentario:" />
+            <h:inputText  id="inputComentario" class="form-control" label="*Comentario*" required="false" maxlength="80" disabled="false" style="margin-bottom:25px" value="#{observacion.comentarios}">
+		 	        	<f:param name="comment" value="${observacion.comentarios}" />
+		 	 </h:inputText>
+        <p:commandButton value="Si" update="message" action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}"  styleClass="ui-confirmdialog-yes" icon="pi pi-check" oncomplete="PF('dlg2').hide();" >
+        <f:param name="id" value="${observacion.id}" />
+        </p:commandButton>
+        <p:commandButton value="No" styleClass="ui-confirmdialog-no" style="margin-left:80px" icon="pi pi-times" oncomplete="PF('dlg1').hide();"/>
+    	</p:dialog>	 
+    </div>
+    
+    
+	 <div class="vertical-center">
+		<p:commandButton value="Rechazar" class="btn btn-danger" onclick="PF('dlg2').show();" update="message" style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
+		</p:commandButton>
+		<p:dialog header="Rechazar observacion" widgetVar="dlg2" minHeight="40">
+            <h:outputLabel for="comment2" value="Comentario:" />
+            <h:inputText  id="inputComentario2" class="form-control" label="*Comentario2*" required="false" maxlength="80" disabled="false" style="margin-bottom:25px" value="#{observacion.comentarios}">
+	            		<f:param name="comment2" value="${observacion.comentarios}" />
+		 	 </h:inputText>
+        <p:commandButton value="Si" update="message" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}"  styleClass="ui-confirmdialog-yes" icon="pi pi-check" oncomplete="PF('dlg2').hide();" >
+        <f:param name="id" value="${observacion.id}" />
+        </p:commandButton>
+        <p:commandButton value="No"  styleClass="ui-confirmdialog-no" style="margin-left:80px" icon="pi pi-times" oncomplete="PF('dlg2').hide();"/>
+    	</p:dialog>	 
+    </div>	
 	 
 </div><br/><br/>
 			<h:messages style="color:red;margin:8px;" /><br/><br/>
