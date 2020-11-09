@@ -138,6 +138,13 @@ public class ObservacionesRest {
 			response.setLocalidad(observaciones.get(i).getLocalidad().getNombreLoc());
 			response.setDepartamento(observaciones.get(i).getLocalidad().getDepartamento().getNombreDep());
 			response.setUsuario(observaciones.get(i).getUsuario().getUsuario());
+			String imagen;
+			if (!(observaciones.get(i).getImagen() == null)) {
+				imagen = Base64.getEncoder().encodeToString(observaciones.get(i).getImagen()); 
+			} else {
+				imagen = "";
+			}
+			response.setImagen(imagen);
 			obsResponse.add(response);
 			}
 			return obsResponse;
@@ -154,7 +161,7 @@ public class ObservacionesRest {
 		{
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = format.parse(observacion.getFecha());
-		byte[] imagen = Base64.getDecoder().decode(observacion.getImagen().getBytes("UTF-8"));
+		byte[] imagen = Base64.getMimeDecoder().decode(observacion.getImagen().getBytes());
 			if (observacionBean.CrearObservacion(observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), 
 					observacion.getDescripcion(), imagen, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), 
 					observacion.getEstado(), date)) { 
@@ -166,7 +173,7 @@ public class ObservacionesRest {
 		}
 		}
 		else {
-		return	Response.status(Response.Status.BAD_REQUEST).entity("{\"id\": 1, \"message\": \"Codigo de observacion repetido\"}").build();
+			return	Response.status(Response.Status.BAD_REQUEST).entity("{\"id\": 1, \"message\": \"Codigo de observacion repetido\"}").build();
 		}
 		}catch(Exception e)
 		{
@@ -189,9 +196,10 @@ public class ObservacionesRest {
 		} else if (existe.size() == 0) {
 			return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\": \"El codigo ingresado en el body no pertenece a ninguna observacion\"}").build();
 		} else if (id == existe.get(0).getId()) {
-		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
+		DateFormat format = new SimpleDateFormat("DD/MM/yyyy");
 		Date date = format.parse(observacion.getFecha());
-		observacionBean.ModificarObservacion(id,observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), observacion.getDescripcion(), null, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado(), date);
+		byte[] imagen = Base64.getMimeDecoder().decode(observacion.getImagen().getBytes());
+		observacionBean.ModificarObservacion(id,observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), observacion.getDescripcion(), imagen, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado(), date);
 		return Response.ok().entity("{\"message\":\"Modificacion de observacion exitosa\"}").build();
 		}
 		else {
