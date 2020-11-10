@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
@@ -47,8 +48,9 @@
   </nav>
 	
 	<h:form class="form-group"><br/><br/>
-		<h:messages style="color:red;margin:8px;" />
-			  <div id="Filtros">
+		<p:messages id="messages" showDetail="true" closable="true">
+        <p:autoUpdate />
+    	</p:messages>			  <div id="Filtros">
 					<div class="container">
 						<div class="row">
 				            <div class="col-xs-7"><br/>

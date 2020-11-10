@@ -48,16 +48,18 @@
   </nav>
 	
 	
-	<h:form class="form-group">
+	<h:form class="form-group" style="margin-top: 50px;margin-left:10px">
 			
-		
+		<p:messages id="messages" showDetail="true" closable="true">
+        <p:autoUpdate/>
+    </p:messages>
 	
 		</h:form><br/>
 
 	<h3 style="text-align:center">Observaciones Pendientes</h3>
 	<hr />
-	<h:messages style="color:red;margin:8px;" />
-	<h:form id="formTabla">
+		
+    <h:form id="formTabla">
 	<h:dataTable value="#{observacion.observacionesSeleccionadas}"
 		var="observacion"
 		  class="table table-hover table-dark">

@@ -281,7 +281,7 @@ public class UsuarioBean implements Serializable{
 		}
 	}
 
-	public void darDeBajaUsuario(Usuario usuario, String usuActual) {
+	public String darDeBajaUsuario(Usuario usuario, String usuActual) {
 		try {
 			Usuario usuLogueado = usuarioBeanRemote.obtenerUsuario(usuActual);
 			
@@ -290,6 +290,7 @@ public class UsuarioBean implements Serializable{
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 						"No se puede eliminar a usted mismo ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				return "No se puede eliminar a usted mismo";
 			}
 			
 			else {
@@ -301,9 +302,11 @@ public class UsuarioBean implements Serializable{
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"Se elimino el usuario. ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				return "GestionUsuarios.xhtml";
 		} 
 		}catch(Exception e) {
 			e.getMessage();
+			return "No se puede dar de baja el usuario";
 		}
 
 	}
