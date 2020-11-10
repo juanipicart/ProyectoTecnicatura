@@ -46,13 +46,7 @@
       <div class="vertical-center">
 		<h:link value="Volver" outcome="ListadoObservaciones.xhtml" class="btn btn-primary" style="float:left;margin-left:350px" />
 	  </div>
-	  <div class="vertical-center">
-		 <h:commandButton value="Editar Informacion" action="ModificarObservacion.xhtml" class="btn btn-primary"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
-	  	
-		<f:param name="id" value="${observacion.id}" />
-		</h:commandButton>				
-				
-	 </div>	
+	  
 	 <div class="vertical-center">
 		<p:commandButton value="Aprobar" class="btn btn-success" onclick="PF('dlg1').show();"  style="float:left;margin-left:25px" disabled="#{observacion.VerificarTipo(login.username)}">
 		</p:commandButton>
