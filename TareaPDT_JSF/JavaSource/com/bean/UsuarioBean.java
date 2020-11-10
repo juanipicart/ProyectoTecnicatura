@@ -178,6 +178,17 @@ public class UsuarioBean implements Serializable{
 		this.usuarioSeleccionado = usuarioSeleccionado;
 	}
 	
+	public boolean isNumeric (String num) {
+		boolean resultado;
+        try {
+            Integer.parseInt(num);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        return resultado;
+	}
+	
 	public void crearUsuario() {
 		try{
 			
@@ -199,12 +210,22 @@ public class UsuarioBean implements Serializable{
 			
 			else {
 				
-				if (tipodoc.equals("CI") && numerodoc.length()<7 || numerodoc.length()>8)
+				if (tipodoc.equals("CI")) 
+				{ 
+					if (numerodoc.length()<7 || numerodoc.length()>8)
 				{
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 							"La CI debe contener entre 7 y 8 digitos", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 				}
+					else if (isNumeric(numerodoc) == false)
+					{
+						FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+								"La CI debe contener formato numerico", "");
+						FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+					}
+				}
+				
 				else if (validarUsuario == true && estado.equals("INACTIVO")) {
 					this.estado = "ACTIVO";
 					usuarioBeanRemote.ModificarUsuario(id,pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
@@ -213,6 +234,7 @@ public class UsuarioBean implements Serializable{
 							"Se creo el usuario correctamente ", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 					limpiar();
+					seleccionarUsuarios();
 				}
 				else 
 				{
@@ -224,6 +246,7 @@ public class UsuarioBean implements Serializable{
 					"Se creo el usuario correctamente ", "");
 			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 			limpiar();
+			seleccionarUsuarios();
 		}
 				}
 			}catch(Exception e){
@@ -258,22 +281,32 @@ public class UsuarioBean implements Serializable{
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 	 		}
 			
-			else if ((tipo.equals("CI")) && (usuario.getNumerodoc().length()<7 || usuario.getNumerodoc().length()>8))
-			{
-				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-						"La CI debe contener entre 7 y 8 digitos", "");
-				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+			else if (tipodoc.equals("CI")) 
+			{ 
+				if (usuario.getNumerodoc().length()<7 || usuario.getNumerodoc().length()>8)
+				{
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+							"La CI debe contener entre 7 y 8 digitos", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				}
+				else if (isNumeric(usuario.getNumerodoc()) == false)
+				{
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+							"La CI debe contener formato numerico", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				}
 			}
 			
 			else
 				{
-				usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
-						usuario.getApellido(), usuario.getEstado(), tipo, usuario.getNumerodoc(), 
-						usuario.getDireccion(), usuario.getMail(), usuario.getTipousuario().getNombre());
-				//mensaje de actualizacion correcta
-				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-						"Se actualizo el usuario. ", "");
-				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+					usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
+							usuario.getApellido(), usuario.getEstado(), tipo, usuario.getNumerodoc(), 
+							usuario.getDireccion(), usuario.getMail(), usuario.getTipousuario().getNombre());
+					//mensaje de actualizacion correcta
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+							"Se actualizo el usuario. ", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+					seleccionarUsuarios();
 				}
 			}
 			catch(Exception e){
