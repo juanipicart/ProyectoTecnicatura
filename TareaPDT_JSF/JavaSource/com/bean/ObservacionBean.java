@@ -480,7 +480,7 @@ public class ObservacionBean implements Serializable{
 			}
 		}
 		
-		public void aprobarObservacion(Observacion observacion) {
+		public String aprobarObservacion(Observacion observacion) {
 			
 			try {
 			observacion = observacionBeanRemote.obtenerObservacionPorId(id);
@@ -502,14 +502,17 @@ public class ObservacionBean implements Serializable{
 			
 			observacionBeanRemote.revisarObservacion(observacion.getUsuario().getId(), observacion.getId(), 
 					date, observacion.getEstado().getNombre(), aprobados);
+			
+			return "ListadoObservaciones.xhtml";
 			}
 			catch(Exception ex)
 			{
 				ex.getMessage();
+				return "Error al aprobar la observación";
 			}
 			}
 		
-		public void rechazarObservacion(Observacion observacion) {
+		public String rechazarObservacion(Observacion observacion) {
 			
 			try {
 			observacion = observacionBeanRemote.obtenerObservacionPorId(id);
@@ -532,10 +535,12 @@ public class ObservacionBean implements Serializable{
 			
 			observacionBeanRemote.revisarObservacion(observacion.getUsuario().getId(), observacion.getId(), 
 					date, observacion.getEstado().getNombre(), rechazados);
+			return "ListadoObservaciones.xhtml";
 			}
 			catch (Exception ex)
 			{
 				ex.getMessage();
+				return "Error al rechazar la observación";
 			}
 			}
 		

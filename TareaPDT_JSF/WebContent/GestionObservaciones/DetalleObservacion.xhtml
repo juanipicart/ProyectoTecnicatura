@@ -55,7 +55,7 @@
             <h:inputText  id="inputComentario" class="form-control" label="*Comentario*" required="false" maxlength="80" disabled="false" style="margin-bottom:25px" value="#{observacion.aprobados}">
 		 	        	<f:param name="comment1" value="${observacion.aprobados}" />
 		 	 </h:inputText>
-        <p:commandButton value="Si" update="message" action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}"  styleClass="ui-confirmdialog-yes" icon="pi pi-check" oncomplete="PF('dlg1').hide();" >
+        <p:commandButton value="Si"  action="#{observacion.aprobarObservacion(observacion.observacionSeleccionada)}" update="message" styleClass="ui-confirmdialog-yes" icon="pi pi-check" oncomplete="PF('dlg1').hide();" >
         <f:param name="id" value="${observacion.id}" />
         </p:commandButton>
         <p:commandButton value="No" styleClass="ui-confirmdialog-no" style="margin-left:80px" icon="pi pi-times" oncomplete="PF('dlg1').hide();"/>
@@ -71,7 +71,7 @@
             <h:inputText  id="inputComentario2" class="form-control" label="*Comentario2*" required="false" maxlength="80" disabled="false" style="margin-bottom:25px" value="#{observacion.rechazados}">
 	            		<f:param name="comment2" value="${observacion.rechazados}" />
 		 	 </h:inputText>
-        <p:commandButton value="Si" update="message" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}"  styleClass="ui-confirmdialog-yes" icon="pi pi-check" oncomplete="PF('dlg1').hide();" >
+        <p:commandButton value="Si" action="#{observacion.rechazarObservacion(observacion.observacionSeleccionada)}"  styleClass="ui-confirmdialog-yes" update="message" icon="pi pi-check" oncomplete="PF('dlg1').hide();" >
         <f:param name="id" value="${observacion.id}" />
         </p:commandButton>
         <p:commandButton value="No"  styleClass="ui-confirmdialog-no" style="margin-left:80px" icon="pi pi-times" oncomplete="PF('dlg2').hide();"/>
