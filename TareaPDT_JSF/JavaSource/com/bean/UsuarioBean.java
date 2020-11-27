@@ -193,19 +193,23 @@ public class UsuarioBean implements Serializable{
 		try{
 			
 			boolean validarUsuario = ValidarUsuario();
+			boolean esNumerico = isNumeric(numerodoc);
+			boolean bandera = true;
 			
 			if (pass.length()<8) {
 				
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 						"La password no puede ser menor que 8 caracteres", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-	 		}
+				bandera = false;
+			}
 			
 			else if (validarUsuario == true && estado.equals("ACTIVO")) {
 				
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 						"El usuario ya existe en el sistema ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				bandera = false;
 	 		}
 			
 			else {
@@ -213,20 +217,27 @@ public class UsuarioBean implements Serializable{
 				if (tipodoc.equals("CI")) 
 				{ 
 					if (numerodoc.length()<7 || numerodoc.length()>8)
-				{
-					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-							"La CI debe contener entre 7 y 8 digitos", "");
-					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-				}
-					else if (isNumeric(numerodoc) == false)
 					{
 						FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-								"La CI debe contener formato numerico", "");
+							"La CI debe contener entre 7 y 8 digitos", "");
 						FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+						bandera = false;
+					}
+					
+					else if (esNumerico != true)
+					{
+						FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+							"La CI debe contener formato numerico", "");
+						FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+						bandera = false;
 					}
 				}
-				
-				else if (validarUsuario == true && estado.equals("INACTIVO")) {
+			}
+			
+			if (bandera == true)
+			{
+				 if (validarUsuario == true && estado.equals("INACTIVO")) 
+				 {
 					this.estado = "ACTIVO";
 					usuarioBeanRemote.ModificarUsuario(id,pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
 					//mensaje de actualizacion correcta
@@ -235,21 +246,22 @@ public class UsuarioBean implements Serializable{
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 					limpiar();
 					seleccionarUsuarios();
-				}
+				 }
 				else 
 				{
-			this.estado = "ACTIVO";
-			usuarioBeanRemote.CrearUsuario(pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
-			altaExitoso = true;
-			//mensaje de actualizacion correcta
-			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-					"Se creo el usuario correctamente ", "");
-			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-			limpiar();
-			seleccionarUsuarios();
-		}
+					this.estado = "ACTIVO";
+					usuarioBeanRemote.CrearUsuario(pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
+					altaExitoso = true;
+					//mensaje de actualizacion correcta
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+							"Se creo el usuario correctamente ", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+					limpiar();
+					seleccionarUsuarios();
 				}
-			}catch(Exception e){
+			}
+			
+		}catch(Exception e){
 			e.getMessage();
 		}
 	}
@@ -272,42 +284,49 @@ public class UsuarioBean implements Serializable{
 
 	public void actualizarUsuario(Usuario usuario){
 		try{
-			String tipo = tipodoc;
+			String pTipo = usuario.getTipodoc();
+			String pNumero = usuario.getNumerodoc();
+			boolean esNumerico = isNumeric(pNumero);
+			boolean bandera = true;
 			
 			if (usuario.getPass().length()<8) {
 				
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 						"La password no puede ser menor que 8 caracteres", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				bandera = false;
 	 		}
 			
-			else if (tipodoc.equals("CI")) 
+			else if (pTipo.equals("CI")) 
 			{ 
-				if (usuario.getNumerodoc().length()<7 || usuario.getNumerodoc().length()>8)
+				if (pNumero.length()<7 || pNumero.length()>8)
 				{
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 							"La CI debe contener entre 7 y 8 digitos", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+					bandera = false;
 				}
-				else if (isNumeric(usuario.getNumerodoc()) == false)
+				else if (esNumerico == false)
 				{
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 							"La CI debe contener formato numerico", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+					bandera = false;
 				}
 			}
 			
-			else
-				{
-					usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
-							usuario.getApellido(), usuario.getEstado(), tipo, usuario.getNumerodoc(), 
-							usuario.getDireccion(), usuario.getMail(), usuario.getTipousuario().getNombre());
-					//mensaje de actualizacion correcta
-					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-							"Se actualizo el usuario. ", "");
-					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-					seleccionarUsuarios();
-				}
+			if (bandera == true)
+			{
+				usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
+						usuario.getApellido(), usuario.getEstado(), usuario.getTipodoc(), usuario.getNumerodoc(), 
+						usuario.getDireccion(), usuario.getMail(), usuario.getTipousuario().getNombre());
+				
+				//mensaje de actualizacion correcta
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+						"Se actualizo el usuario. ", "");
+				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				seleccionarUsuarios();
+				}	
 			}
 			catch(Exception e){
 				e.getMessage();

@@ -73,7 +73,7 @@
 			    </div>
 			    <div class="form-group col-md-3" style="margin-top: 80px">
 					<h:commandButton action="#{usuario.seleccionarUsuarios()}" value="Filtrar" class="btn btn-outline-success"></h:commandButton>
-					<h:commandLink value="Alta de usuario" 	action="AltaUsuario" class="btn btn-outline-success"></h:commandLink>
+					<h:link value="Alta de usuario" disabled="#{usuario.VerificarTipo(login.username)}"	outcome="AltaUsuario.xhtml" class="btn btn-outline-success"></h:link>
    			    </div>
    			   </div> 
 					
