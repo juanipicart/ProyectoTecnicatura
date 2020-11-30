@@ -80,57 +80,61 @@
 	</h:form>
 	  		
 	<h3 style="text-align:center;">Usuarios seleccionados</h3>
+	
+	
 	<h:form id="formTabla" >
-	<h:dataTable  value="#{usuario.usuariosSeleccionados}"
+	<p:dataTable  value="#{usuario.usuariosSeleccionados}"
 		var="usuTabla"
-		  class="table table-hover table-dark">
-   
-		<h:column>
-			<f:facet name="header">Username</f:facet>    				
-      		#{usuTabla.usuario}
-   		</h:column>
-   		<h:column>
-   			<f:facet name="header">TipoUsuario</f:facet>
-   			#{usuTabla.tipousuario.nombre}
-   		</h:column>
+		   style="margin-bottom:40px"
+		   class="table table-hover table-dark"
+		   rows="10"
+                 paginator="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                 rowsPerPageTemplate="5,10,15">
+        		
+   		 <p:column headerText="Usuario" sortBy="#{usuTabla.usuario}">
+           <h:outputText value="#{usuTabla.usuario}" />
+        </p:column>
+        
+   		<p:column headerText="Tipo Usuario" sortBy="#{usuTabla.tipousuario.nombre}">
+           <h:outputText value="#{usuTabla.tipousuario.nombre}" />
+        </p:column>
 
-		<h:column>
-			<f:facet name="header">Nombre</f:facet>
-		      #{usuTabla.nombre}
-		</h:column>
-
-		<h:column>
-			<f:facet name="header">Apellido</f:facet>
-      		#{usuTabla.apellido}
-   		</h:column>
-
-		<h:column>
-			<f:facet name="header">Mail</f:facet>
-      		#{usuTabla.mail}
-		</h:column>
+		<p:column headerText="Nombre" sortBy="#{usuTabla.nombre}">
+           <h:outputText value="#{usuTabla.nombre}" />
+        </p:column>
+        
+		<p:column headerText="Apellido" sortBy="#{usuTabla.apellido}">
+           <h:outputText value="#{usuTabla.apellido}" />
+        </p:column>
+        
+		<p:column headerText="Mail" sortBy="#{usuTabla.mail}">
+           <h:outputText value="#{usuTabla.mail}" />
+        </p:column>
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Ver Detalle</f:facet>
 			<h:link value="Ver detalle" outcome="DetalleUsuario.xhtml" class="badge badge-success">
     			<f:param name="id" value="${usuTabla.id}" />
 			</h:link>
-		</h:column>
+		</p:column>
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Modificar</f:facet>
 			<h:link value="Modificar usuario" outcome="ModificarUsuario.xhtml" class="badge badge-info" disabled="#{usuario.VerificarTipo(login.username)}">
     			<f:param name="id" value="${usuTabla.id}" />
 			</h:link>
-		</h:column>
+		</p:column>
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Dar de baja</f:facet>
 			<h:link value="Dar de baja" outcome="BajaUsuario.xhtml" class="badge badge-danger" disabled="#{usuario.VerificarTipo(login.username)}">
     			<f:param name="id" value="${usuTabla.id}" />
 			</h:link>
-		</h:column> 
+		</p:column> 
 		
-	</h:dataTable>
+	</p:dataTable>
 	</h:form>
 	<div id="footer">
 		<div class="container">

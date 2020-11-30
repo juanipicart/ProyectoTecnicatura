@@ -102,49 +102,50 @@
 		
 	<h3 style="text-align:center">Observaciones seleccionadas</h3>
 	<h:form id="formTabla">
-	<h:dataTable value="#{observacion.observacionesFiltradas}"
+	
+	<p:dataTable  value="#{observacion.observacionesFiltradas}"
 		var="obserTabla"
-		  class="table table-hover table-dark">
-   
-		<h:column>
-			<f:facet name="header">Codigo</f:facet>    				
-      		 #{obserTabla.codigo_OBS}
-   		</h:column>
+		   style="margin-bottom:40px"
+		   class="table table-hover table-dark"
+		   rows="10"
+                 paginator="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                 rowsPerPageTemplate="5,10,15">
+        		
+   		 <p:column headerText="Codigo" sortBy="#{obserTabla.codigo_OBS}">
+           <h:outputText value="#{obserTabla.codigo_OBS}" />
+        </p:column>
+        
+         <p:column headerText="Usuario" sortBy="#{obserTabla.usuario.usuario}">
+           <h:outputText value="#{obserTabla.usuario.usuario}" />
+        </p:column>
 
-		<h:column>
-			<f:facet name="header">Usuario</f:facet>
-		      #{obserTabla.usuario.usuario}
-		</h:column>
+         <p:column headerText="Fenomeno" sortBy="#{obserTabla.fenomeno.nombreFen}">
+           <h:outputText value="#{obserTabla.fenomeno.nombreFen}" />
+        </p:column>
 
-		<h:column>
-			<f:facet name="header">Fenomeno</f:facet>
-      		#{obserTabla.fenomeno.nombreFen}
-   		</h:column>
+		<p:column headerText="Zona" sortBy="#{obserTabla.localidad.departamento.zona.nombre_zona}">
+           <h:outputText value="#{obserTabla.localidad.departamento.zona.nombre_zona}" />
+        </p:column>
 
-		<h:column>
-			<f:facet name="header">Zona</f:facet>
-      		#{obserTabla.localidad.departamento.zona.nombre_zona}
-		</h:column>
-		
-		<h:column>
-		<f:facet name="header">Fecha de Observacion</f:facet>
-			<h:outputText value="#{obserTabla.fecha}" >
+		<p:column headerText="Fecha" sortBy="#{obserTabla.fecha}">
+		    <h:outputText value="#{obserTabla.fecha}">
     		<f:convertDateTime pattern="dd/MM/yyyy" />
 			</h:outputText>
-		</h:column>
+		</p:column>
 		
-		<h:column>
-			<f:facet name="header">Estado</f:facet>
-      		#{obserTabla.estado.nombre}
-		</h:column>
+		 <p:column headerText="Estado" sortBy="#{obserTabla.estado.nombre}">
+           <h:outputText value="#{obserTabla.estado.nombre}" />
+        </p:column>
 		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Ver Detalle</f:facet>
 			<h:link value="Ver detalle" outcome="/GestionReportes/DetalleReporte.xhtml" class="badge badge-success">
     			<f:param name="id" value="${obserTabla.id}"/>
 			</h:link>
-		</h:column>
-	</h:dataTable>
+		</p:column>
+	</p:dataTable>
 	</h:form>
 	<div id="footer">
 		<div class="container">
