@@ -9,6 +9,7 @@
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
 <link rel="stylesheet" href="../resources/css/styleusuario.css"/>
+<link rel="stylesheet" href="../resources/css/style.css"/>
 </h:head>
 <body>
 	
@@ -60,47 +61,47 @@
 	<hr />
 		
     <h:form id="formTabla">
-	<h:dataTable value="#{observacion.observacionesSeleccionadas}"
-		var="observacion"
-		  class="table table-hover table-dark">
+	<p:dataTable value="#{observacion.observacionesPendientes}"
+		var="obseTabla"
+		   style="margin-bottom:40px"
+		   tableStyleClass="table table-hover table-dark"
+		   rows="10"
+                 paginator="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                 rowsPerPageTemplate="5,10,15">
    
-		<h:column>
-			<f:facet name="header">Codigo</f:facet>    				
-      		 #{observacion.codigo_OBS}
-   		</h:column>
-
-		<h:column>
-			<f:facet name="header">Nombre</f:facet>
-		      #{observacion.usuario.usuario}
-		</h:column>
-
-		<h:column>
-			<f:facet name="header">Fenomeno</f:facet>
-      		#{observacion.fenomeno.nombreFen}
-   		</h:column>
-
-		<h:column>
-			<f:facet name="header">Localidad</f:facet>
-      		#{observacion.localidad.nombreLoc}
-		</h:column>
+  		<p:column headerText="Codigo" sortBy="#{obseTabla.codigo_OBS}">
+           <h:outputText value="#{obseTabla.codigo_OBS}" />
+        </p:column>
+        
+   		<p:column headerText="Nombre" sortBy="#{obseTabla.usuario.usuario}">
+           <h:outputText value="#{obseTabla.usuario.usuario}" />
+        </p:column>
 		
-		<h:column>
-			<f:facet name="header">Descripcion</f:facet>
-      		#{observacion.descripcion}
-		</h:column>
+		<p:column headerText="Fenomeno" sortBy="#{obseTabla.fenomeno.nombreFen}">
+           <h:outputText value="#{obseTabla.fenomeno.nombreFen}" />
+        </p:column>
+        
+        <p:column headerText="Localidad" sortBy="#{obseTabla.localidad.nombreLoc}">
+           <h:outputText value="#{obseTabla.localidad.nombreLoc}" />
+        </p:column>
+        
+        <p:column headerText="Descripcion" sortBy="#{obseTabla.descripcion}">
+           <h:outputText value="#{obseTabla.descripcion}" />
+        </p:column>
+        
+        <p:column headerText="Estado" sortBy="#{obseTabla.estado.nombre}">
+           <h:outputText value="#{obseTabla.estado.nombre}" />
+        </p:column>
 		
-		<h:column>
-			<f:facet name="header">Estado</f:facet>
-      		#{observacion.estado.nombre}
-		</h:column>
-		
-		<h:column>
+		<p:column>
 			<f:facet name="header">Ver Detalle</f:facet>
 			<h:link value="Ver detalle" outcome="DetalleObservacion.xhtml" class="badge badge-success">
     			<f:param name="id" value="${observacion.id}" />
 			</h:link>
-		</h:column>		
-	</h:dataTable>
+		</p:column>		
+	</p:dataTable>
 					<div style="display:block; text-align:center; margin-top: 50px" >		
 	               <span class="badge badge-light"> #{observacion.SinObservaciones()}</span>
 	               </div> 

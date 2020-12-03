@@ -18,7 +18,6 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -89,12 +88,13 @@ import com.sun.xml.internal.ws.client.RequestContext;
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
 import javax.faces.application.FacesMessage;  
-import javax.faces.bean.ManagedBean;  
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.expression.impl.ThisExpressionResolver;  
+import org.primefaces.expression.impl.ThisExpressionResolver;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 
 @ManagedBean(name="observacion")
@@ -134,7 +134,7 @@ public class ObservacionBean implements Serializable{
 		private float altitud;
 		private Estado estado;
 	    private Date fecha;
-	    private List<Observacion> observacionesSeleccionadas=new ArrayList<Observacion>();
+	    private List<Observacion> observacionesPendientes=new ArrayList<Observacion>();
 	    private List<Observacion> observacionesFiltradas=new ArrayList<Observacion>();    
 		private Observacion observacionSeleccionada = new Observacion();
 		boolean modo1 = true;
@@ -214,6 +214,14 @@ public class ObservacionBean implements Serializable{
 
 		public void setObservacionesFiltradas(List<Observacion> observacionesFiltradas) {
 			this.observacionesFiltradas = observacionesFiltradas;
+		}
+
+		public List<Observacion> getObservacionesPendientes() {
+			return observacionesPendientes;
+		}
+
+		public void setObservacionesPendientes(List<Observacion> observacionesPendientes) {
+			this.observacionesPendientes = observacionesPendientes;
 		}
 
 		public Date getHasta() {
@@ -372,14 +380,6 @@ public class ObservacionBean implements Serializable{
 
 		public void setFecha(Date fecha) {
 			this.fecha = fecha;
-		}
-		
-		public List<Observacion> getObservacionesSeleccionadas() {
-			return observacionesSeleccionadas;
-		}
-
-		public void setObservacionesSeleccionadas(List<Observacion> observacionesSeleccionadas) {
-			this.observacionesSeleccionadas = observacionesSeleccionadas;
 		}
 
 		//contructor por defecto
@@ -559,8 +559,8 @@ public class ObservacionBean implements Serializable{
 		    localidades = localidadBeanRemote.obtenerTodasLocalidades();
 		    zonas = zonaBeanRemote.obtenerTodasZonas();
 		    Estado e = estadoBeanRemote.ObtenerEstado("PENDIENTE");
-		    observacionesSeleccionadas=observacionBeanRemote.obtenerTodasObservacionesPendientes(e);
-		    totalPen = observacionesSeleccionadas.size();
+		    observacionesPendientes=observacionBeanRemote.obtenerTodasObservacionesPendientes(e);
+		    totalPen = observacionesPendientes.size();
 		    observacionesFiltradas = observacionBeanRemote.obtenerTodasObservaciones();
 		    estados = estadoBeanRemote.obtenerTodosEstados();
 		}
@@ -618,8 +618,6 @@ public class ObservacionBean implements Serializable{
 			else 
 				return "";
 		}
-		
-
 		
 		public List<Observacion>seleccionarObservacionesLista(String zona, Date hasta, Date desde, String estadoStr)
 		{

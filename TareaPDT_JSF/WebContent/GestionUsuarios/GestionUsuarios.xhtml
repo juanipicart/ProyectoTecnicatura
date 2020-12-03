@@ -9,6 +9,7 @@
 <h:head>
 <h:outputStylesheet name="css/bootstrap.min.css"/>
 <link rel="stylesheet" href="../resources/css/styleusuario.css"/>
+<link rel="stylesheet" href="../resources/css/style.css"/>
 <ui:insert name="index"/>
 </h:head>
 <body>
@@ -86,7 +87,7 @@
 	<p:dataTable  value="#{usuario.usuariosSeleccionados}"
 		var="usuTabla"
 		   style="margin-bottom:40px"
-		   class="table table-hover table-dark"
+		   tableStyleClass="table table-hover table-dark"
 		   rows="10"
                  paginator="true"
                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
