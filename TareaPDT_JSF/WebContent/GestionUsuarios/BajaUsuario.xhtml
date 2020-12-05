@@ -35,14 +35,17 @@
 			
 		<div style="display:block; text-align:center; margin-top: 40px">		
 		<h:commandButton  id="idVolver" value="Volver"	action="GestionUsuarios.xhtml" class="btn btn-success" /> 
-		
-		
-		
-			 <div class="vertical-center">
 		<p:commandButton value="Eliminar Usuario" class="btn btn-danger" onclick="PF('dlg1').show();"  style="margin-left:40px">
 		</p:commandButton>
-		<p:dialog header="Eliminar Usuario" widgetVar="dlg1" minHeight="40">
-        <h:outputLabel style="float:center;margin-top:10px" for="comment" value="Confirma la eliminacion?"/>
+		</div>
+		
+		
+		<div class="vertical-center">
+		
+		<p:dialog header="Eliminar" widgetVar="dlg1" minHeight="40">
+        <div style="display:block; text-align:center; margin-top: 20px">
+        <h:outputLabel style="float:center;margin-top:10px;margin-bottom:20px" for="comment" value="Confirma la eliminacion?"/>
+        </div>
         <p:commandButton value="Si"  action="#{usuario.darDeBajaUsuario(usuario.usuarioSeleccionado, login.username)}" update="message" styleClass="ui-confirmdialog-yes" icon="pi pi-check" oncomplete="PF('dlg1').hide();" >
         <f:param name="id" value="${usuario.id}" />
         </p:commandButton>
@@ -52,7 +55,7 @@
 		
 		
 		
-		</div>
+		
 		<h:messages   style="color:red;margin:8px;text-align:center;" />
 		<p:growl id="message" showDetail="true" />		
 		
