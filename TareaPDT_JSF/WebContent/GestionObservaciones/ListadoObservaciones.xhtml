@@ -22,16 +22,16 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="../GestionUsuarios/GestionUsuarios.xhtml">Gestion de Usuarios
+            <a class="nav-link" href="../GestionUsuarios/GestionUsuarios.xhtml">Gestión de Usuarios
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones
+            <a class="nav-link" href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestión de Observaciones
             <span class="badge badge-light"> #{observacion.totalPen}</span>
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a>
+            <a class="nav-link" href="../GestionReportes/GestionReportes.xhtml">Gestión de Reportes</a>
           </li>
           <li>
             <div class="badge badge-light" style="float:left;margin-top:12px">
@@ -71,7 +71,7 @@
                  currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                  rowsPerPageTemplate="5,10,15">
    
-  		<p:column headerText="Codigo" sortBy="#{obseTabla.codigo_OBS}">
+  		<p:column headerText="Código" sortBy="#{obseTabla.codigo_OBS}">
            <h:outputText value="#{obseTabla.codigo_OBS}" />
         </p:column>
         
@@ -79,7 +79,7 @@
            <h:outputText value="#{obseTabla.usuario.usuario}" />
         </p:column>
 		
-		<p:column headerText="Fenomeno" sortBy="#{obseTabla.fenomeno.nombreFen}">
+		<p:column headerText="Fenómeno" sortBy="#{obseTabla.fenomeno.nombreFen}">
            <h:outputText value="#{obseTabla.fenomeno.nombreFen}" />
         </p:column>
         
@@ -87,7 +87,7 @@
            <h:outputText value="#{obseTabla.localidad.nombreLoc}" />
         </p:column>
         
-        <p:column headerText="Descripcion" sortBy="#{obseTabla.descripcion}">
+        <p:column headerText="Descripción" sortBy="#{obseTabla.descripcion}">
            <h:outputText value="#{obseTabla.descripcion}" />
         </p:column>
         
@@ -115,9 +115,9 @@
 				</div><!-- /.col -->
 				<div class="col-md-3">
 					<ul>
-						<li><a href="../GestionUsuarios/GestionUsuarios.xhtml">Gestion de Usuarios</a></li>
-						<li><a href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a></li>
-						<li><a href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a></li>
+						<li><a href="../GestionUsuarios/GestionUsuarios.xhtml">Gestión de Usuarios</a></li>
+						<li><a href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestión de Observaciones</a></li>
+						<li><a href="../GestionReportes/GestionReportes.xhtml">Gestión de Reportes</a></li>
 					</ul>
 				</div><!-- /.col -->
 				<div class="col-md-3">

@@ -21,16 +21,16 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="../GestionUsuarios/GestionUsuarios.xhtml">Gestion de Usuarios
+            <a class="nav-link" href="../GestionUsuarios/GestionUsuarios.xhtml">Gestión de Usuarios
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones
+            <a class="nav-link" href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestión de Observaciones
             <span class="badge badge-light"> #{observacion.totalPen}</span>
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a>
+            <a class="nav-link" href="../GestionReportes/GestionReportes.xhtml">Gestión de Reportes</a>
           </li>
             <li>
             <div class="badge badge-light" style="float:left;margin-top:12px">
@@ -54,7 +54,7 @@
 		<div class="container">
 			<div class="row">
 	            <div class="col-xs-7"><br/>
-	                <h1 style="color:#adad85;">Filtros de Busqueda:</h1>
+	                <h1 style="color:#adad85;">Filtros de Búsqueda:</h1>
 	            </div>	
 	        </div>
 			<hr></hr>	
@@ -113,7 +113,7 @@
                  currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                  rowsPerPageTemplate="5,10,15">
         		
-   		 <p:column headerText="Codigo" sortBy="#{obserTabla.codigo_OBS}">
+   		 <p:column headerText="Código" sortBy="#{obserTabla.codigo_OBS}">
            <h:outputText value="#{obserTabla.codigo_OBS}" />
         </p:column>
         
@@ -121,7 +121,7 @@
            <h:outputText value="#{obserTabla.usuario.usuario}" />
         </p:column>
 
-         <p:column headerText="Fenomeno" sortBy="#{obserTabla.fenomeno.nombreFen}">
+         <p:column headerText="Fenómeno" sortBy="#{obserTabla.fenomeno.nombreFen}">
            <h:outputText value="#{obserTabla.fenomeno.nombreFen}" />
         </p:column>
 
@@ -156,9 +156,9 @@
 				</div><!-- /.col -->
 				<div class="col-md-3">
 					<ul>
-						<li><a href="../GestionUsuarios/GestionUsuarios.xhtml">Gestion de Usuarios</a></li>
-						<li><a href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestion de Observaciones</a></li>
-						<li><a href="../GestionReportes/GestionReportes.xhtml">Gestion de Reportes</a></li>
+						<li><a href="../GestionUsuarios/GestionUsuarios.xhtml">Gestión de Usuarios</a></li>
+						<li><a href="../GestionObservaciones/ListadoObservaciones.xhtml">Gestión de Observaciones</a></li>
+						<li><a href="../GestionReportes/GestionReportes.xhtml">Gestión de Reportes</a></li>
 					</ul>
 				</div><!-- /.col -->
 				<div class="col-md-3">
