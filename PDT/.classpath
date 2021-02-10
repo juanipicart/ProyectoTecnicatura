@@ -12,8 +12,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Juani/Desktop/UTEC/Aplicaciones Web/wildfly-17.0.0.Final/modules/system/layers/base/org/hibernate/main/hibernate-core-5.3.10.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Juani/Desktop/UTEC/Aplicaciones Web/wildfly-17.0.0.Final/bin/client/jboss-cli-client.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Juani/Desktop/UTEC/Aplicaciones Web/wildfly-17.0.0.Final/bin/client/jboss-client.jar"/>
+	<classpathentry kind="lib" path="C:/wildfly-17.0.1.Final/bin/client/jboss-cli-client.jar"/>
+	<classpathentry kind="lib" path="C:/wildfly-17.0.1.Final/bin/client/jboss-client.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
