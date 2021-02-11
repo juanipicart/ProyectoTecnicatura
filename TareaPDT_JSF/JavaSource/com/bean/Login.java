@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
@@ -87,10 +88,21 @@ public class Login implements Serializable {
 	
 
 	//logout
-	public String logout() {
-		HttpSession session = SessionUtils.getSession();
-		session.invalidate();
-		return "Login";
+	public void logout  () {
+		try { 
+		ExternalContext con = FacesContext.getCurrentInstance().getExternalContext();
+		 HttpSession session = (HttpSession) con.getSession(false);
+		 session.invalidate();
+		 FacesContext.getCurrentInstance().getExternalContext().redirect("../GestionUsuarios/Login.xhtml");
+		}catch(Exception e)
+		{
+			e.getMessage();
+		}
+		 
+		 
+		 //HttpSession session = SessionUtils.getSession();
+		//session.invalidate();
+		//return "Login.xhtml";
 	}
 	
 	
