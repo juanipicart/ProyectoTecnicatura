@@ -640,7 +640,8 @@ public class ObservacionBean implements Serializable{
 			try {
 				List <Observacion> filtradas = new ArrayList<Observacion>();
 				java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-
+				//java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+				
 				if (hasta !=null && desde != null && hasta.before(desde))
 				{
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
@@ -663,8 +664,8 @@ public class ObservacionBean implements Serializable{
 						if(
 								(zona == null || zona.isEmpty() || o.getLocalidad().getDepartamento().getZona().getNombre_zona().equals(zona))  
 								&& (estadoStr == null || estadoStr.isEmpty() || o.getEstado().getNombre().equals(estadoStr))  
-								&& (hasta == null || hasta.toString().isEmpty() || o.getFecha().before(hasta)) 
-								&& (desde == null || desde.toString().isEmpty() || o.getFecha().after(desde))
+								&& (hasta == null || hasta.toString().isEmpty() || o.getFecha().before(hasta) || (o.getFecha().compareTo(hasta)==0)) 
+								&& (desde == null || desde.toString().isEmpty() || o.getFecha().after(desde) || (o.getFecha().compareTo(desde)==0))
 						)
 								{
 									filtradas.add(o);
