@@ -90,7 +90,7 @@ public class Login implements Serializable {
 	//logout
 	public void logout  () {
 		try { 
-		ExternalContext con = FacesContext.getCurrentInstance().getExternalContext();
+		 ExternalContext con = FacesContext.getCurrentInstance().getExternalContext();
 		 HttpSession session = (HttpSession) con.getSession(false);
 		 session.invalidate();
 		 FacesContext.getCurrentInstance().getExternalContext().redirect("../GestionUsuarios/Login.xhtml");

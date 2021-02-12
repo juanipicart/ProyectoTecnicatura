@@ -59,6 +59,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.servlet.http.HttpSession;
 import javax.swing.ImageIcon;
 import javax.validation.constraints.Size;
 
@@ -486,12 +487,19 @@ public class ObservacionBean implements Serializable{
 			observacion = observacionBeanRemote.obtenerObservacionPorId(id);
 			Estado estado = estadoBeanRemote.ObtenerEstado("APROBADA");
 			observacion.setEstado(estado);
+			totalPen = totalPen-1;
+		    
 			
 			observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
 					observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
 					observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), 
 					observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), 
 					observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
+			
+			Estado e = estadoBeanRemote.ObtenerEstado("PENDIENTE");
+			List<Observacion>observacionesP = observacionBeanRemote.obtenerTodasObservacionesPendientes(e);
+			observacionesPendientes = observacionesP;
+			
 			//mensaje de actualizacion correcta
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 					"Se aprobo la observacion. ", "");
@@ -503,6 +511,8 @@ public class ObservacionBean implements Serializable{
 			observacionBeanRemote.revisarObservacion(observacion.getUsuario().getId(), observacion.getId(), 
 					date, observacion.getEstado().getNombre(), aprobados);
 			
+			HttpSession session = SessionUtils.getSession();
+			session.setAttribute("username", usu);
 			return "ListadoObservaciones.xhtml";
 			}
 			catch(Exception ex)
@@ -518,12 +528,18 @@ public class ObservacionBean implements Serializable{
 			observacion = observacionBeanRemote.obtenerObservacionPorId(id);
 			Estado estado = estadoBeanRemote.ObtenerEstado("RECHAZADA");
 			observacion.setEstado(estado);
+			totalPen = totalPen-1;
 			
 			observacionBeanRemote.ModificarObservacion(observacion.getId(), observacion.getCodigo_OBS(), 
 					observacion.getUsuario().getUsuario(), observacion.getFenomeno().getNombreFen(), 
 					observacion.getLocalidad().getNombreLoc(), observacion.getDescripcion(), 
 					observacion.getImagen(), observacion.getLatitud(), observacion.getLongitud(), 
 					observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
+			
+			Estado e = estadoBeanRemote.ObtenerEstado("PENDIENTE");
+			List<Observacion>observacionesP = observacionBeanRemote.obtenerTodasObservacionesPendientes(e);
+			observacionesPendientes = observacionesP;
+			
 			//mensaje de actualizacion correcta
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 					"Se rechazo la observacion. ", "");
