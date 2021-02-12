@@ -350,6 +350,10 @@ public class UsuarioBean implements Serializable{
 			usuarioBeanRemote.ModificarUsuario(usuario.getId(), usuario.getPass(), usuario.getUsuario(), usuario.getNombre(), 
 					usuario.getApellido(), this.estado, usuario.getTipodoc(), usuario.getNumerodoc(), 
 					usuario.getDireccion(), usuario.getMail(), usuario.getTipousuario().getNombre());
+			
+			  List<Usuario> usuariosAux = usuarioBeanRemote.obtenerUsuarioActivos();
+			  usuariosSeleccionados = usuariosAux;
+			
 				//mensaje de actualizacion correcta
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"Se elimino el usuario. ", "");
