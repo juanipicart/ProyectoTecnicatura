@@ -16,7 +16,7 @@
 
 
 <h:form id="idDatosEmpleado">
-
+	
 		
 	<div class="card border-success mb-12" style="max-width:100rem;margin-left:15px"  >
 		<ul class="list-group" style="text-align:left">
@@ -28,7 +28,7 @@
 	  		     <div class="form-group col-md-4">
 		   		  
 		   		   <h:outputLabel for="inputUsuario" >Usuario:</h:outputLabel>
-		  		   <h:inputText  id="inputusuario" class="form-control" label="*Usuario*" required="true" a:placeholder="Ingrese un usuario..."  
+		  		   <h:inputText  id="inputusuario" onchange="this.value = this.value.trim()" class="form-control" label="*Usuario*" required="true" requiredMessage="El usuario es requerido." a:placeholder="Ingrese un usuario..."  
 		  		   maxlength="80" disabled="false" value="#{usuario.usuario}">
 		  		   	 </h:inputText>
 
@@ -36,7 +36,7 @@
 	  	    	
 	  	         <div class="form-group col-md-5">
 			       <label for="inputPass" >Password:</label> 
-					<p:password id="password" label="*Pass Requerida*" feedback="true" class="form-control" required="true" a:placeholder="Ingrese una password..." maxlength="80" disabled="false" value="#{usuario.pass}"/>
+					<p:password id="password" label="*Pass Requerida*" feedback="true" class="form-control" required="true" requiredMessage="La contraseña es requerida." a:placeholder="Ingrese una password..." maxlength="80" disabled="false" value="#{usuario.pass}"/>
       	         </div>
       	         <div class="form-group col-md-3">
 	   		       <label for="tipoUsuario" >Tipo de Usuario:</label>
@@ -49,12 +49,11 @@
       	      <div class="form-row" style="margin-left:25px"> 
 			     <div class="col-md-4 mb-3">
 			       <label for="inputNombre">Nombre:</label> 	 
-			  	   <h:inputText label="*Nombre Requerido*" id="inputNombre" class="form-control" required="true" a:placeholder="Ingrese un nombre..." maxlength="80" disabled="false" value="#{usuario.nombre}" />
-
+			  	   <h:inputText label="*Nombre Requerido*" onchange="this.value = this.value.trim()" id="inputNombre"  class="form-control" required="true" requiredMessage="El nombre es requerido." a:placeholder="Ingrese un nombre..." maxlength="80" disabled="false" value="#{usuario.nombre}" validatorMessage="El nombre no puede contener solamente espacios"/>	  				  	         
 	  	         </div>
                  <div class="col-md-5 mb-3">
 	  			   <label for="inputApellido">Apellido:</label>
-		  	  	   <h:inputText label="*Apellido Requerido*" id="apellido" class="form-control" required="true" a:placeholder="Ingrese un apellido..." maxlength="80" disabled="false" value="#{usuario.apellido}" />
+		  	  	   <h:inputText label="*Apellido Requerido*" onchange="this.value = this.value.trim()" id="apellido"  class="form-control" required="true" requiredMessage="El apellido es requerido." a:placeholder="Ingrese un apellido..." maxlength="80" disabled="false" value="#{usuario.apellido}" />
 		  	  	
 	  		     </div>
 	  		     <div class="col-md-3 mb-3">
@@ -75,17 +74,17 @@
 	   		 </div>	   
 	         <div class="col-md-3 mb-3">	
 	   		   <label for="inputDocumento">Documento:</label> 
-	  		    <h:inputText label="*Documento Requerido*" id="inputDocumento"  class="form-control" required="true" a:placeholder="Ingrese un numero de documento..." maxlength="50" disabled="false" value="#{usuario.numerodoc}" />
+	  		    <h:inputText label="*Documento Requerido*" onchange="this.value = this.value.trim()" id="inputDocumento"  class="form-control" required="true" requiredMessage="El documento es requerido." a:placeholder="Ingrese un numero de documento..." maxlength="50" disabled="false" value="#{usuario.numerodoc}" />
 	  		    
 	  		 </div>
 	         <div class="col-md-3 mb-3">
 	   		 	 <label for="inputDireccion">Dirección:</label>
-				  	<h:inputText label="*Dirección Requerido*" id="inputDireccion" class="form-control" required="true" a:placeholder="Ingrese la direccion del usuario..." maxlength="50" disabled="false" value="#{usuario.direccion}" />
+				  	<h:inputText label="*Dirección Requerido*" onchange="this.value = this.value.trim()" id="inputDireccion" class="form-control" required="true" requiredMessage="La dirección es requerida." a:placeholder="Ingrese la direccion del usuario..." maxlength="50" disabled="false" value="#{usuario.direccion}" />
 				
 	  	     </div>
 	  	     <div class="col-md-4 mb-4">
 	   		  <label for="inputMail">Mail:</label>
-			  	<h:inputText label="*Mail Requerido*" id="inputMail" required="true" class="form-control" type="email" a:placeholder="Ingrese el mail del usuario..." maxlength="100" disabled="false" value="#{usuario.mail}" validatorMessage="El formato del email no es correcto">
+			  	<h:inputText label="*Mail Requerido*" id="inputMail" onchange="this.value = this.value.trim()" required="true" requiredMessage="El mail es requerido." class="form-control" type="email" a:placeholder="Ingrese el mail del usuario..." maxlength="100" disabled="false" value="#{usuario.mail}" validatorMessage="El formato del email no es correcto">
 			  	<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" /> 
 			  	</h:inputText>
 			  	

@@ -16,6 +16,9 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
+import javax.faces.validator.FacesValidator;
+import javax.faces.validator.Validator;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
@@ -196,7 +199,21 @@ public class UsuarioBean implements Serializable{
 			boolean esNumerico = isNumeric(numerodoc);
 			boolean bandera = true;
 			
-			if (pass.length()<8) {
+			try {
+				
+			} catch (Exception e){
+				
+			}
+			
+			if (nombre.trim().isEmpty()) {
+				
+				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+						"Debe ingresar un nombre", "");
+				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+				bandera = false;
+			}
+			
+			else if (pass.length()<8) {
 				
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 						"La password no puede ser menor que 8 caracteres", "");
@@ -204,14 +221,16 @@ public class UsuarioBean implements Serializable{
 				bandera = false;
 			}
 			
-			else if (validarUsuario == true && estado.equals("ACTIVO")) {
+			else if (!(usuarioBeanRemote.existeUsuario(username).size() == 0)) {
 				
-				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-						"El usuario ya existe en el sistema ", "");
-				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-				bandera = false;
+				if(validarUsuario == true && usuarioBeanRemote.obtenerUsuario(username).getEstado().equals("ACTIVO")) {
+					
+					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+							"El usuario ya existe en el sistema ", "");
+					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+					bandera = false;
+				}	
 	 		}
-			
 			else {
 				
 				if (tipodoc.equals("CI")) 
@@ -236,13 +255,14 @@ public class UsuarioBean implements Serializable{
 			
 			if (bandera == true)
 			{
-				 if (validarUsuario == true && estado.equals("INACTIVO")) 
+				 if (validarUsuario == true && usuarioBeanRemote.obtenerUsuario(username).getEstado().equals("INACTIVO")) 
 				 {
 					this.estado = "ACTIVO";
-					usuarioBeanRemote.ModificarUsuario(id,pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
+					System.out.println("El id es :" + usuarioBeanRemote.obtenerUsuario(username).getId());
+					usuarioBeanRemote.ModificarUsuario(usuarioBeanRemote.obtenerUsuario(username).getId(), pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
 					//mensaje de actualizacion correcta
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-							"Se creo el usuario correctamente ", "");
+							"Se reactivó el usuario en el sistema.", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 					limpiar();
 					seleccionarUsuarios();
@@ -356,7 +376,7 @@ public class UsuarioBean implements Serializable{
 			
 				//mensaje de actualizacion correcta
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-						"Se elimino el usuario. ", "");
+						"Se eliminó el usuario. ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 				return "GestionUsuarios.xhtml";
 		} 
