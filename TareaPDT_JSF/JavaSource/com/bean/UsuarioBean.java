@@ -198,6 +198,7 @@ public class UsuarioBean implements Serializable{
 			boolean validarUsuario = ValidarUsuario();
 			boolean esNumerico = isNumeric(numerodoc);
 			boolean bandera = true;
+			String usuMayus = username.toUpperCase();
 			
 			try {
 				
@@ -221,9 +222,9 @@ public class UsuarioBean implements Serializable{
 				bandera = false;
 			}
 			
-			else if (!(usuarioBeanRemote.existeUsuario(username).size() == 0)) {
+			else if (!(usuarioBeanRemote.existeUsuario(usuMayus).size() == 0)) {
 				
-				if(validarUsuario == true && usuarioBeanRemote.obtenerUsuario(username).getEstado().equals("ACTIVO")) {
+				if(validarUsuario == true && usuarioBeanRemote.obtenerUsuario(usuMayus).getEstado().equals("ACTIVO")) {
 					
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 							"El usuario ya existe en el sistema ", "");
@@ -255,11 +256,11 @@ public class UsuarioBean implements Serializable{
 			
 			if (bandera == true)
 			{
-				 if (validarUsuario == true && usuarioBeanRemote.obtenerUsuario(username).getEstado().equals("INACTIVO")) 
+				 if (validarUsuario == true && usuarioBeanRemote.obtenerUsuario(usuMayus).getEstado().equals("INACTIVO")) 
 				 {
 					this.estado = "ACTIVO";
-					System.out.println("El id es :" + usuarioBeanRemote.obtenerUsuario(username).getId());
-					usuarioBeanRemote.ModificarUsuario(usuarioBeanRemote.obtenerUsuario(username).getId(), pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
+					System.out.println("El id es :" + usuarioBeanRemote.obtenerUsuario(usuMayus).getId());
+					usuarioBeanRemote.ModificarUsuario(usuarioBeanRemote.obtenerUsuario(usuMayus).getId(), pass, usuMayus, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
 					//mensaje de actualizacion correcta
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
 							"Se reactivó el usuario en el sistema.", "");
@@ -270,7 +271,7 @@ public class UsuarioBean implements Serializable{
 				else 
 				{
 					this.estado = "ACTIVO";
-					usuarioBeanRemote.CrearUsuario(pass, username, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
+					usuarioBeanRemote.CrearUsuario(pass, usuMayus, nombre, apellido, estado, tipodoc, numerodoc, direccion, mail, tipoUsuario);
 					altaExitoso = true;
 					//mensaje de actualizacion correcta
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 

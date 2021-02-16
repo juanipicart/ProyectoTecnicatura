@@ -99,15 +99,12 @@ public class Login implements Serializable {
 			e.getMessage();
 		}
 		 
-		 
-		 //HttpSession session = SessionUtils.getSession();
-		//session.invalidate();
-		//return "Login.xhtml";
 	}
 	
 	
 	public String loginLDAP(String username, String password) {
 		
+		String usuMayus = username.toUpperCase();
 		Usuario usu = new Usuario();
 		Properties env = new Properties();
 
@@ -117,18 +114,28 @@ public class Login implements Serializable {
 
 		env.put(Context.SECURITY_AUTHENTICATION, "simple");
 
-		env.put(Context.SECURITY_PRINCIPAL, "CN="+username+ ", cn=Users, DC=greenplace,DC=utec,DC=edu,DC=uy");
+		env.put(Context.SECURITY_PRINCIPAL, usuMayus+"@greenplace.utec.edu.uy");
 		
 		env.put(Context.SECURITY_CREDENTIALS, password);
 
 		try {
 
-		DirContext ctx = new InitialDirContext(env);
-		usu = usuarioBeanRemote.obtenerUsuario(username);
-		HttpSession session = SessionUtils.getSession();
-		session.setAttribute("username", usu);
-		return "Index";
-	
+			DirContext ctx = new InitialDirContext(env);
+			try {
+				usu = usuarioBeanRemote.obtenerUsuario(usuMayus);
+				HttpSession session = SessionUtils.getSession();
+				session.setAttribute("username", usu);
+				return "Index";
+				}
+			
+			catch (Exception ex){	
+				FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_WARN,
+					"Usuario no existente en la base de datos",
+					"Por favor ingrese el usuario tambien en la base"));
+				return "LoginLDAP";		    
+				
+			}
 		} 
 		catch (NamingException ex) {
 
@@ -141,68 +148,4 @@ public class Login implements Serializable {
 						"Por favor verifique los datos ingresados"));
 		return "LoginLDAP";		    
 	}
-	
-	
-	
-	
-	/*
-	public static boolean authenticateJndi (String username, String password)
-	{
-		// obtenemos el dominio en base al email provisto
-		//Integer corteString = username.indexOf("@");
-		String nombreUsuario = username;
-		Properties props = new Properties();
-		props.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-		//props.put(Context.PROVIDER_URL, "ldap://192.168.210.100:389");
-		props.put(Context.PROVIDER_URL, "ldap://serv404notfound.greenplace.utec.edu.uy:389");
-
-		// login con cuenta con usuario provisto
-		props.put(Context.SECURITY_PRINCIPAL, username);
-
-		props.put(Context.SECURITY_CREDENTIALS, password);
-		
-		
-		
-		
-		// CONEXION AL AD
-
-
-	try {
-		InitialDirContext context;	
-								context = new InitialDirContext(props);
-								
-		SearchControls ctrls = new SearchControls();
-		ctrls.setReturningAttributes(new String[] { "sn", "parametroBuscado", "otroParametro" });
-		ctrls.setSearchScope(SearchControls.SUBTREE_SCOPE);
-		
-		NamingEnumeration<javax.naming.directory.SearchResult> answers;
-		
-		answers = context.search("CN=Users,DC=greenplace,DC=utec,DC=edu,DC=uy",
-		//answers = context.search(",DC=greenplace,DC=utec,DC=edu,DC=uy",
-			   "sAMAccountName=" + nombreUsuario, ctrls);
-	 
-		SearchResult result = answers.nextElement();
-
-		Attributes attributes = result.getAttributes();
-		Attribute atributoSipa = attributes.get("sipaUser");
-
-		
-		// VALIDAMOS LA PRESENCIA DEL ATRIBUTO
-
-
-
-			if (atributoSipa != null) {
-					//Controla que el usuario este habilitado para sipa
-						if (atributoSipa.get().equals("TRUE")) {
-								return true;
-						}
-			}
-			return false;
-
-		} catch (Exception e) {
-				e.printStackTrace();
-						System.out.println("error");
-				}
-		return false;
-		}*/	
 }
