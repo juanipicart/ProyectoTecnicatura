@@ -21,6 +21,8 @@ public class Usuariodao {
 	public void AgregarUsuario(Usuario usuario) throws Exception 
 		{
 		try {
+			String usuMayus = usuario.getUsuario().toUpperCase();
+			usuario.setUsuario(usuMayus);
 			String originalInput = usuario.getPass();
 			String encodedString = Base64.getEncoder().encodeToString(originalInput.getBytes());
 			usuario.setPass(encodedString);
@@ -35,6 +37,8 @@ public class Usuariodao {
 	public void Modificarusuario(Usuario usuario)
 	{
 		try {
+			String usuMayus = usuario.getUsuario().toUpperCase();
+			usuario.setUsuario(usuMayus);
 			String originalInput = usuario.getPass();
 			String encodedString = Base64.getEncoder().encodeToString(originalInput.getBytes());
 			usuario.setPass(encodedString);
@@ -63,6 +67,7 @@ public class Usuariodao {
 
 	//Lista de usuario por nombre de usuario y password
 	public List<Usuario> Login (String usuario, String pass){
+		usuario=usuario.toUpperCase();
 		pass = Base64.getEncoder().encodeToString(pass.getBytes());
 	    	TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.usuario LIKE :usuario AND u.pass LIKE :pass",Usuario.class)
 					.setParameter("usuario", usuario)
@@ -76,6 +81,7 @@ public class Usuariodao {
 	//Lista de usuario por nombre de usuario
   	public List<Usuario> existeUsuario(String usuario) {
   		
+  		usuario = usuario.toUpperCase();
   		TypedQuery<Usuario> query = em.createQuery("SELECT U FROM Usuario U WHERE U.usuario LIKE :usuario",Usuario.class).setParameter("usuario",usuario);
 		
   		List<Usuario> us  =  query.getResultList();
@@ -105,7 +111,7 @@ public class Usuariodao {
   	
   	//Obtener usuario por nombre de usuario
   	public Usuario obtenerUsuario(String usuario) {
-
+  			usuario = usuario.toUpperCase();
 	    	TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u where u.usuario LIKE : usuario",Usuario.class).setParameter("usuario",usuario);
 			return query.getSingleResult();
 
@@ -118,18 +124,5 @@ public class Usuariodao {
 			return query.getSingleResult();
 
 		} 
-  	
 }
 	  
-	
-
-
-		
-
-		
-	
-		
-		
-	
-
-

@@ -59,7 +59,7 @@ public class Login implements Serializable {
 	}
 	
 	public String ValidarLogin (){
-		
+		username = username.toUpperCase();
 		boolean valid = false;
 		List <Usuario> usuarios = usuarioBeanRemote.Login(username, pass);
 		Usuario usu = new Usuario();
@@ -140,6 +140,7 @@ public class Login implements Serializable {
 		catch (NamingException ex) {
 
 		             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+		             
 		         }
 
 			FacesContext.getCurrentInstance().addMessage(null,
