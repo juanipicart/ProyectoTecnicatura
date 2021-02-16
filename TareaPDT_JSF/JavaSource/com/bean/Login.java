@@ -33,6 +33,7 @@ import com.entidades.Usuario;
 public class Login implements Serializable {
 	
 	static final String LDAP_URL = "ldap://serv404notfound.greenplace.utec.edu.uy:389/DC=greenplace,DC=utec,DC=edu,DC=uy";
+	static final String passError = "[LDAP: error code 49 - 80090308: LdapErr: DSID-0C0903C5, comment: AcceptSecurityContext error, data 52e, v2580";
 	private String pass;
 	private String username;
 	private Usuario usuario;
@@ -98,7 +99,6 @@ public class Login implements Serializable {
 		{
 			e.getMessage();
 		}
-		 
 	}
 	
 	
@@ -126,7 +126,7 @@ public class Login implements Serializable {
 				HttpSession session = SessionUtils.getSession();
 				session.setAttribute("username", usu);
 				return "Index";
-				}
+			}
 			
 			catch (Exception ex){	
 				FacesContext.getCurrentInstance().addMessage(null,
@@ -137,16 +137,24 @@ public class Login implements Serializable {
 				
 			}
 		} 
-		catch (NamingException ex) {
-
-		             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-		             
-		         }
-
-			FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_WARN,
-						"Usuario o Password incorrecta",
-						"Por favor verifique los datos ingresados"));
-		return "LoginLDAP";		    
+		catch (Exception ex) {
+					String error = ex.getMessage();
+					
+				 if (error == passError)
+					{
+					FacesContext.getCurrentInstance().addMessage(null,
+		     				new FacesMessage(FacesMessage.SEVERITY_WARN,
+		     						"Usuario o Password incorrecta",
+		     						"Por favor verifique los datos ingresados"));
+					}
+				 else
+					{
+						FacesContext.getCurrentInstance().addMessage(null,
+			     				new FacesMessage(FacesMessage.SEVERITY_WARN,
+			     						"Ocurrio un error con el servidor",
+			     						"Por favor contactese con el Administrador de Red"));
+					}	 
+				return "LoginLDAP";	
+         }	    
 	}
 }
