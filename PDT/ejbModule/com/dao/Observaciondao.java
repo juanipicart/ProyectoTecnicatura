@@ -91,7 +91,7 @@ public class Observaciondao {
     //Lista de observaciones por codigo
     public List<Observacion> existeObservacion(String codigo_OBS) {
   		
-  		TypedQuery<Observacion> query = em.createQuery("SELECT o FROM Observacion o WHERE o.codigo_OBS LIKE :codigo_OBS", Observacion.class).setParameter("codigo_OBS", codigo_OBS);
+  		TypedQuery<Observacion> query = em.createQuery("SELECT o FROM Observacion o WHERE UPPER(o.codigo_OBS) LIKE :codigo_OBS", Observacion.class).setParameter("codigo_OBS", codigo_OBS.toUpperCase());
 		
   		List<Observacion> observaciones  =  query.getResultList();
   		
