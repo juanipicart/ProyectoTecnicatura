@@ -203,7 +203,11 @@ public class ObservacionesRest {
 		Date date = format.parse(observacion.getFecha());
 		byte[] imagen = null;
 		if (!(observacion.getImagen() == null)) {
-		imagen = Base64.getMimeDecoder().decode(observacion.getImagen().getBytes()); }
+		imagen = Base64.getMimeDecoder().decode(observacion.getImagen().getBytes()); 
+		}
+		else {
+		imagen = observacionPorID.getImagen();
+		}
 		observacionBean.ModificarObservacion(id,observacion.getCodigo(),observacion.getUsuario(),observacion.getFenomeno(),observacion.getLocalidad(), observacion.getDescripcion(), imagen, observacion.getLatitud(), observacion.getLongitud(), observacion.getAltitud(), observacion.getEstado(), date);
 		return Response.ok().entity("{\"message\":\"Modificacion de observacion exitosa\"}").build();
 		}
