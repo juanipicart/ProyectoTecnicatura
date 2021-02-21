@@ -239,7 +239,7 @@ public class UsuarioBean implements Serializable{
 					if (numerodoc.length()<7 || numerodoc.length()>8)
 					{
 						FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-							"La CI debe contener entre 7 y 8 digitos", "");
+							"La CI debe contener entre 7 y 8 dígitos", "");
 						FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 						bandera = false;
 					}
@@ -247,7 +247,7 @@ public class UsuarioBean implements Serializable{
 					else if (esNumerico != true)
 					{
 						FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-							"La CI debe contener formato numerico", "");
+							"La CI debe contener formato numérico", "");
 						FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 						bandera = false;
 					}
@@ -275,7 +275,7 @@ public class UsuarioBean implements Serializable{
 					altaExitoso = true;
 					//mensaje de actualizacion correcta
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-							"Se creo el usuario correctamente ", "");
+							"Se creó el usuario correctamente ", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 					limpiar();
 					seleccionarUsuarios();
@@ -323,14 +323,14 @@ public class UsuarioBean implements Serializable{
 				if (pNumero.length()<7 || pNumero.length()>8)
 				{
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-							"La CI debe contener entre 7 y 8 digitos", "");
+							"La CI debe contener entre 7 y 8 dígitos", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 					bandera = false;
 				}
 				else if (esNumerico == false)
 				{
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-							"La CI debe contener formato numerico", "");
+							"La CI debe contener formato numérico", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 					bandera = false;
 				}
@@ -344,7 +344,7 @@ public class UsuarioBean implements Serializable{
 				
 				//mensaje de actualizacion correcta
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-						"Se actualizo el usuario. ", "");
+						"Se actualizó el usuario. ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 				seleccionarUsuarios();
 				}	
@@ -406,7 +406,7 @@ public class UsuarioBean implements Serializable{
 
 
 	public void actionAlta(ActionEvent event) throws AbortProcessingException {
-		System.out.println("Alta exitosa!!");	
+		System.out.println("Alta exitosa!");	
 	}
 	public void info() {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Alta exitosa."));

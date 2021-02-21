@@ -446,21 +446,21 @@ public class ObservacionBean implements Serializable{
 				if (observacion.getAltitud() > 520 || observacion.getAltitud()<0)
 				{
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-							"La altitud ingresada no es valida, desde 0 mts a 520 mts", "");
+							"La altitud ingresada no es válida, desde 0 mts a 520 mts", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 				}
 				
 				else if (observacion.getLongitud() > 60 || observacion.getLongitud()<-60)
 				{
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-							"La longitud ingresada no es valida, desde -60° a 60°", "");
+							"La longitud ingresada no es válida, desde -60° a 60°", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 				}
 				
 				else if (observacion.getLatitud() > 60 || observacion.getLatitud()<-60)
 				{
 					FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-							"La latitud ingresada no es valida, desde -60° a 60°", "");
+							"La latitud ingresada no es válida, desde -60° a 60°", "");
 					FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 				}
 				
@@ -473,7 +473,7 @@ public class ObservacionBean implements Serializable{
 						observacion.getAltitud(), observacion.getEstado().getNombre(), observacion.getFecha());
 				//mensaje de actualizacion correcta
 				FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-						"Se actualizo la observacion. ", "");
+						"Se actualizó la observación. ", "");
 				FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 				}
 			}catch(Exception e){
@@ -502,7 +502,7 @@ public class ObservacionBean implements Serializable{
 			
 			//mensaje de actualizacion correcta
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-					"Se aprobo la observacion. ", "");
+					"Se aprobó la observación. ", "");
 			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 			
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
@@ -542,7 +542,7 @@ public class ObservacionBean implements Serializable{
 			
 			//mensaje de actualizacion correcta
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-					"Se rechazo la observacion. ", "");
+					"Se rechazo la observación. ", "");
 			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 			
 			
@@ -704,11 +704,11 @@ public class ObservacionBean implements Serializable{
 	    }
 	     
 	    public void RechazoModal() {
-	        addMessage("Observacion Rechazada", "La observacion se Rechazo correctamente");
+	        addMessage("Observacion Rechazada", "La observacion se rechazó correctamente");
 	    }
 	    
 	    public void ApruebaModal() {
-	        addMessage("Observacion Aprobada", "La observacion se aprobo correctamente");
+	        addMessage("Observacion Aprobada", "La observacion se aprobó correctamente");
 	    }
 	     
 	    public void addMessage(String summary, String detail) {
